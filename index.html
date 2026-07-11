@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Station Model Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0D10; --panel:#10151A; --panel-2:#141A20; --border:#1E262D;
+    --text:#D8E1E8; --muted:#6B7885; --dim:#3E4750;
+    --teal:#3ED6B5; --amber:#E8935B; --violet:#C98BD9; --bad:#D9695B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:14px; line-height:1.45;}
+  .num{font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums;}
+  h1,h2{font-family:'Space Grotesk',sans-serif; margin:0; letter-spacing:-0.01em;}
+  .wrap{max-width:1050px; margin:0 auto; padding:20px 16px 60px;}
+  .top{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:18px; flex-wrap:wrap;}
+  .top h1{font-size:20px; color:#fff;}
+  .top .sub{color:var(--muted); font-size:12.5px; margin-top:4px;}
+  .status{color:var(--muted); font-size:11.5px; text-align:right;}
+  .tabs{display:flex; gap:4px; border-bottom:1px solid var(--border); margin-bottom:18px; overflow-x:auto;}
+  .tab{padding:10px 14px; cursor:pointer; color:var(--muted); font-family:'Space Grotesk'; font-weight:600; font-size:13px; border-bottom:2px solid transparent; white-space:nowrap;}
+  .tab.active{color:#fff;}
+  .panel{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:16px;}
+  .panel h2{font-size:14px; color:#fff; margin-bottom:2px;}
+  .panel .hint{color:var(--muted); font-size:12px; margin-bottom:12px;}
+  table{width:100%; border-collapse:collapse; font-size:12.5px;}
+  th{text-align:left; color:var(--muted); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:0.03em; padding:6px 8px; border-bottom:1px solid var(--border);}
+  td{padding:7px 8px; border-bottom:1px solid var(--panel-2); white-space:nowrap;}
+  th:first-child, td:first-child{position:sticky; left:0; z-index:2; background:var(--panel);}
+  tr.aux-row td:first-child{background:var(--panel);}
+  tr.best td{background:rgba(62,214,181,0.07);}
+  tr.best td:first-child{background:#132a24; box-shadow:inset 3px 0 0 var(--teal);}
+  .rank{color:var(--dim); font-size:11px; margin-right:6px;}
+  .filter-row{display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap;}
+  .chip{padding:5px 11px; border:1px solid var(--border); border-radius:20px; color:var(--muted); font-size:11.5px; cursor:pointer;}
+  .chip.active{background:var(--teal); color:#06201A; border-color:var(--teal);}
+  .gridwrap{overflow-x:auto;}
+  .spread-bar{position:relative; height:6px; background:var(--panel-2); border-radius:3px; width:70px; margin-top:3px;}
+  .spread-fill{position:absolute; top:0; height:6px; background:var(--amber); border-radius:3px;}
+  .day-hdr{font-family:'IBM Plex Mono'; font-size:11.5px;}
+  .day-hdr .dow{color:var(--muted); display:block; font-size:10px;}
+  .aux-row td{color:var(--muted); font-size:11px;}
+  .cell-input{width:56px; background:var(--panel-2); border:1px solid var(--border); color:var(--text); border-radius:5px; padding:5px 6px; font-family:'IBM Plex Mono'; font-size:12px; text-align:right;}
+  .cell-input:focus{outline:none; border-color:var(--violet);}
+  .conf-badge{padding:3px 8px; border-radius:10px; font-size:10.5px; font-family:'IBM Plex Mono'; display:inline-block;}
+  .conf-high{background:rgba(62,214,181,0.15); color:var(--teal);}
+  .conf-med{background:rgba(232,147,93,0.15); color:var(--amber);}
+  .conf-low{background:rgba(217,105,91,0.15); color:var(--bad);}
+  .heat-badge{background:rgba(232,147,93,0.18); color:var(--amber); padding:3px 7px; border-radius:6px; font-size:10.5px;}
+  .sel{background:var(--panel-2); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:7px 9px; font-family:'IBM Plex Mono'; font-size:12.5px; margin-bottom:12px;}
+  .empty{color:var(--muted); font-size:12.5px; padding:10px 0;}
+  .caveat{color:var(--dim); font-size:11px; line-height:1.6; margin-top:4px;}
+  .src-tag{font-size:9.5px; color:var(--dim); margin-left:3px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Station Model Tracker</h1>
+      <div class="sub">Automated forecast-vs-actual backtesting for Polymarket max-temp markets</div>
+    </div>
+    <div class="status" id="status">Loading…</div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div id="content"></div>
+</div>
+
+<script>
+let DATA = null;
+let current = null;
+let leadFilter = 'all';
+let historyDate = null;
+let reliabilityThreshold = 1.0;
+const HEAT_SPIKE_WIND_MAX = 15;
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function fmtDate(d){ return d.toISOString().slice(0,10); }
+function todayStr(){ const d=new Date(); d.setHours(0,0,0,0); return fmtDate(d); }
+
+function overrideKey(station, date){ return `actual-override:${station}:${date}`; }
+function getActual(station, date){
+  const ov = localStorage.getItem(overrideKey(station, date));
+  if(ov !== null) return {value: parseFloat(ov), overridden: true};
+  const v = DATA[station].actuals[date];
+  return v !== undefined ? {value: v, overridden: false} : null;
+}
+function setActualOverride(station, date, value){
+  if(value === '' || isNaN(parseFloat(value))) localStorage.removeItem(overrideKey(station, date));
+  else localStorage.setItem(overrideKey(station, date), value);
+  render();
+}
+
+async function loadData(){
+  const res = await fetch('./data.json?t=' + Date.now());
+  DATA = await res.json();
+  const stationIds = Object.keys(DATA).filter(k => !k.startsWith('_'));
+  if(!current) current = stationIds[0];
+  const anyPanel = DATA[current];
+  document.getElementById('status').textContent = anyPanel && anyPanel.lastUpdated
+    ? 'Data updated ' + new Date(anyPanel.lastUpdated).toLocaleString()
+    : 'No data yet — waiting for first Action run';
+}
+
+function stationIds(){ return Object.keys(DATA).filter(k => !k.startsWith('_')); }
+function stationName(id){ return (DATA._stations && DATA._stations[id] && DATA._stations[id].name) || id; }
+function modelName(id){ return (DATA._modelNames && DATA._modelNames[id]) || id; }
+
+function leadFor(dateStr){
+  const target = new Date(dateStr+'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  return Math.round((target-today)/86400000);
+}
+function latestEntry(dataset, date){
+  const arr = dataset && dataset[date];
+  if(!arr || arr.length===0) return undefined;
+  return arr[arr.length-1];
+}
+function leadPasses(lead){
+  if(leadFilter==='all') return true;
+  if(lead===null||lead===undefined) return true;
+  if(leadFilter==='0-1') return lead<=1;
+  if(leadFilter==='0-3') return lead<=3;
+  if(leadFilter==='0-5') return lead<=5;
+  return true;
+}
+
+function computeMaeByLead(panel){
+  const buckets = {};
+  Object.values(panel.forecasts||{}).forEach(dataset=>{
+    Object.keys(dataset).forEach(date=>{
+      const actual = getActual(current, date);
+      if(!actual) return;
+      (dataset[date]||[]).forEach(entry=>{
+        if(entry.lead===null||entry.lead===undefined) return;
+        const err = Math.abs(entry.temp-actual.value);
+        if(!buckets[entry.lead]) buckets[entry.lead] = {sum:0,count:0};
+        buckets[entry.lead].sum += err; buckets[entry.lead].count++;
+      });
+    });
+  });
+  const out = {};
+  Object.keys(buckets).forEach(l=> out[l] = buckets[l].sum/buckets[l].count);
+  return out;
+}
+function computeModelLeadMae(panel, modelId){
+  const dataset = panel.forecasts[modelId];
+  if(!dataset) return {};
+  const buckets = {};
+  Object.keys(dataset).forEach(date=>{
+    const actual = getActual(current, date);
+    if(!actual) return;
+    (dataset[date]||[]).forEach(entry=>{
+      if(entry.lead===null||entry.lead===undefined) return;
+      const err = Math.abs(entry.temp-actual.value);
+      if(!buckets[entry.lead]) buckets[entry.lead] = {sum:0,count:0};
+      buckets[entry.lead].sum += err; buckets[entry.lead].count++;
+    });
+  });
+  const out = {};
+  Object.keys(buckets).forEach(l=> out[l] = {mae: buckets[l].sum/buckets[l].count, n: buckets[l].count});
+  return out;
+}
+function reliableHorizon(leadMae, threshold){
+  let horizon = -1;
+  for(let lead=0; lead<=10; lead++){
+    const b = leadMae[lead];
+    if(!b) break;
+    if(b.mae <= threshold) horizon = lead; else break;
+  }
+  return horizon;
+}
+
+// Signed bias per lead bucket, plus an overall (all-lead) fallback — drives the
+// automatic bias-correction shown next to each forecast cell.
+const MIN_SAMPLES_FOR_CORRECTION = 3;
+function computeModelBias(panel, modelId){
+  const dataset = panel.forecasts[modelId];
+  if(!dataset) return {byLead:{}, overall:null};
+  const buckets = {};
+  let overallSum = 0, overallCount = 0;
+  Object.keys(dataset).forEach(date=>{
+    const actual = getActual(current, date);
+    if(!actual) return;
+    (dataset[date]||[]).forEach(entry=>{
+      if(entry.lead===null||entry.lead===undefined) return;
+      const err = entry.temp - actual.value; // signed: >0 model runs warm, <0 runs cold
+      if(!buckets[entry.lead]) buckets[entry.lead] = {sum:0,count:0};
+      buckets[entry.lead].sum += err; buckets[entry.lead].count++;
+      overallSum += err; overallCount++;
+    });
+  });
+  const byLead = {};
+  Object.keys(buckets).forEach(l=> byLead[l] = {bias: buckets[l].sum/buckets[l].count, n: buckets[l].count});
+  const overall = overallCount>0 ? {bias: overallSum/overallCount, n: overallCount} : null;
+  return {byLead, overall};
+}
+function correctedForecast(biasInfo, lead, rawTemp){
+  const leadBucket = biasInfo.byLead[lead];
+  if(leadBucket && leadBucket.n >= MIN_SAMPLES_FOR_CORRECTION){
+    return {value: rawTemp - leadBucket.bias, n: leadBucket.n, source: 'lead'};
+  }
+  if(biasInfo.overall && biasInfo.overall.n >= MIN_SAMPLES_FOR_CORRECTION){
+    return {value: rawTemp - biasInfo.overall.bias, n: biasInfo.overall.n, source: 'overall'};
+  }
+  return null;
+}
+
+function computeLeaderboard(panel){
+  const series = {};
+  Object.keys(panel.forecasts).forEach(modelId=>{
+    const map = {};
+    Object.keys(panel.forecasts[modelId]).forEach(date=>{
+      const e = latestEntry(panel.forecasts[modelId], date);
+      if(!e || !leadPasses(e.lead)) return;
+      map[date] = {temp:e.temp};
+    });
+    series[modelName(modelId)] = map;
+  });
+
+  const winCount = {}, compareDays = {};
+  Object.keys(series).forEach(n=>{ winCount[n]=0; compareDays[n]=0; });
+  const allDates = new Set();
+  Object.values(series).forEach(map=>Object.keys(map).forEach(d=>allDates.add(d)));
+  allDates.forEach(date=>{
+    const actual = getActual(current, date);
+    if(!actual) return;
+    const errsByName = {};
+    Object.keys(series).forEach(name=>{
+      const e = series[name][date];
+      if(!e) return;
+      compareDays[name]++;
+      errsByName[name] = Math.abs(e.temp-actual.value);
+    });
+    const names = Object.keys(errsByName);
+    if(names.length===0) return;
+    const bestErr = Math.min(...names.map(n=>errsByName[n]));
+    names.forEach(name=>{ if(errsByName[name] <= bestErr + 0.01) winCount[name]++; });
+  });
+
+  const cutoff14 = new Date(); cutoff14.setHours(0,0,0,0); cutoff14.setDate(cutoff14.getDate()-14);
+  const cutoff14str = fmtDate(cutoff14);
+
+  const rows = [];
+  Object.keys(series).forEach(name=>{
+    const map = series[name];
+    const errors = [], errors14 = [];
+    Object.keys(map).forEach(date=>{
+      const actual = getActual(current, date);
+      if(!actual) return;
+      const err = map[date].temp - actual.value;
+      errors.push(err);
+      if(date >= cutoff14str) errors14.push(err);
+    });
+    if(errors.length===0) return;
+    const n = errors.length;
+    const bias = errors.reduce((a,b)=>a+b,0)/n;
+    const mae = errors.reduce((a,b)=>a+Math.abs(b),0)/n;
+    const rmse = Math.sqrt(errors.reduce((a,b)=>a+b*b,0)/n);
+    const mae14 = errors14.length ? errors14.reduce((a,b)=>a+Math.abs(b),0)/errors14.length : null;
+    const winRate = compareDays[name] ? (winCount[name]/compareDays[name]*100) : null;
+    rows.push({name, n, bias, mae, rmse, mae14, winRate});
+  });
+  rows.sort((a,b)=>a.mae-b.mae);
+  return rows;
+}
+
+function nextDates(){
+  const arr = [];
+  const today = new Date(); today.setHours(0,0,0,0);
+  for(let i=0;i<7;i++){ const d = new Date(today); d.setDate(d.getDate()+i); arr.push(fmtDate(d)); }
+  return arr;
+}
+
+function renderTabs(){
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = stationIds().map(id =>
+    `<div class="tab ${id===current?'active':''}" onclick="setStation('${id}')">${stationName(id)}</div>`
+  ).join('');
+}
+function setStation(id){ current = id; historyDate = null; render(); }
+function setLeadFilter(f){ leadFilter = f; render(); }
+function setHistoryDate(d){ historyDate = d; render(); }
+function setThreshold(v){ const n = parseFloat(v); if(!isNaN(n) && n>0) reliabilityThreshold = n; render(); }
+
+function confidenceBadge(score){
+  if(score===null) return '<span style="color:var(--dim)">—</span>';
+  const cls = score>=70 ? 'conf-high' : (score>=40 ? 'conf-med' : 'conf-low');
+  const label = score>=70 ? 'High' : (score>=40 ? 'Med' : 'Low');
+  return `<span class="conf-badge ${cls}">${label} ${score}</span>`;
+}
+
+function render(){
+  renderTabs();
+  const panel = DATA[current];
+  const modelIds = Object.keys(panel.forecasts);
+  const leaderboard = computeLeaderboard(panel);
+  const dates = nextDates();
+  const maeByLead = computeMaeByLead(panel);
+
+  let html = '';
+
+  html += `<div class="panel">
+    <h2>${stationName(current)} — model accuracy</h2>
+    <div class="hint">MAE / bias in °C, win-rate = share of overlapping days a model was closest to actual.</div>
+    <div class="filter-row">
+      ${[['all','All lead times'],['0-1','≤1 day out'],['0-3','≤3 days out'],['0-5','≤5 days out']]
+        .map(([k,l])=>`<div class="chip ${leadFilter===k?'active':''}" onclick="setLeadFilter('${k}')">${l}</div>`).join('')}
+    </div>`;
+  if(leaderboard.length===0){
+    html += `<div class="empty">No overlapping forecast/actual data yet — check back after the first couple of Action runs and once a day or two has passed.</div>`;
+  } else {
+    html += `<div class="gridwrap"><table><thead><tr><th>Model</th><th>Days</th><th>MAE</th><th>MAE 14d</th><th>Bias</th><th>RMSE</th><th>Win%</th></tr></thead><tbody>`;
+    const bestMae = leaderboard[0].mae;
+    leaderboard.forEach(r=>{
+      const isBest = r.mae <= bestMae + 0.01;
+      html += `<tr class="${isBest?'best':''}"><td>${isBest?'<span class="rank">#1</span>':''}${r.name}</td>
+        <td class="num">${r.n}</td><td class="num">${r.mae.toFixed(2)}°</td>
+        <td class="num">${r.mae14!==null?r.mae14.toFixed(2)+'°':'—'}</td>
+        <td class="num">${r.bias>0?'+':''}${r.bias.toFixed(2)}°</td>
+        <td class="num">${r.rmse.toFixed(2)}°</td>
+        <td class="num">${r.winRate!==null?r.winRate.toFixed(0)+'%':'—'}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+    html += `<div class="caveat">Bias &gt; 0 = model runs warm; &lt; 0 = runs cold. Win% only counts days with 2+ models to compare.</div>`;
+  }
+  html += `</div>`;
+
+  html += `<div class="panel">
+    <h2>Accuracy by lead time</h2>
+    <div class="hint">MAE at each "days before target" bucket. <b style="color:var(--text)">Reliable Horizon</b> = furthest-out lead where a model's average error still stays within your threshold.</div>
+    <div style="margin-bottom:12px;">
+      <label style="color:var(--muted); font-size:11px;">Threshold (°C)</label><br>
+      <input class="cell-input" style="width:70px; margin-top:4px;" type="number" step="0.1" value="${reliabilityThreshold}" onchange="setThreshold(this.value)">
+    </div>`;
+  const leadCols = [0,1,2,3,4,5,6];
+  let anyLeadData = false;
+  html += `<div class="gridwrap"><table><thead><tr><th>Model</th>`;
+  leadCols.forEach(l=> html += `<th>${l}d</th>`);
+  html += `<th>Reliable horizon</th></tr></thead><tbody>`;
+  modelIds.forEach(mid=>{
+    const leadMae = computeModelLeadMae(panel, mid);
+    if(Object.keys(leadMae).length===0) return;
+    anyLeadData = true;
+    const horizon = reliableHorizon(leadMae, reliabilityThreshold);
+    html += `<tr><td>${modelName(mid)}</td>`;
+    leadCols.forEach(l=>{ const b = leadMae[l]; html += `<td class="num">${b ? b.mae.toFixed(2)+'°' : '—'}</td>`; });
+    const horizonLabel = horizon<0 ? '<span style="color:var(--bad)">none</span>' : `<span style="color:var(--teal)">${horizon}d</span>`;
+    html += `<td>${horizonLabel}</td></tr>`;
+  });
+  html += `</tbody></table></div>`;
+  if(!anyLeadData) html += `<div class="empty">No lead-bucketed data yet.</div>`;
+  html += `</div>`;
+
+  html += `<div class="panel"><h2>Next 7 days — all models</h2>
+    <div class="hint">Wind &amp; cloud are read at the hour each model itself predicts the daily max — automatically, per model. Confidence blends spread, lead time and historical accuracy. Heat-spike flags calm (&lt;15 km/h) + clear (&le;20% cloud) days, where actuals often run hotter than every model says. The teal number under each forecast is that model auto-corrected for its own historical bias at this lead time (needs ${MIN_SAMPLES_FOR_CORRECTION}+ past days); Consensus averages all corrected values.</div>
+    <div class="gridwrap"><table><thead><tr><th>Model</th>`;
+  dates.forEach(d=>{ const dt = new Date(d+'T00:00:00'); html += `<th class="day-hdr">${d.slice(5)}<span class="dow">${DOW[dt.getDay()]}</span></th>`; });
+  html += `<th>Spread</th></tr></thead><tbody>`;
+
+  // confidence row
+  html += `<tr class="aux-row"><td>Confidence</td>`;
+  dates.forEach(d=>{
+    const vals = [];
+    modelIds.forEach(mid=>{ const e = latestEntry(panel.forecasts[mid], d); if(e) vals.push(e.temp); });
+    if(vals.length<2){ html += `<td>—</td>`; return; }
+    const spread = Math.max(...vals)-Math.min(...vals);
+    const lead = leadFor(d);
+    const leadMae = maeByLead[lead] !== undefined ? maeByLead[lead] : null;
+    let score = 100 - Math.min(spread*10,40) - Math.min(lead*3,20);
+    if(leadMae!==null) score -= Math.min(leadMae*8,30);
+    score = Math.max(0, Math.min(100, Math.round(score)));
+    html += `<td>${confidenceBadge(score)}</td>`;
+  });
+  html += `<td></td></tr>`;
+
+  // heat-spike row — averaged wind/cloud across all models with data for that day
+  html += `<tr class="aux-row"><td>Heat-spike risk</td>`;
+  dates.forEach(d=>{
+    let windSum=0, cloudSum=0, count=0;
+    modelIds.forEach(mid=>{
+      const e = latestEntry(panel.forecasts[mid], d);
+      if(e && e.wind!==undefined && e.cloud!==undefined){ windSum+=e.wind; cloudSum+=e.cloud; count++; }
+    });
+    if(count===0){ html += `<td>—</td>`; return; }
+    const avgWind = windSum/count, avgCloud = cloudSum/count;
+    const flagged = avgWind < HEAT_SPIKE_WIND_MAX && avgCloud <= 20;
+    html += `<td>${flagged ? '<span class="heat-badge">🔥 spike</span>' : '<span style="color:var(--dim)">—</span>'}</td>`;
+  });
+  html += `<td></td></tr>`;
+
+  // model rows: temp (wind/cloud + auto bias-corrected value shown as small subtext)
+  const modelBiasCache = {};
+  modelIds.forEach(mid=>{ modelBiasCache[mid] = computeModelBias(panel, mid); });
+
+  modelIds.forEach(mid=>{
+    html += `<tr><td>${modelName(mid)}</td>`;
+    dates.forEach(d=>{
+      const e = latestEntry(panel.forecasts[mid], d);
+      if(!e){ html += `<td class="num">—</td>`; return; }
+      const windTxt = e.wind!==undefined ? `${Math.round(e.wind)}km/h` : '';
+      const cloudTxt = e.cloud!==undefined ? `${Math.round(e.cloud)}%` : '';
+      const corr = correctedForecast(modelBiasCache[mid], leadFor(d), e.temp);
+      const corrTxt = corr
+        ? `<div style="color:var(--teal); font-size:9.5px;" title="corrected using this lead's own bias, n=${corr.n}">→${corr.value.toFixed(1)}°</div>`
+        : `<div style="color:var(--dim); font-size:9.5px;">not enough history</div>`;
+      html += `<td class="num">${e.temp.toFixed(1)}°<div style="color:var(--dim); font-size:9.5px;">${windTxt}${windTxt&&cloudTxt?' · ':''}${cloudTxt}</div>${corrTxt}</td>`;
+    });
+    html += `<td></td></tr>`;
+  });
+
+  // consensus row — average of every model's bias-corrected value for the day
+  html += `<tr class="aux-row"><td>Consensus (bias-adj.)</td>`;
+  dates.forEach(d=>{
+    const corrected = [];
+    modelIds.forEach(mid=>{
+      const e = latestEntry(panel.forecasts[mid], d);
+      if(!e) return;
+      const corr = correctedForecast(modelBiasCache[mid], leadFor(d), e.temp);
+      if(corr) corrected.push(corr.value);
+    });
+    if(corrected.length===0){ html += `<td>—</td>`; return; }
+    const avg = corrected.reduce((a,b)=>a+b,0)/corrected.length;
+    html += `<td class="num" style="color:var(--teal); font-weight:600;">${avg.toFixed(1)}°<div style="color:var(--dim); font-weight:400; font-size:9.5px;">n=${corrected.length}</div></td>`;
+  });
+  html += `<td></td></tr>`;
+
+  // actual row (editable override, since this page is a real site — localStorage works fine here)
+  html += `<tr class="aux-row"><td>Actual (observed)</td>`;
+  dates.forEach(d=>{
+    const a = getActual(current, d);
+    const v = a ? a.value : '';
+    html += `<td><input class="cell-input" type="number" step="0.1" value="${v}"
+      onchange="setActualOverride('${current}','${d}',this.value)" title="${a && a.overridden ? 'manually overridden' : 'from Open-Meteo archive (reanalysis proxy)'}"></td>`;
+  });
+  html += `<td></td></tr>`;
+
+  // spread
+  html += `<tr class="aux-row"><td>Spread (max−min)</td>`;
+  dates.forEach(d=>{
+    const vals = [];
+    modelIds.forEach(mid=>{ const e = latestEntry(panel.forecasts[mid], d); if(e) vals.push(e.temp); });
+    if(vals.length>1){
+      const spread = Math.max(...vals)-Math.min(...vals);
+      const pct = Math.min(100, spread*20);
+      html += `<td class="num">${spread.toFixed(1)}°<div class="spread-bar"><div class="spread-fill" style="width:${pct}%"></div></div></td>`;
+    } else { html += `<td>—</td>`; }
+  });
+  html += `<td></td></tr>`;
+
+  html += `</tbody></table></div></div>`;
+
+  // Live METAR — real airport observations, not model output. Refreshed every ~30 min.
+  const metarList = (panel.metar || []).slice().sort((a,b)=> a.obsTime.localeCompare(b.obsTime));
+  html += `<div class="panel"><h2>Live METAR — ${stationName(current)}</h2>
+    <div class="hint">Actual airport observations (not a forecast) — use this to see whether today is tracking hot or cold relative to what the models said, and react before the market resolves.</div>`;
+  if(metarList.length===0){
+    html += `<div class="empty">No METAR data yet — waiting for the first METAR Action run.</div>`;
+  } else {
+    const latest = metarList[metarList.length-1];
+    const ageMin = Math.round((Date.now() - new Date(latest.obsTime).getTime())/60000);
+    const windTxt = (latest.wspd!==null && latest.wspd!==undefined)
+      ? `${latest.wdir!==null&&latest.wdir!==undefined?latest.wdir+'°/':''}${latest.wspd}kt${latest.wgst?(' G'+latest.wgst+'kt'):''}`
+      : '—';
+    html += `<div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:14px;">
+      <div><div style="color:var(--muted); font-size:11px;">Temp</div><div class="num" style="font-size:20px; color:#fff;">${latest.temp!==null&&latest.temp!==undefined?latest.temp.toFixed(1)+'°':'—'}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Dewpoint</div><div class="num" style="font-size:20px; color:#fff;">${latest.dewp!==null&&latest.dewp!==undefined?latest.dewp.toFixed(1)+'°':'—'}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Wind</div><div class="num" style="font-size:20px; color:#fff;">${windTxt}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Cloud</div><div class="num" style="font-size:20px; color:#fff;">${latest.cover||'—'}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Report age</div><div class="num" style="font-size:20px; color:${ageMin>90?'var(--bad)':'var(--muted)'};">${ageMin}min</div></div>
+    </div>`;
+    if(latest.raw) html += `<div class="caveat" style="margin-bottom:12px;">${latest.raw}</div>`;
+
+    // compare current observed temp to today's bias-corrected consensus max
+    const todayStr2 = todayStr();
+    const todayCorrected = [];
+    modelIds.forEach(mid=>{
+      const e = latestEntry(panel.forecasts[mid], todayStr2);
+      if(!e) return;
+      const corr = correctedForecast(computeModelBias(panel, mid), leadFor(todayStr2), e.temp);
+      if(corr) todayCorrected.push(corr.value);
+    });
+    if(todayCorrected.length>0 && latest.temp!==null && latest.temp!==undefined){
+      const consensusMax = todayCorrected.reduce((a,b)=>a+b,0)/todayCorrected.length;
+      const diff = latest.temp - consensusMax;
+      let msg, color;
+      if(diff >= -0.5){
+        msg = `Already at/near today's forecast max (${consensusMax.toFixed(1)}°) — if it's still climbing, actual may beat the models.`;
+        color = 'var(--amber)';
+      } else {
+        msg = `${Math.abs(diff).toFixed(1)}° below today's forecast max (${consensusMax.toFixed(1)}°) — still room to reach it, or the day may fall short.`;
+        color = 'var(--teal)';
+      }
+      html += `<div style="padding:10px 12px; background:var(--panel-2); border-radius:8px; border-left:3px solid ${color}; font-size:12.5px;">${msg}</div>`;
+    }
+
+    // recent trend table
+    const recent = metarList.slice(-12).reverse();
+    html += `<div class="gridwrap" style="margin-top:14px;"><table><thead><tr><th>Time (UTC)</th><th>Temp</th><th>Dewpoint</th><th>Wind</th><th>Cloud</th></tr></thead><tbody>`;
+    recent.forEach(m=>{
+      const t = new Date(m.obsTime);
+      const timeLabel = t.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'UTC'});
+      const w = (m.wspd!==null&&m.wspd!==undefined) ? `${m.wdir!==null&&m.wdir!==undefined?m.wdir+'°/':''}${m.wspd}kt` : '—';
+      html += `<tr><td class="num">${timeLabel}</td><td class="num">${m.temp!==null&&m.temp!==undefined?m.temp.toFixed(1)+'°':'—'}</td>
+        <td class="num">${m.dewp!==null&&m.dewp!==undefined?m.dewp.toFixed(1)+'°':'—'}</td>
+        <td class="num">${w}</td><td class="num">${m.cover||'—'}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+  html += `</div>`;
+
+  // Forecast history
+  const historyDates = Array.from(new Set([
+    ...Object.values(panel.forecasts).flatMap(ds=>Object.keys(ds)),
+    ...Object.keys(panel.actuals)
+  ])).sort();
+  if(!historyDate || !historyDates.includes(historyDate)){
+    historyDate = historyDates.length ? historyDates[historyDates.length-1] : dates[0];
+  }
+  html += `<div class="panel"><h2>Forecast history</h2>
+    <div class="hint">Every automated run is kept as its own snapshot — see how each model's call for one date changed as the lead time shrank.</div>`;
+  if(historyDates.length===0){
+    html += `<div class="empty">No dates logged yet.</div>`;
+  } else {
+    html += `<select class="sel" onchange="setHistoryDate(this.value)">
+      ${historyDates.map(d=>`<option value="${d}" ${d===historyDate?'selected':''}>${d}</option>`).join('')}
+    </select>`;
+    html += `<div class="gridwrap"><table><thead><tr><th>Model</th><th>Snapshots (lead → temp)</th><th>Actual</th></tr></thead><tbody>`;
+    const actual = getActual(current, historyDate);
+    let any = false;
+    modelIds.forEach(mid=>{
+      const arr = (panel.forecasts[mid] && panel.forecasts[mid][historyDate]) || [];
+      if(arr.length===0) return;
+      any = true;
+      const snaps = arr.map(e=>{
+        const t = new Date(e.capturedAt);
+        const timeLabel = t.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+        return `${e.lead}d (${timeLabel})→${e.temp.toFixed(1)}°`;
+      }).join(' · ');
+      html += `<tr><td>${modelName(mid)}</td><td class="num">${snaps}</td><td class="num">${actual?actual.value.toFixed(1)+'°':'—'}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+    if(!any) html += `<div class="empty">No snapshots logged for this date yet.</div>`;
+  }
+  html += `</div>`;
+
+  html += `<div class="panel">
+    <div class="caveat">
+      Forecasts &amp; wind/cloud update automatically twice a day via GitHub Actions — nothing to enter by hand. Actuals come from Open-Meteo's reanalysis archive (a close proxy, not guaranteed identical to the exact station reading Polymarket resolves against) — you can manually overwrite any "Actual" cell above if you know the real resolution value; overrides are stored in your browser only.
+    </div>
+  </div>`;
+
+  document.getElementById('content').innerHTML = html;
+}
+
+(async function init(){
+  await loadData();
+  render();
+})();
+</script>
+</body>
+</html>
