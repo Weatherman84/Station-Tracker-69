@@ -373,10 +373,9 @@ function setHistoryDate(d){ historyDate = d; render(); }
 function setThreshold(v){ const n = parseFloat(v); if(!isNaN(n) && n>0) reliabilityThreshold = n; render(); }
 
 function buildHistoryChart(seriesByModel, actualValue){
-  const allLeads = new Set();
-  Object.values(seriesByModel).forEach(arr=>arr.forEach(p=>allLeads.add(p.lead)));
-  const leads = Array.from(allLeads).sort((a,b)=>b-a); // descending: further out on the left, 0 on the right
-  if(leads.length===0) return '<div class="empty">Not enough snapshots yet to chart.</div>';
+  const allX = [];
+  Object.values(seriesByModel).forEach(arr=>arr.forEach(p=>allX.push(p.x)));
+  if(allX.length===0) return '<div class="empty">Not enough snapshots yet to chart.</div>';
 
   const allTemps = [];
   Object.values(seriesByModel).forEach(arr=>arr.forEach(p=>allTemps.push(p.temp)));
@@ -387,8 +386,9 @@ function buildHistoryChart(seriesByModel, actualValue){
 
   const W=640, H=220, ML=42, MR=14, MT=14, MB=26;
   const plotW = W-ML-MR, plotH = H-MT-MB;
-  const leadMin = leads[leads.length-1], leadMax = leads[0];
-  const xFor = lead => ML + (leadMax===leadMin ? plotW/2 : (leadMax-lead)/(leadMax-leadMin)*plotW);
+  const xMax = Math.max(...allX, 0.01), xMin = Math.min(...allX, 0);
+  // descending x-axis: further out in time on the left, the target date (x=0) on the right
+  const xFor = x => ML + (xMax===xMin ? plotW/2 : (xMax-x)/(xMax-xMin)*plotW);
   const yFor = t => MT + (yMax===yMin ? plotH/2 : (yMax-t)/(yMax-yMin)*plotH);
 
   const colors = ['#3ED6B5','#E8935B','#C98BD9','#6FA8DC','#D9695B','#7FD1B9','#F2C14E','#9B8AFB','#5CC8E8'];
@@ -399,10 +399,12 @@ function buildHistoryChart(seriesByModel, actualValue){
     svg += `<line x1="${ML}" y1="${y.toFixed(1)}" x2="${W-MR}" y2="${y.toFixed(1)}" stroke="#1E262D" stroke-width="1"/>`;
     svg += `<text x="${ML-6}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="9" fill="#6B7885" font-family="IBM Plex Mono, monospace">${t.toFixed(1)}°</text>`;
   });
-  leads.forEach(l=>{
-    const x = xFor(l);
-    svg += `<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9" fill="#6B7885" font-family="IBM Plex Mono, monospace">${l}d</text>`;
-  });
+  const tickCount = 5;
+  for(let i=0;i<=tickCount;i++){
+    const xv = xMin + (xMax-xMin)*i/tickCount;
+    const x = xFor(xv);
+    svg += `<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9" fill="#6B7885" font-family="IBM Plex Mono, monospace">${xv.toFixed(1)}d</text>`;
+  }
 
   if(actualValue!==null && actualValue!==undefined){
     const y = yFor(actualValue);
@@ -413,14 +415,14 @@ function buildHistoryChart(seriesByModel, actualValue){
   let colorIdx = 0;
   const legend = [];
   Object.keys(seriesByModel).forEach(name=>{
-    const pts = seriesByModel[name].slice().sort((a,b)=>b.lead-a.lead);
+    const pts = seriesByModel[name].slice().sort((a,b)=>b.x-a.x);
     if(pts.length===0) return;
     const color = colors[colorIdx % colors.length]; colorIdx++;
     legend.push({name, color});
-    const pathD = pts.map((p,i)=> (i===0?'M':'L') + xFor(p.lead).toFixed(1) + ',' + yFor(p.temp).toFixed(1)).join(' ');
+    const pathD = pts.map((p,i)=> (i===0?'M':'L') + xFor(p.x).toFixed(1) + ',' + yFor(p.temp).toFixed(1)).join(' ');
     svg += `<path d="${pathD}" fill="none" stroke="${color}" stroke-width="2"/>`;
     pts.forEach(p=>{
-      svg += `<circle cx="${xFor(p.lead).toFixed(1)}" cy="${yFor(p.temp).toFixed(1)}" r="2.5" fill="${color}"/>`;
+      svg += `<circle cx="${xFor(p.x).toFixed(1)}" cy="${yFor(p.temp).toFixed(1)}" r="2.5" fill="${color}"/>`;
     });
   });
   svg += `</svg>`;
@@ -784,11 +786,14 @@ function render(){
     </select>`;
 
     const actual = getActual(current, historyDate);
+    const targetMidnight = new Date(historyDate+'T00:00:00Z').getTime();
     const seriesByModel = {};
     modelIds.forEach(mid=>{
       const arr = (panel.forecasts[mid] && panel.forecasts[mid][historyDate]) || [];
       if(arr.length===0) return;
-      seriesByModel[modelName(mid)] = arr.filter(e=>e.lead!==null&&e.lead!==undefined).map(e=>({lead:e.lead, temp:e.temp}));
+      seriesByModel[modelName(mid)] = arr
+        .filter(e=>e.capturedAt)
+        .map(e=>({x: (targetMidnight - new Date(e.capturedAt).getTime())/86400000, temp: e.temp}));
     });
     html += buildHistoryChart(seriesByModel, actual ? actual.value : null);
 
