@@ -2751,7 +2751,58 @@
     "cover": "FEW",
     "raw": "METAR LEMD 121730Z 24012KT 200V270 9999 FEW080CB 33/09 Q1012 NOSIG"
    }
-  ]
+  ],
+  "market": {
+   "fetchedAt": "2026-07-12T20:24:19.465247+00:00",
+   "eventSlug": "highest-temperature-in-madrid-on-july-12-2026",
+   "question": "Highest temperature in Madrid on July 12?",
+   "buckets": [
+    {
+     "label": "32°C or below",
+     "price": 0.0005
+    },
+    {
+     "label": "33°C",
+     "price": 0.0005
+    },
+    {
+     "label": "34°C",
+     "price": 0.9995
+    },
+    {
+     "label": "35°C",
+     "price": 0.0005
+    },
+    {
+     "label": "36°C",
+     "price": 0.0005
+    },
+    {
+     "label": "37°C",
+     "price": 0.0005
+    },
+    {
+     "label": "38°C",
+     "price": 0.0005
+    },
+    {
+     "label": "39°C",
+     "price": 0.0005
+    },
+    {
+     "label": "40°C",
+     "price": 0.0005
+    },
+    {
+     "label": "41°C",
+     "price": 0.0005
+    },
+    {
+     "label": "42°C or higher",
+     "price": 0.0005
+    }
+   ]
+  }
  },
  "amsterdam": {
   "forecasts": {
