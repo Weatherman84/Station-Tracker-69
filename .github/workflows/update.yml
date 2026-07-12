@@ -1,0 +1,34 @@
+name: Update forecast data
+
+on:
+  schedule:
+    # 06:00 and 15:00 UTC daily — two runs/day builds real intraday history.
+    # Adjust to taste; GitHub's cron can run a few minutes late, that's fine here.
+    - cron: '0 6,15 * * *'
+  workflow_dispatch: {}   # lets you trigger a run manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch forecasts
+        env:
+          METEOBLUE_API_KEY: ${{ secrets.METEOBLUE_API_KEY }}
+        run: python fetch_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git diff --quiet --cached || git commit -m "Update forecast data $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
