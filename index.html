@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Station Model Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0D10; --panel:#10151A; --panel-2:#141A20; --border:#1E262D;
+    --text:#D8E1E8; --muted:#6B7885; --dim:#3E4750;
+    --teal:#3ED6B5; --amber:#E8935B; --violet:#C98BD9; --bad:#D9695B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:14px; line-height:1.45;}
+  .num{font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums;}
+  h1,h2{font-family:'Space Grotesk',sans-serif; margin:0; letter-spacing:-0.01em;}
+  .wrap{max-width:1050px; margin:0 auto; padding:20px 16px 60px;}
+  .top{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:18px; flex-wrap:wrap;}
+  .top h1{font-size:20px; color:#fff;}
+  .top .sub{color:var(--muted); font-size:12.5px; margin-top:4px;}
+  .status{color:var(--muted); font-size:11.5px; text-align:right;}
+  .tabs{display:flex; gap:4px; border-bottom:1px solid var(--border); margin-bottom:18px; overflow-x:auto;}
+  .tab{padding:10px 14px; cursor:pointer; color:var(--muted); font-family:'Space Grotesk'; font-weight:600; font-size:13px; border-bottom:2px solid transparent; white-space:nowrap;}
+  .tab.active{color:#fff;}
+  .panel{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:16px;}
+  .panel h2{font-size:14px; color:#fff; margin-bottom:2px;}
+  .panel .hint{color:var(--muted); font-size:12px; margin-bottom:12px;}
+  table{width:100%; border-collapse:collapse; font-size:12.5px;}
+  th{text-align:left; color:var(--muted); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:0.03em; padding:6px 8px; border-bottom:1px solid var(--border);}
+  td{padding:7px 8px; border-bottom:1px solid var(--panel-2); white-space:nowrap;}
+  th:first-child, td:first-child{position:sticky; left:0; z-index:2; background:var(--panel);}
+  tr.aux-row td:first-child{background:var(--panel);}
+  tr.best td{background:rgba(62,214,181,0.07);}
+  tr.best td:first-child{background:#132a24; box-shadow:inset 3px 0 0 var(--teal);}
+  .rank{color:var(--dim); font-size:11px; margin-right:6px;}
+  .filter-row{display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap;}
+  .chip{padding:5px 11px; border:1px solid var(--border); border-radius:20px; color:var(--muted); font-size:11.5px; cursor:pointer;}
+  .chip.active{background:var(--teal); color:#06201A; border-color:var(--teal);}
+  .gridwrap{overflow-x:auto;}
+  .spread-bar{position:relative; height:6px; background:var(--panel-2); border-radius:3px; width:70px; margin-top:3px;}
+  .spread-fill{position:absolute; top:0; height:6px; background:var(--amber); border-radius:3px;}
+  .day-hdr{font-family:'IBM Plex Mono'; font-size:11.5px;}
+  .day-hdr .dow{color:var(--muted); display:block; font-size:10px;}
+  .aux-row td{color:var(--muted); font-size:11px;}
+  .cell-input{width:56px; background:var(--panel-2); border:1px solid var(--border); color:var(--text); border-radius:5px; padding:5px 6px; font-family:'IBM Plex Mono'; font-size:12px; text-align:right;}
+  .cell-input:focus{outline:none; border-color:var(--violet);}
+  .conf-badge{padding:3px 8px; border-radius:10px; font-size:10.5px; font-family:'IBM Plex Mono'; display:inline-block;}
+  .conf-high{background:rgba(62,214,181,0.15); color:var(--teal);}
+  .conf-med{background:rgba(232,147,93,0.15); color:var(--amber);}
+  .conf-low{background:rgba(217,105,91,0.15); color:var(--bad);}
+  .heat-badge{background:rgba(232,147,93,0.18); color:var(--amber); padding:3px 7px; border-radius:6px; font-size:10.5px;}
+  .sel{background:var(--panel-2); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:7px 9px; font-family:'IBM Plex Mono'; font-size:12.5px; margin-bottom:12px;}
+  .empty{color:var(--muted); font-size:12.5px; padding:10px 0;}
+  .caveat{color:var(--dim); font-size:11px; line-height:1.6; margin-top:4px;}
+  .src-tag{font-size:9.5px; color:var(--dim); margin-left:3px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Station Model Tracker</h1>
+      <div class="sub">Automated forecast-vs-actual backtesting for Polymarket max-temp markets</div>
+    </div>
+    <div class="status" id="status">Loading…</div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div id="content"></div>
+</div>
+
+<script>
+let DATA = null;
+let current = null;
+let leadFilter = 'all';
+let historyDate = null;
+let reliabilityThreshold = 1.0;
+const HEAT_SPIKE_WIND_MAX = 15;
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function fmtDate(d){ return d.toISOString().slice(0,10); }
+function todayStr(){ const d=new Date(); d.setHours(0,0,0,0); return fmtDate(d); }
+
+function overrideKey(station, date){ return `actual-override:${station}:${date}`; }
+function getActual(station, date){
+  const ov = localStorage.getItem(overrideKey(station, date));
+  if(ov !== null) return {value: parseFloat(ov), overridden: true};
+  const v = DATA[station].actuals[date];
+  return v !== undefined ? {value: v, overridden: false} : null;
+}
+function setActualOverride(station, date, value){
+  if(value === '' || isNaN(parseFloat(value))) localStorage.removeItem(overrideKey(station, date));
+  else localStorage.setItem(overrideKey(station, date), value);
+  render();
+}
+
+// Bet tracker — deliberately localStorage-only, never written to data.json/the repo,
+// since GitHub Pages repos are public by default and this is personal trading data.
+function betsKey(station){ return `bets:${station}`; }
+function getBets(station){
+  try{ const raw = localStorage.getItem(betsKey(station)); return raw ? JSON.parse(raw) : []; }
+  catch(e){ return []; }
+}
+function saveBets(station, bets){ localStorage.setItem(betsKey(station), JSON.stringify(bets)); }
+function addBet(station, date, label, stake, price){
+  stake = parseFloat(stake); price = parseFloat(price);
+  if(!date || !label || isNaN(stake) || isNaN(price) || price<=0 || price>=1) return;
+  const bets = getBets(station);
+  bets.push({id: Date.now(), date, label, stake, price, addedAt: new Date().toISOString()});
+  saveBets(station, bets);
+  render();
+}
+function removeBet(station, id){
+  saveBets(station, getBets(station).filter(b=>b.id!==id));
+  render();
+}
+// A bet's "label" is meant as a plain description of the bucket/side you took, e.g. "38°" or ">=38°".
+// PnL only resolves once you've set an Actual value for that date (override or auto) AND the label
+// contains a number we can compare — for exact-bucket bets ("38°") win = actual rounds to that value;
+// for threshold bets (">=38", "<38") win = actual satisfies the comparison.
+function resolveBet(bet, actualValue){
+  if(actualValue===undefined || actualValue===null) return null;
+  const label = bet.label.trim();
+  let win = null;
+  const geMatch = label.match(/^>=?\s*(-?\d+(\.\d+)?)/);
+  const leMatch = label.match(/^<=?\s*(-?\d+(\.\d+)?)/);
+  const exactMatch = label.match(/^(-?\d+(\.\d+)?)/);
+  if(geMatch) win = actualValue >= parseFloat(geMatch[1]);
+  else if(leMatch) win = actualValue < parseFloat(leMatch[1]);
+  else if(exactMatch) win = Math.round(actualValue) === Math.round(parseFloat(exactMatch[1]));
+  if(win===null) return null;
+  const payout = win ? bet.stake/bet.price - bet.stake : -bet.stake;
+  return {win, payout};
+}
+
+async function loadData(){
+  const res = await fetch('./data.json?t=' + Date.now());
+  DATA = await res.json();
+  const stationIds = Object.keys(DATA).filter(k => !k.startsWith('_'));
+  if(!current) current = stationIds[0];
+  const anyPanel = DATA[current];
+  document.getElementById('status').textContent = anyPanel && anyPanel.lastUpdated
+    ? 'Data updated ' + new Date(anyPanel.lastUpdated).toLocaleString()
+    : 'No data yet — waiting for first Action run';
+}
+
+function stationIds(){ return Object.keys(DATA).filter(k => !k.startsWith('_')); }
+function stationName(id){ return (DATA._stations && DATA._stations[id] && DATA._stations[id].name) || id; }
+function modelName(id){ return (DATA._modelNames && DATA._modelNames[id]) || id; }
+
+function erf(x){
+  // Abramowitz-Stegun approximation, good to ~1e-7
+  const sign = x<0 ? -1 : 1; x = Math.abs(x);
+  const a1=0.254829592, a2=-0.284496736, a3=1.421413741, a4=-1.453152027, a5=1.061405429, p=0.3275911;
+  const t = 1/(1+p*x);
+  const y = 1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+  return sign*y;
+}
+function normalCDF(x, mean, std){ return 0.5*(1+erf((x-mean)/(std*Math.SQRT2))); }
+function buildNowcast(mean, std){
+  const buckets = [];
+  const center = Math.round(mean);
+  for(let b=center-4; b<=center+4; b++){
+    const p = normalCDF(b+0.5, mean, std) - normalCDF(b-0.5, mean, std);
+    buckets.push({bucket:b, prob:p});
+  }
+  const sum = buckets.reduce((a,b)=>a+b.prob,0) || 1;
+  buckets.forEach(b=> b.prob = b.prob/sum);
+  return buckets;
+}
+function computeSurpriseIndex(panel, modelIds){
+  const allDates = new Set();
+  modelIds.forEach(mid=>{ Object.keys(panel.forecasts[mid]||{}).forEach(d=>allDates.add(d)); });
+  let total=0, surprises=0;
+  allDates.forEach(d=>{
+    const actual = getActual(current, d);
+    if(!actual) return;
+    const vals = [];
+    modelIds.forEach(mid=>{ const e = latestEntry(panel.forecasts[mid], d); if(e) vals.push(e.temp); });
+    if(vals.length<2) return;
+    total++;
+    const mn=Math.min(...vals), mx=Math.max(...vals);
+    if(actual.value < mn || actual.value > mx) surprises++;
+  });
+  return total>0 ? {rate: surprises/total*100, n: total, count: surprises} : null;
+}
+
+function relativeHumidity(tempC, dewpC){
+  if(tempC===null||tempC===undefined||dewpC===null||dewpC===undefined) return null;
+  // Magnus formula
+  const a = 17.625, b = 243.04;
+  const gammaT = (a*tempC)/(b+tempC);
+  const gammaD = (a*dewpC)/(b+dewpC);
+  const rh = 100 * Math.exp(gammaD - gammaT);
+  return Math.max(0, Math.min(100, rh));
+}
+
+function leadFor(dateStr){
+  const target = new Date(dateStr+'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  return Math.round((target-today)/86400000);
+}
+function latestEntry(dataset, date){
+  const arr = dataset && dataset[date];
+  if(!arr || arr.length===0) return undefined;
+  return arr[arr.length-1];
+}
+function leadPasses(lead){
+  if(leadFilter==='all') return true;
+  if(lead===null||lead===undefined) return true;
+  if(leadFilter==='0-1') return lead<=1;
+  if(leadFilter==='0-3') return lead<=3;
+  if(leadFilter==='0-5') return lead<=5;
+  return true;
+}
+
+function computeMaeByLead(panel){
+  const buckets = {};
+  Object.values(panel.forecasts||{}).forEach(dataset=>{
+    Object.keys(dataset).forEach(date=>{
+      const actual = getActual(current, date);
+      if(!actual) return;
+      (dataset[date]||[]).forEach(entry=>{
+        if(entry.lead===null||entry.lead===undefined) return;
+        const err = Math.abs(entry.temp-actual.value);
+        if(!buckets[entry.lead]) buckets[entry.lead] = {sum:0,count:0};
+        buckets[entry.lead].sum += err; buckets[entry.lead].count++;
+      });
+    });
+  });
+  const out = {};
+  Object.keys(buckets).forEach(l=> out[l] = buckets[l].sum/buckets[l].count);
+  return out;
+}
+function computeModelLeadMae(panel, modelId){
+  const dataset = panel.forecasts[modelId];
+  if(!dataset) return {};
+  const buckets = {};
+  Object.keys(dataset).forEach(date=>{
+    const actual = getActual(current, date);
+    if(!actual) return;
+    (dataset[date]||[]).forEach(entry=>{
+      if(entry.lead===null||entry.lead===undefined) return;
+      const err = Math.abs(entry.temp-actual.value);
+      if(!buckets[entry.lead]) buckets[entry.lead] = {sum:0,count:0};
+      buckets[entry.lead].sum += err; buckets[entry.lead].count++;
+    });
+  });
+  const out = {};
+  Object.keys(buckets).forEach(l=> out[l] = {mae: buckets[l].sum/buckets[l].count, n: buckets[l].count});
+  return out;
+}
+function reliableHorizon(leadMae, threshold){
+  let horizon = -1;
+  for(let lead=0; lead<=10; lead++){
+    const b = leadMae[lead];
+    if(!b) break;
+    if(b.mae <= threshold) horizon = lead; else break;
+  }
+  return horizon;
+}
+
+// Signed bias per lead bucket, plus an overall (all-lead) fallback — drives the
+// automatic bias-correction shown next to each forecast cell.
+const MIN_SAMPLES_FOR_CORRECTION = 3;
+function computeModelBias(panel, modelId){
+  const dataset = panel.forecasts[modelId];
+  if(!dataset) return {byLead:{}, overall:null};
+  const buckets = {};
+  let overallSum = 0, overallCount = 0;
+  Object.keys(dataset).forEach(date=>{
+    const actual = getActual(current, date);
+    if(!actual) return;
+    (dataset[date]||[]).forEach(entry=>{
+      if(entry.lead===null||entry.lead===undefined) return;
+      const err = entry.temp - actual.value; // signed: >0 model runs warm, <0 runs cold
+      if(!buckets[entry.lead]) buckets[entry.lead] = {sum:0,count:0};
+      buckets[entry.lead].sum += err; buckets[entry.lead].count++;
+      overallSum += err; overallCount++;
+    });
+  });
+  const byLead = {};
+  Object.keys(buckets).forEach(l=> byLead[l] = {bias: buckets[l].sum/buckets[l].count, n: buckets[l].count});
+  const overall = overallCount>0 ? {bias: overallSum/overallCount, n: overallCount} : null;
+  return {byLead, overall};
+}
+function correctedForecast(biasInfo, lead, rawTemp){
+  const leadBucket = biasInfo.byLead[lead];
+  if(leadBucket && leadBucket.n >= MIN_SAMPLES_FOR_CORRECTION){
+    return {value: rawTemp - leadBucket.bias, n: leadBucket.n, source: 'lead'};
+  }
+  if(biasInfo.overall && biasInfo.overall.n >= MIN_SAMPLES_FOR_CORRECTION){
+    return {value: rawTemp - biasInfo.overall.bias, n: biasInfo.overall.n, source: 'overall'};
+  }
+  return null;
+}
+
+function computeLeaderboard(panel){
+  const series = {};
+  Object.keys(panel.forecasts).forEach(modelId=>{
+    const map = {};
+    Object.keys(panel.forecasts[modelId]).forEach(date=>{
+      const e = latestEntry(panel.forecasts[modelId], date);
+      if(!e || !leadPasses(e.lead)) return;
+      map[date] = {temp:e.temp};
+    });
+    series[modelName(modelId)] = map;
+  });
+
+  const winCount = {}, compareDays = {};
+  Object.keys(series).forEach(n=>{ winCount[n]=0; compareDays[n]=0; });
+  const allDates = new Set();
+  Object.values(series).forEach(map=>Object.keys(map).forEach(d=>allDates.add(d)));
+  allDates.forEach(date=>{
+    const actual = getActual(current, date);
+    if(!actual) return;
+    const errsByName = {};
+    Object.keys(series).forEach(name=>{
+      const e = series[name][date];
+      if(!e) return;
+      compareDays[name]++;
+      errsByName[name] = Math.abs(e.temp-actual.value);
+    });
+    const names = Object.keys(errsByName);
+    if(names.length===0) return;
+    const bestErr = Math.min(...names.map(n=>errsByName[n]));
+    names.forEach(name=>{ if(errsByName[name] <= bestErr + 0.01) winCount[name]++; });
+  });
+
+  const cutoff14 = new Date(); cutoff14.setHours(0,0,0,0); cutoff14.setDate(cutoff14.getDate()-14);
+  const cutoff14str = fmtDate(cutoff14);
+
+  const rows = [];
+  Object.keys(series).forEach(name=>{
+    const map = series[name];
+    const errors = [], errors14 = [];
+    Object.keys(map).forEach(date=>{
+      const actual = getActual(current, date);
+      if(!actual) return;
+      const err = map[date].temp - actual.value;
+      errors.push(err);
+      if(date >= cutoff14str) errors14.push(err);
+    });
+    if(errors.length===0) return;
+    const n = errors.length;
+    const bias = errors.reduce((a,b)=>a+b,0)/n;
+    const mae = errors.reduce((a,b)=>a+Math.abs(b),0)/n;
+    const rmse = Math.sqrt(errors.reduce((a,b)=>a+b*b,0)/n);
+    const mae14 = errors14.length ? errors14.reduce((a,b)=>a+Math.abs(b),0)/errors14.length : null;
+    const winRate = compareDays[name] ? (winCount[name]/compareDays[name]*100) : null;
+    rows.push({name, n, bias, mae, rmse, mae14, winRate});
+  });
+  rows.sort((a,b)=>a.mae-b.mae);
+  return rows;
+}
+
+function nextDates(){
+  const arr = [];
+  const today = new Date(); today.setHours(0,0,0,0);
+  for(let i=0;i<7;i++){ const d = new Date(today); d.setDate(d.getDate()+i); arr.push(fmtDate(d)); }
+  return arr;
+}
+
+function renderTabs(){
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = stationIds().map(id =>
+    `<div class="tab ${id===current?'active':''}" onclick="setStation('${id}')">${stationName(id)}</div>`
+  ).join('');
+}
+function setStation(id){ current = id; historyDate = null; render(); }
+function setLeadFilter(f){ leadFilter = f; render(); }
+function setHistoryDate(d){ historyDate = d; render(); }
+function setThreshold(v){ const n = parseFloat(v); if(!isNaN(n) && n>0) reliabilityThreshold = n; render(); }
+
+function buildHistoryChart(seriesByModel, actualValue){
+  const allLeads = new Set();
+  Object.values(seriesByModel).forEach(arr=>arr.forEach(p=>allLeads.add(p.lead)));
+  const leads = Array.from(allLeads).sort((a,b)=>b-a); // descending: further out on the left, 0 on the right
+  if(leads.length===0) return '<div class="empty">Not enough snapshots yet to chart.</div>';
+
+  const allTemps = [];
+  Object.values(seriesByModel).forEach(arr=>arr.forEach(p=>allTemps.push(p.temp)));
+  if(actualValue!==null && actualValue!==undefined) allTemps.push(actualValue);
+  const minT = Math.min(...allTemps), maxT = Math.max(...allTemps);
+  const pad = Math.max(0.5, (maxT-minT)*0.15 || 1);
+  const yMin = minT-pad, yMax = maxT+pad;
+
+  const W=640, H=220, ML=42, MR=14, MT=14, MB=26;
+  const plotW = W-ML-MR, plotH = H-MT-MB;
+  const leadMin = leads[leads.length-1], leadMax = leads[0];
+  const xFor = lead => ML + (leadMax===leadMin ? plotW/2 : (leadMax-lead)/(leadMax-leadMin)*plotW);
+  const yFor = t => MT + (yMax===yMin ? plotH/2 : (yMax-t)/(yMax-yMin)*plotH);
+
+  const colors = ['#3ED6B5','#E8935B','#C98BD9','#6FA8DC','#D9695B','#7FD1B9','#F2C14E','#9B8AFB','#5CC8E8'];
+  let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%; height:auto; display:block;">`;
+
+  [yMin, (yMin+yMax)/2, yMax].forEach(t=>{
+    const y = yFor(t);
+    svg += `<line x1="${ML}" y1="${y.toFixed(1)}" x2="${W-MR}" y2="${y.toFixed(1)}" stroke="#1E262D" stroke-width="1"/>`;
+    svg += `<text x="${ML-6}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="9" fill="#6B7885" font-family="IBM Plex Mono, monospace">${t.toFixed(1)}°</text>`;
+  });
+  leads.forEach(l=>{
+    const x = xFor(l);
+    svg += `<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9" fill="#6B7885" font-family="IBM Plex Mono, monospace">${l}d</text>`;
+  });
+
+  if(actualValue!==null && actualValue!==undefined){
+    const y = yFor(actualValue);
+    svg += `<line x1="${ML}" y1="${y.toFixed(1)}" x2="${W-MR}" y2="${y.toFixed(1)}" stroke="#D8E1E8" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+    svg += `<text x="${W-MR}" y="${(y-4).toFixed(1)}" text-anchor="end" font-size="9" fill="#D8E1E8" font-family="IBM Plex Mono, monospace">actual ${actualValue.toFixed(1)}°</text>`;
+  }
+
+  let colorIdx = 0;
+  const legend = [];
+  Object.keys(seriesByModel).forEach(name=>{
+    const pts = seriesByModel[name].slice().sort((a,b)=>b.lead-a.lead);
+    if(pts.length===0) return;
+    const color = colors[colorIdx % colors.length]; colorIdx++;
+    legend.push({name, color});
+    const pathD = pts.map((p,i)=> (i===0?'M':'L') + xFor(p.lead).toFixed(1) + ',' + yFor(p.temp).toFixed(1)).join(' ');
+    svg += `<path d="${pathD}" fill="none" stroke="${color}" stroke-width="2"/>`;
+    pts.forEach(p=>{
+      svg += `<circle cx="${xFor(p.lead).toFixed(1)}" cy="${yFor(p.temp).toFixed(1)}" r="2.5" fill="${color}"/>`;
+    });
+  });
+  svg += `</svg>`;
+
+  const legendHtml = `<div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; font-size:10.5px; color:var(--muted);">` +
+    legend.map(l=>`<span><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${l.color}; margin-right:4px;"></span>${l.name}</span>`).join('') +
+    `</div>`;
+
+  return svg + legendHtml;
+}
+
+function confidenceBadge(score){
+  if(score===null) return '<span style="color:var(--dim)">—</span>';
+  const cls = score>=70 ? 'conf-high' : (score>=40 ? 'conf-med' : 'conf-low');
+  const label = score>=70 ? 'High' : (score>=40 ? 'Med' : 'Low');
+  const stars = Math.max(1, Math.min(5, Math.round(score/20)));
+  const starStr = '★'.repeat(stars) + '☆'.repeat(5-stars);
+  return `<span class="conf-badge ${cls}">${label} ${score}</span><div style="color:var(--amber); font-size:10px; margin-top:2px;">${starStr}</div>`;
+}
+
+function render(){
+  renderTabs();
+  const panel = DATA[current];
+  const modelIds = Object.keys(panel.forecasts);
+  const leaderboard = computeLeaderboard(panel);
+  const dates = nextDates();
+  const maeByLead = computeMaeByLead(panel);
+
+  let html = '';
+
+  html += `<div class="panel">
+    <h2>${stationName(current)} — model accuracy</h2>
+    <div class="hint">MAE / bias in °C, win-rate = share of overlapping days a model was closest to actual.</div>
+    <div class="filter-row">
+      ${[['all','All lead times'],['0-1','≤1 day out'],['0-3','≤3 days out'],['0-5','≤5 days out']]
+        .map(([k,l])=>`<div class="chip ${leadFilter===k?'active':''}" onclick="setLeadFilter('${k}')">${l}</div>`).join('')}
+    </div>`;
+  if(leaderboard.length===0){
+    html += `<div class="empty">No overlapping forecast/actual data yet — check back after the first couple of Action runs and once a day or two has passed.</div>`;
+  } else {
+    html += `<div class="gridwrap"><table><thead><tr><th>Model</th><th>Days</th><th>MAE</th><th>MAE 14d</th><th>Bias</th><th>RMSE</th><th>Win%</th></tr></thead><tbody>`;
+    const bestMae = leaderboard[0].mae;
+    leaderboard.forEach(r=>{
+      const isBest = r.mae <= bestMae + 0.01;
+      html += `<tr class="${isBest?'best':''}"><td>${isBest?'<span class="rank">#1</span>':''}${r.name}</td>
+        <td class="num">${r.n}</td><td class="num">${r.mae.toFixed(2)}°</td>
+        <td class="num">${r.mae14!==null?r.mae14.toFixed(2)+'°':'—'}</td>
+        <td class="num">${r.bias>0?'+':''}${r.bias.toFixed(2)}°</td>
+        <td class="num">${r.rmse.toFixed(2)}°</td>
+        <td class="num">${r.winRate!==null?r.winRate.toFixed(0)+'%':'—'}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+    html += `<div class="caveat">Bias &gt; 0 = model runs warm; &lt; 0 = runs cold. Win% only counts days with 2+ models to compare.</div>`;
+  }
+  html += `</div>`;
+
+  html += `<div class="panel">
+    <h2>Accuracy by lead time</h2>
+    <div class="hint">MAE at each "days before target" bucket. <b style="color:var(--text)">Reliable Horizon</b> = furthest-out lead where a model's average error still stays within your threshold.</div>
+    <div style="margin-bottom:12px;">
+      <label style="color:var(--muted); font-size:11px;">Threshold (°C)</label><br>
+      <input class="cell-input" style="width:70px; margin-top:4px;" type="number" step="0.1" value="${reliabilityThreshold}" onchange="setThreshold(this.value)">
+    </div>`;
+  const leadCols = [0,1,2,3,4,5,6];
+  let anyLeadData = false;
+  html += `<div class="gridwrap"><table><thead><tr><th>Model</th>`;
+  leadCols.forEach(l=> html += `<th>${l}d</th>`);
+  html += `<th>Reliable horizon</th></tr></thead><tbody>`;
+  modelIds.forEach(mid=>{
+    const leadMae = computeModelLeadMae(panel, mid);
+    if(Object.keys(leadMae).length===0) return;
+    anyLeadData = true;
+    const horizon = reliableHorizon(leadMae, reliabilityThreshold);
+    html += `<tr><td>${modelName(mid)}</td>`;
+    leadCols.forEach(l=>{ const b = leadMae[l]; html += `<td class="num">${b ? b.mae.toFixed(2)+'°' : '—'}</td>`; });
+    const horizonLabel = horizon<0 ? '<span style="color:var(--bad)">none</span>' : `<span style="color:var(--teal)">${horizon}d</span>`;
+    html += `<td>${horizonLabel}</td></tr>`;
+  });
+  html += `</tbody></table></div>`;
+  if(!anyLeadData) html += `<div class="empty">No lead-bucketed data yet.</div>`;
+  html += `</div>`;
+
+  html += `<div class="panel"><h2>Next 7 days — all models</h2>
+    <div class="hint">Wind &amp; cloud are read at the hour each model itself predicts the daily max — automatically, per model. Confidence blends spread, lead time and historical accuracy. Heat-spike flags calm (&lt;15 km/h) + clear (&le;20% cloud) days, where actuals often run hotter than every model says. The teal number under each forecast is that model auto-corrected for its own historical bias at this lead time (needs ${MIN_SAMPLES_FOR_CORRECTION}+ past days); Consensus averages all corrected values.</div>
+    <div class="gridwrap"><table><thead><tr><th>Model</th>`;
+  dates.forEach(d=>{ const dt = new Date(d+'T00:00:00'); html += `<th class="day-hdr">${d.slice(5)}<span class="dow">${DOW[dt.getDay()]}</span></th>`; });
+  html += `<th>Spread</th></tr></thead><tbody>`;
+
+  // confidence row
+  html += `<tr class="aux-row"><td>Confidence</td>`;
+  dates.forEach(d=>{
+    const vals = [];
+    modelIds.forEach(mid=>{ const e = latestEntry(panel.forecasts[mid], d); if(e) vals.push(e.temp); });
+    if(vals.length<2){ html += `<td>—</td>`; return; }
+    const spread = Math.max(...vals)-Math.min(...vals);
+    const lead = leadFor(d);
+    const leadMae = maeByLead[lead] !== undefined ? maeByLead[lead] : null;
+    let score = 100 - Math.min(spread*10,40) - Math.min(lead*3,20);
+    if(leadMae!==null) score -= Math.min(leadMae*8,30);
+    score = Math.max(0, Math.min(100, Math.round(score)));
+    html += `<td>${confidenceBadge(score)}</td>`;
+  });
+  html += `<td></td></tr>`;
+
+  // heat-spike row — averaged wind/cloud across all models with data for that day
+  html += `<tr class="aux-row"><td>Heat-spike risk</td>`;
+  dates.forEach(d=>{
+    let windSum=0, cloudSum=0, count=0;
+    modelIds.forEach(mid=>{
+      const e = latestEntry(panel.forecasts[mid], d);
+      if(e && e.wind!==undefined && e.cloud!==undefined){ windSum+=e.wind; cloudSum+=e.cloud; count++; }
+    });
+    if(count===0){ html += `<td>—</td>`; return; }
+    const avgWind = windSum/count, avgCloud = cloudSum/count;
+    const flagged = avgWind < HEAT_SPIKE_WIND_MAX && avgCloud <= 20;
+    html += `<td>${flagged ? '<span class="heat-badge">🔥 spike</span>' : '<span style="color:var(--dim)">—</span>'}</td>`;
+  });
+  html += `<td></td></tr>`;
+
+  // model rows: temp (wind/cloud + auto bias-corrected value shown as small subtext)
+  const modelBiasCache = {};
+  modelIds.forEach(mid=>{ modelBiasCache[mid] = computeModelBias(panel, mid); });
+
+  const medianByDate = {};
+  dates.forEach(d=>{
+    const vals = [];
+    modelIds.forEach(mid=>{ const e = latestEntry(panel.forecasts[mid], d); if(e) vals.push(e.temp); });
+    if(vals.length){
+      const sorted = vals.slice().sort((a,b)=>a-b);
+      medianByDate[d] = sorted.length%2 ? sorted[(sorted.length-1)/2] : (sorted[sorted.length/2-1]+sorted[sorted.length/2])/2;
+    }
+  });
+
+  modelIds.forEach(mid=>{
+    html += `<tr><td>${modelName(mid)}</td>`;
+    dates.forEach(d=>{
+      const e = latestEntry(panel.forecasts[mid], d);
+      if(!e){ html += `<td class="num">—</td>`; return; }
+      const windTxt = e.wind!==undefined ? `${Math.round(e.wind)}km/h` : '';
+      const cloudTxt = e.cloud!==undefined ? `${Math.round(e.cloud)}%` : '';
+      const corr = correctedForecast(modelBiasCache[mid], leadFor(d), e.temp);
+      const corrTxt = corr
+        ? `<div style="color:var(--teal); font-size:9.5px;" title="corrected using this lead's own bias, n=${corr.n}">→${corr.value.toFixed(1)}°</div>`
+        : `<div style="color:var(--dim); font-size:9.5px;">not enough history</div>`;
+      const isOutlier = medianByDate[d]!==undefined && Math.abs(e.temp - medianByDate[d]) > 1.5;
+      const outlierMark = isOutlier ? `<span style="color:var(--amber);" title="more than 1.5° from today's median">⚠</span>` : '';
+      html += `<td class="num">${e.temp.toFixed(1)}°${outlierMark}<div style="color:var(--dim); font-size:9.5px;">${windTxt}${windTxt&&cloudTxt?' · ':''}${cloudTxt}</div>${corrTxt}</td>`;
+    });
+    html += `<td></td></tr>`;
+  });
+
+  // consensus row — average of every model's bias-corrected value for the day
+  html += `<tr class="aux-row"><td>Consensus (bias-adj.)</td>`;
+  dates.forEach(d=>{
+    const corrected = [];
+    modelIds.forEach(mid=>{
+      const e = latestEntry(panel.forecasts[mid], d);
+      if(!e) return;
+      const corr = correctedForecast(modelBiasCache[mid], leadFor(d), e.temp);
+      if(corr) corrected.push(corr.value);
+    });
+    if(corrected.length===0){ html += `<td>—</td>`; return; }
+    const avg = corrected.reduce((a,b)=>a+b,0)/corrected.length;
+    html += `<td class="num" style="color:var(--teal); font-weight:600;">${avg.toFixed(1)}°<div style="color:var(--dim); font-weight:400; font-size:9.5px;">n=${corrected.length}</div></td>`;
+  });
+  html += `<td></td></tr>`;
+
+  // actual row (editable override, since this page is a real site — localStorage works fine here)
+  html += `<tr class="aux-row"><td>Actual (observed)</td>`;
+  dates.forEach(d=>{
+    const a = getActual(current, d);
+    const v = a ? a.value : '';
+    html += `<td><input class="cell-input" type="number" step="0.1" value="${v}"
+      onchange="setActualOverride('${current}','${d}',this.value)" title="${a && a.overridden ? 'manually overridden' : 'from Open-Meteo archive (reanalysis proxy)'}"></td>`;
+  });
+  html += `<td></td></tr>`;
+
+  // mean / median
+  html += `<tr class="aux-row"><td>Mean</td>`;
+  dates.forEach(d=>{
+    const vals = [];
+    modelIds.forEach(mid=>{ const e = latestEntry(panel.forecasts[mid], d); if(e) vals.push(e.temp); });
+    html += vals.length ? `<td class="num">${(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1)}°</td>` : `<td>—</td>`;
+  });
+  html += `<td></td></tr>`;
+  html += `<tr class="aux-row"><td>Median</td>`;
+  dates.forEach(d=>{
+    const vals = [];
+    modelIds.forEach(mid=>{ const e = latestEntry(panel.forecasts[mid], d); if(e) vals.push(e.temp); });
+    if(vals.length){
+      const sorted = vals.slice().sort((a,b)=>a-b);
+      const mid2 = sorted.length%2 ? sorted[(sorted.length-1)/2] : (sorted[sorted.length/2-1]+sorted[sorted.length/2])/2;
+      html += `<td class="num">${mid2.toFixed(1)}°</td>`;
+    } else { html += `<td>—</td>`; }
+  });
+  html += `<td></td></tr>`;
+
+  // spread
+  html += `<tr class="aux-row"><td>Spread (max−min)</td>`;
+  dates.forEach(d=>{
+    const vals = [];
+    modelIds.forEach(mid=>{ const e = latestEntry(panel.forecasts[mid], d); if(e) vals.push(e.temp); });
+    if(vals.length>1){
+      const spread = Math.max(...vals)-Math.min(...vals);
+      const pct = Math.min(100, spread*20);
+      html += `<td class="num">${spread.toFixed(1)}°<div class="spread-bar"><div class="spread-fill" style="width:${pct}%"></div></div></td>`;
+    } else { html += `<td>—</td>`; }
+  });
+  html += `<td></td></tr>`;
+
+  html += `</tbody></table></div>`;
+  html += `<div class="caveat">Outlier models (more than 1.5° from that day's median) get a small ⚠ next to their value in the table above.</div></div>`;
+
+  // Live Nowcast — probability distribution instead of a single number
+  {
+    const todayDate = todayStr();
+    const todayLead = leadFor(todayDate);
+    const todayVals = [];
+    modelIds.forEach(mid=>{
+      const e = latestEntry(panel.forecasts[mid], todayDate);
+      if(!e) return;
+      const corr = correctedForecast(modelBiasCache[mid], todayLead, e.temp);
+      todayVals.push(corr ? corr.value : e.temp);
+    });
+    html += `<div class="panel"><h2>Live Nowcast — today's probability distribution</h2>
+      <div class="hint">Today's bias-corrected consensus as the mean, this lead-time's historical error as the spread — a normal distribution split into 1° buckets instead of one single number.</div>`;
+    if(todayVals.length>0){
+      const mean = todayVals.reduce((a,b)=>a+b,0)/todayVals.length;
+      const maeAtLead = maeByLead[todayLead];
+      let sigma;
+      if(maeAtLead!==undefined && maeAtLead>0){ sigma = maeAtLead/0.7979; }
+      else {
+        const spread = todayVals.length>1 ? Math.max(...todayVals)-Math.min(...todayVals) : 2;
+        sigma = Math.max(0.6, spread/2);
+      }
+      const buckets = buildNowcast(mean, sigma);
+      const maxProb = Math.max(...buckets.map(b=>b.prob));
+      html += `<div style="max-width:300px;">` + buckets.map(b=>{
+        const pct = (b.prob*100);
+        const barPct = maxProb>0 ? (b.prob/maxProb*100) : 0;
+        return `<div style="display:flex; align-items:center; gap:8px; padding:3px 0;">
+          <span class="num" style="width:32px;">${b.bucket}°</span>
+          <div style="flex:1; background:var(--panel-2); border-radius:3px; height:14px; position:relative;">
+            <div style="position:absolute; left:0; top:0; height:14px; width:${barPct.toFixed(0)}%; background:${pct>=25?'var(--teal)':'var(--dim)'}; border-radius:3px;"></div>
+          </div>
+          <span class="num" style="width:38px; text-align:right;">${pct.toFixed(0)}%</span>
+        </div>`;
+      }).join('') + `</div>`;
+      html += `<div class="caveat" style="margin-top:8px;">Mean ${mean.toFixed(1)}°, σ≈${sigma.toFixed(2)}° (from ${todayVals.length} bias-corrected models${maeAtLead!==undefined?", calibrated to this lead's historical error":", calibrated to today's model spread — thin history so far"}).</div>`;
+    } else {
+      html += `<div class="empty">No forecasts logged for today yet.</div>`;
+    }
+
+    const surprise = computeSurpriseIndex(panel, modelIds);
+    if(surprise){
+      html += `<div class="caveat" style="margin-top:10px; padding-top:10px; border-top:1px solid var(--border);"><b style="color:var(--text)">Surprise Index:</b> actual landed completely outside the full model range on ${surprise.count}/${surprise.n} historical days (${surprise.rate.toFixed(0)}%) — treat the model spread as a soft boundary, not a hard cap, especially on heat-spike-flagged days.</div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Live METAR — real airport observations, not model output. Refreshed every ~30 min.
+  const metarList = (panel.metar || []).slice().sort((a,b)=> a.obsTime.localeCompare(b.obsTime));
+  html += `<div class="panel"><h2>Live METAR — ${stationName(current)}</h2>
+    <div class="hint">Actual airport observations (not a forecast) — use this to see whether today is tracking hot or cold relative to what the models said, and react before the market resolves.</div>`;
+  if(metarList.length===0){
+    html += `<div class="empty">No METAR data yet — waiting for the first METAR Action run.</div>`;
+  } else {
+    const latest = metarList[metarList.length-1];
+    const ageMin = Math.round((Date.now() - new Date(latest.obsTime).getTime())/60000);
+    const windTxt = (latest.wspd!==null && latest.wspd!==undefined)
+      ? `${latest.wdir!==null&&latest.wdir!==undefined?latest.wdir+'°/':''}${latest.wspd}kt${latest.wgst?(' G'+latest.wgst+'kt'):''}`
+      : '—';
+    const rh = relativeHumidity(latest.temp, latest.dewp);
+    const sunsetTxt = (panel.sunset && panel.sunset[todayStr()]) || '—';
+    html += `<div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:14px;">
+      <div><div style="color:var(--muted); font-size:11px;">Temp</div><div class="num" style="font-size:20px; color:#fff;">${latest.temp!==null&&latest.temp!==undefined?latest.temp.toFixed(1)+'°':'—'}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Dewpoint</div><div class="num" style="font-size:20px; color:#fff;">${latest.dewp!==null&&latest.dewp!==undefined?latest.dewp.toFixed(1)+'°':'—'}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Humidity</div><div class="num" style="font-size:20px; color:#fff;">${rh!==null?rh.toFixed(0)+'%':'—'}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Wind</div><div class="num" style="font-size:20px; color:#fff;">${windTxt}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Cloud</div><div class="num" style="font-size:20px; color:#fff;">${latest.cover||'—'}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Sunset today</div><div class="num" style="font-size:20px; color:#fff;">${sunsetTxt}</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Report age</div><div class="num" style="font-size:20px; color:${ageMin>90?'var(--bad)':'var(--muted)'};">${ageMin}min</div></div>
+    </div>`;
+
+    // time to (each model's) expected max, for today
+    const todayMaxHours = [];
+    modelIds.forEach(mid=>{
+      const e = latestEntry(panel.forecasts[mid], todayStr());
+      if(e && e.maxHour) todayMaxHours.push(e.maxHour);
+    });
+    if(todayMaxHours.length>0){
+      const now = new Date();
+      const nowHM = now.getHours()*60+now.getMinutes();
+      const diffs = todayMaxHours.map(hm=>{
+        const [h,m] = hm.split(':').map(Number);
+        let mins = h*60+m - nowHM;
+        return mins;
+      });
+      const avgMin = diffs.reduce((a,b)=>a+b,0)/diffs.length;
+      const label = avgMin > 0
+        ? `~${Math.floor(avgMin/60)}h ${Math.round(avgMin%60)}m until expected max (avg across models, ~${todayMaxHours.sort()[0]}–${todayMaxHours.sort().slice(-1)[0]} local)`
+        : `Expected max window has likely passed for today (models said ~${todayMaxHours.sort()[0]}–${todayMaxHours.sort().slice(-1)[0]} local)`;
+      html += `<div class="caveat" style="margin-bottom:10px;">${label}</div>`;
+    }
+
+    if(latest.raw) html += `<div class="caveat" style="margin-bottom:12px;">${latest.raw}</div>`;
+
+    // compare current observed temp to today's bias-corrected consensus max
+    const todayStr2 = todayStr();
+    const todayCorrected = [];
+    modelIds.forEach(mid=>{
+      const e = latestEntry(panel.forecasts[mid], todayStr2);
+      if(!e) return;
+      const corr = correctedForecast(computeModelBias(panel, mid), leadFor(todayStr2), e.temp);
+      if(corr) todayCorrected.push(corr.value);
+    });
+    if(todayCorrected.length>0 && latest.temp!==null && latest.temp!==undefined){
+      const consensusMax = todayCorrected.reduce((a,b)=>a+b,0)/todayCorrected.length;
+      const diff = latest.temp - consensusMax;
+      let msg, color;
+      if(diff >= -0.5){
+        msg = `Already at/near today's forecast max (${consensusMax.toFixed(1)}°) — if it's still climbing, actual may beat the models.`;
+        color = 'var(--amber)';
+      } else {
+        msg = `${Math.abs(diff).toFixed(1)}° below today's forecast max (${consensusMax.toFixed(1)}°) — still room to reach it, or the day may fall short.`;
+        color = 'var(--teal)';
+      }
+      html += `<div style="padding:10px 12px; background:var(--panel-2); border-radius:8px; border-left:3px solid ${color}; font-size:12.5px;">${msg}</div>`;
+    }
+
+    // recent trend table
+    const recent = metarList.slice(-12).reverse();
+    html += `<div class="gridwrap" style="margin-top:14px;"><table><thead><tr><th>Time (UTC)</th><th>Temp</th><th>Dewpoint</th><th>Wind</th><th>Cloud</th></tr></thead><tbody>`;
+    recent.forEach(m=>{
+      const t = new Date(m.obsTime);
+      const timeLabel = t.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'UTC'});
+      const w = (m.wspd!==null&&m.wspd!==undefined) ? `${m.wdir!==null&&m.wdir!==undefined?m.wdir+'°/':''}${m.wspd}kt` : '—';
+      html += `<tr><td class="num">${timeLabel}</td><td class="num">${m.temp!==null&&m.temp!==undefined?m.temp.toFixed(1)+'°':'—'}</td>
+        <td class="num">${m.dewp!==null&&m.dewp!==undefined?m.dewp.toFixed(1)+'°':'—'}</td>
+        <td class="num">${w}</td><td class="num">${m.cover||'—'}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+  html += `</div>`;
+
+  // Forecast history
+  const historyDates = Array.from(new Set([
+    ...Object.values(panel.forecasts).flatMap(ds=>Object.keys(ds)),
+    ...Object.keys(panel.actuals)
+  ])).sort();
+  if(!historyDate || !historyDates.includes(historyDate)){
+    historyDate = historyDates.length ? historyDates[historyDates.length-1] : dates[0];
+  }
+  html += `<div class="panel"><h2>Forecast history</h2>
+    <div class="hint">Every automated run is kept as its own snapshot — see how each model's call for one date converged (or didn't) as the lead time shrank.</div>`;
+  if(historyDates.length===0){
+    html += `<div class="empty">No dates logged yet.</div>`;
+  } else {
+    html += `<select class="sel" onchange="setHistoryDate(this.value)">
+      ${historyDates.map(d=>`<option value="${d}" ${d===historyDate?'selected':''}>${d}</option>`).join('')}
+    </select>`;
+
+    const actual = getActual(current, historyDate);
+    const seriesByModel = {};
+    modelIds.forEach(mid=>{
+      const arr = (panel.forecasts[mid] && panel.forecasts[mid][historyDate]) || [];
+      if(arr.length===0) return;
+      seriesByModel[modelName(mid)] = arr.filter(e=>e.lead!==null&&e.lead!==undefined).map(e=>({lead:e.lead, temp:e.temp}));
+    });
+    html += buildHistoryChart(seriesByModel, actual ? actual.value : null);
+
+    html += `<div class="gridwrap" style="margin-top:14px;"><table><thead><tr><th>Model</th><th>Snapshots (lead → temp)</th><th>Actual</th></tr></thead><tbody>`;
+    let any = false;
+    modelIds.forEach(mid=>{
+      const arr = (panel.forecasts[mid] && panel.forecasts[mid][historyDate]) || [];
+      if(arr.length===0) return;
+      any = true;
+      const snaps = arr.map(e=>{
+        const t = new Date(e.capturedAt);
+        const timeLabel = t.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+        return `${e.lead}d (${timeLabel})→${e.temp.toFixed(1)}°`;
+      }).join(' · ');
+      html += `<tr><td>${modelName(mid)}</td><td class="num">${snaps}</td><td class="num">${actual?actual.value.toFixed(1)+'°':'—'}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+    if(!any) html += `<div class="empty">No snapshots logged for this date yet.</div>`;
+  }
+  html += `</div>`;
+
+  // Trading Mode — market price (from Polymarket, if fetched) vs this tool's Nowcast probability
+  {
+    const market = panel.market;
+    html += `<div class="panel"><h2>Trading Mode</h2>
+      <div class="hint">Market prices are pulled automatically (see the "Update Polymarket" Action) — this is best-effort keyword matching against Polymarket's Gamma API, so double-check the matched market looks right before trusting it.</div>`;
+    if(!market || !market.buckets || market.buckets.length===0){
+      html += `<div class="empty">No market data yet — waiting for the Polymarket Action to find and fetch today's market for this airport.</div>`;
+    } else {
+      const ageMin = Math.round((Date.now() - new Date(market.fetchedAt).getTime())/60000);
+      html += `<div class="caveat" style="margin-bottom:10px;">Matched: <b style="color:var(--text)">${market.question||market.eventSlug}</b> (fetched ${ageMin}min ago)</div>`;
+      const todayDate2 = todayStr();
+      const todayLead2 = leadFor(todayDate2);
+      const todayVals2 = [];
+      modelIds.forEach(mid=>{
+        const e = latestEntry(panel.forecasts[mid], todayDate2);
+        if(!e) return;
+        const corr = correctedForecast(modelBiasCache[mid], todayLead2, e.temp);
+        todayVals2.push(corr ? corr.value : e.temp);
+      });
+      let nowcastByBucket = {};
+      if(todayVals2.length>0){
+        const mean2 = todayVals2.reduce((a,b)=>a+b,0)/todayVals2.length;
+        const maeAtLead2 = maeByLead[todayLead2];
+        const sigma2 = (maeAtLead2!==undefined && maeAtLead2>0) ? maeAtLead2/0.7979
+          : Math.max(0.6, (todayVals2.length>1 ? Math.max(...todayVals2)-Math.min(...todayVals2) : 2)/2);
+        buildNowcast(mean2, sigma2).forEach(b=> nowcastByBucket[b.bucket] = b.prob);
+      }
+      html += `<div class="gridwrap"><table><thead><tr><th>Bucket</th><th>Market price</th><th>Nowcast prob.</th><th>Edge</th></tr></thead><tbody>`;
+      market.buckets.forEach(b=>{
+        const numMatch = b.label.match(/(-?\d+(\.\d+)?)/);
+        const bucketNum = numMatch ? Math.round(parseFloat(numMatch[1])) : null;
+        const toolProb = bucketNum!==null && nowcastByBucket[bucketNum]!==undefined ? nowcastByBucket[bucketNum] : null;
+        const edge = toolProb!==null ? toolProb - b.price : null;
+        const edgeTxt = edge!==null ? `${edge>0?'+':''}${(edge*100).toFixed(0)}pp` : '—';
+        const isValue = edge!==null && edge > 0.05;
+        html += `<tr class="${isValue?'best':''}"><td>${b.label}</td><td class="num">${(b.price*100).toFixed(0)}%</td>
+          <td class="num">${toolProb!==null?(toolProb*100).toFixed(0)+'%':'—'}</td>
+          <td class="num" style="color:${isValue?'var(--teal)':'var(--muted)'};">${edgeTxt}${isValue?' 🎯':''}</td></tr>`;
+      });
+      html += `</tbody></table></div>`;
+      html += `<div class="caveat" style="margin-top:8px;">🎯 marks buckets where the tool's probability beats the market price by more than 5 percentage points — a possible value bet, not a guarantee. This compares your own bias-corrected model consensus to the crowd; both can be wrong.</div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Bet Tracker — local only, never committed to the repo (this page is public by default)
+  {
+    const bets = getBets(current);
+    html += `<div class="panel"><h2>Bet Tracker <span style="color:var(--dim); font-size:11px; font-weight:400;">(stored in this browser only)</span></h2>
+      <div class="hint">Label format: an exact bucket like <span class="num">38</span>, or a threshold like <span class="num">>=38</span> / <span class="num">&lt;38</span>. Price is what you paid (0–1, e.g. 0.22 for 22¢).</div>
+      <div class="manual-form">
+        <div><label style="color:var(--muted); font-size:11px; display:block; margin-bottom:4px;">Date</label><input id="betDate" type="date" class="cell-input" style="width:130px;" value="${todayStr()}"></div>
+        <div><label style="color:var(--muted); font-size:11px; display:block; margin-bottom:4px;">Bucket/side</label><input id="betLabel" class="cell-input" style="width:80px;" placeholder="38 or >=38"></div>
+        <div><label style="color:var(--muted); font-size:11px; display:block; margin-bottom:4px;">Stake</label><input id="betStake" type="number" step="0.01" class="cell-input" style="width:70px;" placeholder="10"></div>
+        <div><label style="color:var(--muted); font-size:11px; display:block; margin-bottom:4px;">Price paid</label><input id="betPrice" type="number" step="0.01" min="0.01" max="0.99" class="cell-input" style="width:70px;" placeholder="0.22"></div>
+        <button onclick="addBet('${current}', document.getElementById('betDate').value, document.getElementById('betLabel').value, document.getElementById('betStake').value, document.getElementById('betPrice').value)">Add bet</button>
+      </div>`;
+    if(bets.length===0){
+      html += `<div class="empty" style="margin-top:10px;">No bets logged yet for ${stationName(current)}.</div>`;
+    } else {
+      let totalStake=0, totalPnl=0, resolved=0, wins=0;
+      html += `<div class="gridwrap" style="margin-top:14px;"><table><thead><tr><th>Date</th><th>Bucket</th><th>Stake</th><th>Price</th><th>Actual</th><th>Result</th><th>PnL</th><th></th></tr></thead><tbody>`;
+      bets.slice().sort((a,b)=>b.date.localeCompare(a.date)).forEach(bet=>{
+        const actual = getActual(current, bet.date);
+        const res = actual ? resolveBet(bet, actual.value) : null;
+        totalStake += bet.stake;
+        if(res){ resolved++; totalPnl += res.payout; if(res.win) wins++; }
+        html += `<tr><td class="num">${bet.date}</td><td class="num">${bet.label}</td><td class="num">${bet.stake.toFixed(2)}</td>
+          <td class="num">${(bet.price*100).toFixed(0)}%</td>
+          <td class="num">${actual?actual.value.toFixed(1)+'°':'—'}</td>
+          <td class="num" style="color:${res?(res.win?'var(--teal)':'var(--bad)'):'var(--muted)'};">${res?(res.win?'Win':'Loss'):'pending'}</td>
+          <td class="num" style="color:${res?(res.payout>=0?'var(--teal)':'var(--bad)'):'var(--muted)'};">${res?(res.payout>=0?'+':'')+res.payout.toFixed(2):'—'}</td>
+          <td><span class="chip" style="padding:3px 8px" onclick="removeBet('${current}',${bet.id})">remove</span></td></tr>`;
+      });
+      html += `</tbody></table></div>`;
+      const roi = totalStake>0 ? (totalPnl/totalStake*100) : 0;
+      const winRate = resolved>0 ? (wins/resolved*100) : null;
+      html += `<div style="display:flex; gap:24px; flex-wrap:wrap; margin-top:12px;">
+        <div><div style="color:var(--muted); font-size:11px;">Resolved</div><div class="num" style="font-size:16px; color:#fff;">${resolved}/${bets.length}</div></div>
+        <div><div style="color:var(--muted); font-size:11px;">Win rate</div><div class="num" style="font-size:16px; color:#fff;">${winRate!==null?winRate.toFixed(0)+'%':'—'}</div></div>
+        <div><div style="color:var(--muted); font-size:11px;">Total PnL</div><div class="num" style="font-size:16px; color:${totalPnl>=0?'var(--teal)':'var(--bad)'};">${totalPnl>=0?'+':''}${totalPnl.toFixed(2)}</div></div>
+        <div><div style="color:var(--muted); font-size:11px;">ROI</div><div class="num" style="font-size:16px; color:${roi>=0?'var(--teal)':'var(--bad)'};">${roi>=0?'+':''}${roi.toFixed(1)}%</div></div>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  html += `<div class="panel">
+    <div class="caveat">
+      Forecasts &amp; wind/cloud update automatically twice a day via GitHub Actions — nothing to enter by hand. Actuals come from Open-Meteo's reanalysis archive (a close proxy, not guaranteed identical to the exact station reading Polymarket resolves against) — you can manually overwrite any "Actual" cell above if you know the real resolution value; overrides are stored in your browser only.
+    </div>
+  </div>`;
+
+  document.getElementById('content').innerHTML = html;
+}
+
+(async function init(){
+  await loadData();
+  render();
+})();
+</script>
+</body>
+</html>
