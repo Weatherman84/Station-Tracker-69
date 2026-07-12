@@ -25,10 +25,28 @@ jobs:
           METEOBLUE_API_KEY: ${{ secrets.METEOBLUE_API_KEY }}
         run: python fetch_data.py
 
-      - name: Commit updated data
+      - name: Commit updated data (merge-safe)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
-          git diff --quiet --cached || git commit -m "Update forecast data $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git push
+          cp data.json /tmp/local_computed.json
+
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git show origin/main:data.json > /tmp/remote_current.json 2>/dev/null || echo "{}" > /tmp/remote_current.json
+            python merge_data.py /tmp/local_computed.json /tmp/remote_current.json /tmp/merged_output.json
+            git reset --hard origin/main
+            cp /tmp/merged_output.json data.json
+            git add data.json
+            if git diff --quiet --cached; then
+              echo "no changes to commit"
+              break
+            fi
+            git commit -m "Update forecast data $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            if git push; then
+              echo "pushed successfully"
+              break
+            fi
+            echo "push rejected (concurrent update) — retrying merge, attempt $attempt"
+            sleep $((RANDOM % 10 + 3))
+          done
