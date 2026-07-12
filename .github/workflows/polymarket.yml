@@ -1,0 +1,32 @@
+name: Update Polymarket
+
+on:
+  schedule:
+    # every 20 minutes — market prices move faster than weather models
+    - cron: '*/20 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  polymarket:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Polymarket data
+        run: python fetch_polymarket.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git diff --quiet --cached || git commit -m "Update Polymarket $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git pull --rebase
+          git push
