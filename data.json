@@ -1408,6 +1408,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 122030Z 27004KT CAVOK 15/14 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-07-12T21:00:00+00:00",
+    "temp": 15,
+    "dewp": 14,
+    "wdir": 260,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 122100Z 26003KT CAVOK 15/14 Q1018 NOSIG"
    }
   ]
  },
@@ -2860,10 +2870,20 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 122000Z 26010KT CAVOK 28/10 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-07-12T20:30:00+00:00",
+    "temp": 28,
+    "dewp": 9,
+    "wdir": 260,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 122030Z 26010KT CAVOK 28/09 Q1014 NOSIG"
    }
   ],
   "market": {
-   "fetchedAt": "2026-07-12T21:03:16.953013+00:00",
+   "fetchedAt": "2026-07-12T20:24:19.465247+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-july-12-2026",
    "question": "Highest temperature in Madrid on July 12?",
    "buckets": [
@@ -4439,6 +4459,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 122025Z 02013KT 340V060 9999 FEW016 18/14 Q1024 BECMG BKN016"
+   },
+   {
+    "obsTime": "2026-07-12T20:55:00+00:00",
+    "temp": 17,
+    "dewp": 14,
+    "wdir": 20,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 122055Z 02011KT 350V050 9999 FEW016 17/14 Q1024 BECMG BKN016"
    }
   ]
  },
@@ -5851,6 +5881,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 122020Z 05009KT CAVOK 22/12 Q1015 NOSIG RMK RWY21C 04008KT RWY03L 03010KT RWY21R 02010KT RWY03R 03011KT RWY21L 03006KT 350V050"
+   },
+   {
+    "obsTime": "2026-07-12T20:50:00+00:00",
+    "temp": 22,
+    "dewp": 12,
+    "wdir": 30,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 122050Z 03012KT CAVOK 22/12 Q1015 NOSIG RMK RWY21C 05010KT RWY03L 03011KT RWY21R 02010KT RWY03R 03011KT RWY21L 04007KT 010V070"
    }
   ]
  },
