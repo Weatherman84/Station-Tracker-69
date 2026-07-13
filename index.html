@@ -185,6 +185,40 @@ function computeSurpriseIndex(panel, modelIds){
   return total>0 ? {rate: surprises/total*100, n: total, count: surprises} : null;
 }
 
+// Momentum Score — combines the last few hours of METAR trend (temp rising, dewpoint
+// falling, wind weakening) into one directional signal. The idea: rising temp + drying
+// air + calming wind together often precede a temp jump the models haven't caught up to
+// yet — exactly the live pattern worth flagging before it shows up in any forecast.
+// This is a heuristic composite, not a calibrated model — treat it as a prompt to look
+// closer, not as a probability.
+const MOMENTUM_WINDOW_HOURS = 3;
+function computeMomentum(metarList){
+  const cutoff = Date.now() - MOMENTUM_WINDOW_HOURS*3600000;
+  const recent = metarList.filter(m => new Date(m.obsTime).getTime() >= cutoff && m.temp!==null && m.temp!==undefined);
+  if(recent.length < 3) return null;
+  const first = recent[0], last = recent[recent.length-1];
+  const hours = (new Date(last.obsTime) - new Date(first.obsTime)) / 3600000;
+  if(hours <= 0) return null;
+
+  const tempSlope = (last.temp - first.temp) / hours;                 // °C/hour
+  const dewpSlope = (last.dewp!==null && first.dewp!==null && last.dewp!==undefined && first.dewp!==undefined)
+    ? (last.dewp - first.dewp) / hours : 0;                           // °C/hour
+  const windSlope = (last.wspd!==null && first.wspd!==null && last.wspd!==undefined && first.wspd!==undefined)
+    ? (last.wspd - first.wspd) / hours : 0;                           // kt/hour
+
+  // rising temp: positive contribution. falling dewpoint / weakening wind: also positive
+  // (drying + calming conditions tend to favor further heating), hence the minus signs.
+  let score = tempSlope*15 - dewpSlope*8 - windSlope*2.5;
+  score = Math.max(-100, Math.min(100, score));
+
+  let label, color;
+  if(score > 30){ label = 'Building'; color = 'var(--teal)'; }
+  else if(score < -30){ label = 'Fading'; color = 'var(--bad)'; }
+  else { label = 'Neutral'; color = 'var(--muted)'; }
+
+  return {score, label, color, tempSlope, dewpSlope, windSlope, n: recent.length, hours};
+}
+
 function relativeHumidity(tempC, dewpC){
   if(tempC===null||tempC===undefined||dewpC===null||dewpC===undefined) return null;
   // Magnus formula
@@ -232,6 +266,27 @@ function computeMaeByLead(panel){
   Object.keys(buckets).forEach(l=> out[l] = buckets[l].sum/buckets[l].count);
   return out;
 }
+const LEAD_BUCKET_ORDER = ['0-6h','6-12h','12-24h','1d','2d','3d','4d','5d','6d','7d','8d','9d','10d'];
+
+// Buckets by real elapsed time between when a forecast was captured and the
+// end of its target day — not just calendar-day difference. This matters
+// because a model that keeps re-forecasting the SAME day (e.g. meteoblue
+// checked morning and evening) naturally looks "less biased" if you only
+// average by whole day: the late-day updates are closer to actual almost by
+// construction. Splitting the target day itself into hour bands keeps that
+// visible instead of hiding it in one blended "0d" number.
+function getLeadBucket(capturedAtIso, targetDateStr){
+  const targetStart = new Date(targetDateStr+'T00:00:00Z').getTime();
+  const endOfDay = targetStart + 86400000;
+  const captured = new Date(capturedAtIso).getTime();
+  const hoursBefore = (endOfDay - captured) / 3600000;
+  if(hoursBefore <= 6) return '0-6h';
+  if(hoursBefore <= 12) return '6-12h';
+  if(hoursBefore <= 24) return '12-24h';
+  const days = Math.ceil((hoursBefore - 24) / 24);
+  return days + 'd';
+}
+
 function computeModelLeadMae(panel, modelId){
   const dataset = panel.forecasts[modelId];
   if(!dataset) return {};
@@ -240,54 +295,56 @@ function computeModelLeadMae(panel, modelId){
     const actual = getActual(current, date);
     if(!actual) return;
     (dataset[date]||[]).forEach(entry=>{
-      if(entry.lead===null||entry.lead===undefined) return;
+      if(!entry.capturedAt) return;
+      const bucket = getLeadBucket(entry.capturedAt, date);
       const err = Math.abs(entry.temp-actual.value);
-      if(!buckets[entry.lead]) buckets[entry.lead] = {sum:0,count:0};
-      buckets[entry.lead].sum += err; buckets[entry.lead].count++;
+      if(!buckets[bucket]) buckets[bucket] = {sum:0,count:0};
+      buckets[bucket].sum += err; buckets[bucket].count++;
     });
   });
   const out = {};
-  Object.keys(buckets).forEach(l=> out[l] = {mae: buckets[l].sum/buckets[l].count, n: buckets[l].count});
+  Object.keys(buckets).forEach(b=> out[b] = {mae: buckets[b].sum/buckets[b].count, n: buckets[b].count});
   return out;
 }
 function reliableHorizon(leadMae, threshold){
-  let horizon = -1;
-  for(let lead=0; lead<=10; lead++){
-    const b = leadMae[lead];
-    if(!b) break;
-    if(b.mae <= threshold) horizon = lead; else break;
+  let horizon = null;
+  for(const b of LEAD_BUCKET_ORDER){
+    const info = leadMae[b];
+    if(!info) break;
+    if(info.mae <= threshold) horizon = b; else break;
   }
   return horizon;
 }
 
-// Signed bias per lead bucket, plus an overall (all-lead) fallback — drives the
+// Signed bias per lead bucket, plus an overall (all-bucket) fallback — drives the
 // automatic bias-correction shown next to each forecast cell.
 const MIN_SAMPLES_FOR_CORRECTION = 3;
 function computeModelBias(panel, modelId){
   const dataset = panel.forecasts[modelId];
-  if(!dataset) return {byLead:{}, overall:null};
+  if(!dataset) return {byBucket:{}, overall:null};
   const buckets = {};
   let overallSum = 0, overallCount = 0;
   Object.keys(dataset).forEach(date=>{
     const actual = getActual(current, date);
     if(!actual) return;
     (dataset[date]||[]).forEach(entry=>{
-      if(entry.lead===null||entry.lead===undefined) return;
+      if(!entry.capturedAt) return;
+      const bucket = getLeadBucket(entry.capturedAt, date);
       const err = entry.temp - actual.value; // signed: >0 model runs warm, <0 runs cold
-      if(!buckets[entry.lead]) buckets[entry.lead] = {sum:0,count:0};
-      buckets[entry.lead].sum += err; buckets[entry.lead].count++;
+      if(!buckets[bucket]) buckets[bucket] = {sum:0,count:0};
+      buckets[bucket].sum += err; buckets[bucket].count++;
       overallSum += err; overallCount++;
     });
   });
-  const byLead = {};
-  Object.keys(buckets).forEach(l=> byLead[l] = {bias: buckets[l].sum/buckets[l].count, n: buckets[l].count});
+  const byBucket = {};
+  Object.keys(buckets).forEach(b=> byBucket[b] = {bias: buckets[b].sum/buckets[b].count, n: buckets[b].count});
   const overall = overallCount>0 ? {bias: overallSum/overallCount, n: overallCount} : null;
-  return {byLead, overall};
+  return {byBucket, overall};
 }
-function correctedForecast(biasInfo, lead, rawTemp){
-  const leadBucket = biasInfo.byLead[lead];
-  if(leadBucket && leadBucket.n >= MIN_SAMPLES_FOR_CORRECTION){
-    return {value: rawTemp - leadBucket.bias, n: leadBucket.n, source: 'lead'};
+function correctedForecast(biasInfo, bucket, rawTemp){
+  const b = biasInfo.byBucket[bucket];
+  if(b && b.n >= MIN_SAMPLES_FOR_CORRECTION){
+    return {value: rawTemp - b.bias, n: b.n, source: 'bucket', bucket};
   }
   if(biasInfo.overall && biasInfo.overall.n >= MIN_SAMPLES_FOR_CORRECTION){
     return {value: rawTemp - biasInfo.overall.bias, n: biasInfo.overall.n, source: 'overall'};
@@ -486,10 +543,10 @@ function render(){
       <label style="color:var(--muted); font-size:11px;">Threshold (°C)</label><br>
       <input class="cell-input" style="width:70px; margin-top:4px;" type="number" step="0.1" value="${reliabilityThreshold}" onchange="setThreshold(this.value)">
     </div>`;
-  const leadCols = [0,1,2,3,4,5,6];
+  const leadCols = LEAD_BUCKET_ORDER.slice(0, 10); // 0-6h .. 7d covers the practically useful range
   let anyLeadData = false;
   html += `<div class="gridwrap"><table><thead><tr><th>Model</th>`;
-  leadCols.forEach(l=> html += `<th>${l}d</th>`);
+  leadCols.forEach(b=> html += `<th>${b}</th>`);
   html += `<th>Reliable horizon</th></tr></thead><tbody>`;
   modelIds.forEach(mid=>{
     const leadMae = computeModelLeadMae(panel, mid);
@@ -497,12 +554,13 @@ function render(){
     anyLeadData = true;
     const horizon = reliableHorizon(leadMae, reliabilityThreshold);
     html += `<tr><td>${modelName(mid)}</td>`;
-    leadCols.forEach(l=>{ const b = leadMae[l]; html += `<td class="num">${b ? b.mae.toFixed(2)+'°' : '—'}</td>`; });
-    const horizonLabel = horizon<0 ? '<span style="color:var(--bad)">none</span>' : `<span style="color:var(--teal)">${horizon}d</span>`;
+    leadCols.forEach(b=>{ const info = leadMae[b]; html += `<td class="num">${info ? info.mae.toFixed(2)+'°' : '—'}</td>`; });
+    const horizonLabel = horizon===null ? '<span style="color:var(--bad)">none</span>' : `<span style="color:var(--teal)">${horizon}</span>`;
     html += `<td>${horizonLabel}</td></tr>`;
   });
   html += `</tbody></table></div>`;
   if(!anyLeadData) html += `<div class="empty">No lead-bucketed data yet.</div>`;
+  html += `<div class="caveat">0-6h/6-12h/12-24h split the target day itself by how close to day's end the forecast was made — this is what keeps a model that updates itself often (like meteoblue) from looking artificially accurate: its late-day re-forecasts land in their own bucket instead of blending into one "day of" average.</div>`;
   html += `</div>`;
 
   html += `<div class="panel"><h2>Next 7 days — all models</h2>
@@ -563,7 +621,7 @@ function render(){
       if(!e){ html += `<td class="num">—</td>`; return; }
       const windTxt = e.wind!==undefined ? `${Math.round(e.wind)}km/h` : '';
       const cloudTxt = e.cloud!==undefined ? `${Math.round(e.cloud)}%` : '';
-      const corr = correctedForecast(modelBiasCache[mid], leadFor(d), e.temp);
+      const corr = correctedForecast(modelBiasCache[mid], getLeadBucket(e.capturedAt, d), e.temp);
       const corrTxt = corr
         ? `<div style="color:var(--teal); font-size:9.5px;" title="corrected using this lead's own bias, n=${corr.n}">→${corr.value.toFixed(1)}°</div>`
         : `<div style="color:var(--dim); font-size:9.5px;">not enough history</div>`;
@@ -581,7 +639,7 @@ function render(){
     modelIds.forEach(mid=>{
       const e = latestEntry(panel.forecasts[mid], d);
       if(!e) return;
-      const corr = correctedForecast(modelBiasCache[mid], leadFor(d), e.temp);
+      const corr = correctedForecast(modelBiasCache[mid], getLeadBucket(e.capturedAt, d), e.temp);
       if(corr) corrected.push(corr.value);
     });
     if(corrected.length===0){ html += `<td>—</td>`; return; }
@@ -644,7 +702,7 @@ function render(){
     modelIds.forEach(mid=>{
       const e = latestEntry(panel.forecasts[mid], todayDate);
       if(!e) return;
-      const corr = correctedForecast(modelBiasCache[mid], todayLead, e.temp);
+      const corr = correctedForecast(modelBiasCache[mid], getLeadBucket(e.capturedAt, todayDate), e.temp);
       todayVals.push(corr ? corr.value : e.temp);
     });
     html += `<div class="panel"><h2>Live Nowcast — today's probability distribution</h2>
@@ -697,6 +755,7 @@ function render(){
       : '—';
     const rh = relativeHumidity(latest.temp, latest.dewp);
     const sunsetTxt = (panel.sunset && panel.sunset[todayStr()]) || '—';
+    const momentum = computeMomentum(metarList);
     html += `<div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:14px;">
       <div><div style="color:var(--muted); font-size:11px;">Temp</div><div class="num" style="font-size:20px; color:#fff;">${latest.temp!==null&&latest.temp!==undefined?latest.temp.toFixed(1)+'°':'—'}</div></div>
       <div><div style="color:var(--muted); font-size:11px;">Dewpoint</div><div class="num" style="font-size:20px; color:#fff;">${latest.dewp!==null&&latest.dewp!==undefined?latest.dewp.toFixed(1)+'°':'—'}</div></div>
@@ -705,7 +764,15 @@ function render(){
       <div><div style="color:var(--muted); font-size:11px;">Cloud</div><div class="num" style="font-size:20px; color:#fff;">${latest.cover||'—'}</div></div>
       <div><div style="color:var(--muted); font-size:11px;">Sunset today</div><div class="num" style="font-size:20px; color:#fff;">${sunsetTxt}</div></div>
       <div><div style="color:var(--muted); font-size:11px;">Report age</div><div class="num" style="font-size:20px; color:${ageMin>90?'var(--bad)':'var(--muted)'};">${ageMin}min</div></div>
+      <div><div style="color:var(--muted); font-size:11px;">Momentum (${MOMENTUM_WINDOW_HOURS}h)</div><div class="num" style="font-size:20px; color:${momentum?momentum.color:'var(--dim)'};">${momentum?momentum.label:'—'}</div></div>
     </div>`;
+    if(momentum){
+      html += `<div class="caveat" style="margin-bottom:12px;">Temp ${momentum.tempSlope>=0?'+':''}${momentum.tempSlope.toFixed(2)}°/h, dewpoint ${momentum.dewpSlope>=0?'+':''}${momentum.dewpSlope.toFixed(2)}°/h, wind ${momentum.windSlope>=0?'+':''}${momentum.windSlope.toFixed(1)}kt/h over the last ${momentum.hours.toFixed(1)}h (${momentum.n} reports).
+        ${momentum.label==='Building' ? 'Rising temp + drying/calming air — a pattern that has often preceded models under-calling the eventual max.' : ''}
+        ${momentum.label==='Fading' ? 'Falling temp + moistening/strengthening wind — conditions look less likely to push past what the models already say.' : ''}
+        ${momentum.label==='Neutral' ? 'No strong directional signal right now.' : ''}
+        This is a heuristic composite (temp/dewpoint/wind trend), not a calibrated probability — a prompt to look closer, not a forecast on its own.</div>`;
+    }
 
     // time to (each model's) expected max, for today
     const todayMaxHours = [];
@@ -736,7 +803,7 @@ function render(){
     modelIds.forEach(mid=>{
       const e = latestEntry(panel.forecasts[mid], todayStr2);
       if(!e) return;
-      const corr = correctedForecast(computeModelBias(panel, mid), leadFor(todayStr2), e.temp);
+      const corr = correctedForecast(computeModelBias(panel, mid), getLeadBucket(e.capturedAt, todayStr2), e.temp);
       if(corr) todayCorrected.push(corr.value);
     });
     if(todayCorrected.length>0 && latest.temp!==null && latest.temp!==undefined){
@@ -831,7 +898,7 @@ function render(){
       modelIds.forEach(mid=>{
         const e = latestEntry(panel.forecasts[mid], todayDate2);
         if(!e) return;
-        const corr = correctedForecast(modelBiasCache[mid], todayLead2, e.temp);
+        const corr = correctedForecast(modelBiasCache[mid], getLeadBucket(e.capturedAt, todayDate2), e.temp);
         todayVals2.push(corr ? corr.value : e.temp);
       });
       let nowcastByBucket = {};

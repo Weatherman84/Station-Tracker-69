@@ -39,7 +39,7 @@ RESTRICTED_MODELS = {
 
 LEADS = [1, 2, 3, 4, 5, 6, 7]
 BACKFILL_START = "2024-01-01"   # earliest most models are archived from
-CHUNK_DAYS = 365                # split requests into ~1-year windows (fewer requests = faster)
+CHUNK_DAYS = 270                # ~9-month windows — balance between fewer requests and reliability
 
 DATA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data.json")
 
@@ -60,7 +60,7 @@ def date_chunks(start_str, end_str, chunk_days):
         cur = chunk_end + timedelta(days=1)
 
 
-def fetch_previous_runs(station, model_id, lead, start_str, end_str):
+def fetch_previous_runs(station, model_id, lead, start_str, end_str, retries=3):
     params = {
         "latitude": station["lat"],
         "longitude": station["lon"],
@@ -71,11 +71,19 @@ def fetch_previous_runs(station, model_id, lead, start_str, end_str):
         "timezone": "auto",
     }
     url = "https://previous-runs-api.open-meteo.com/v1/forecast?" + urllib.parse.urlencode(params)
-    try:
-        return http_get_json(url)
-    except Exception as e:
-        print(f"    ! {model_id} lead={lead} {start_str}..{end_str} failed: {e}", file=sys.stderr)
-        return None
+    last_err = None
+    for attempt in range(retries):
+        try:
+            return http_get_json(url, timeout=90)
+        except Exception as e:
+            last_err = e
+            if attempt < retries - 1:
+                wait = 5 * (attempt + 1)
+                print(f"    ! {model_id} lead={lead} {start_str}..{end_str} attempt {attempt+1}/{retries} failed "
+                      f"({e}) — retrying in {wait}s", file=sys.stderr)
+                time.sleep(wait)
+    print(f"    ! {model_id} lead={lead} {start_str}..{end_str} failed after {retries} attempts: {last_err}", file=sys.stderr)
+    return None
 
 
 def group_by_local_day(hourly):
@@ -101,7 +109,7 @@ def backfill_model(dataset, station, model_id, end_date_str):
     for lead in LEADS:
         for start_str, chunk_end_str in date_chunks(BACKFILL_START, end_date_str, CHUNK_DAYS):
             resp = fetch_previous_runs(station, model_id, lead, start_str, chunk_end_str)
-            time.sleep(0.2)  # be polite to the free API
+            time.sleep(0.5)  # be polite to the free API
             if not resp or "hourly" not in resp:
                 continue
             hourly = resp["hourly"]
