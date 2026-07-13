@@ -3,7 +3,7 @@ name: Update METAR
 on:
   schedule:
     # every 30 minutes — METARs are typically issued hourly, this catches them promptly
-    - cron: '*/30 * * * *'
+    - cron: '7,37 * * * *'
   workflow_dispatch: {}
 
 permissions:

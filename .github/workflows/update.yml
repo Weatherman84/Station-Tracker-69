@@ -4,7 +4,7 @@ on:
   schedule:
     # 06:00 and 15:00 UTC daily — two runs/day builds real intraday history.
     # Adjust to taste; GitHub's cron can run a few minutes late, that's fine here.
-    - cron: '0 6,15 * * *'
+    - cron: '7 6,15 * * *'
   workflow_dispatch: {}   # lets you trigger a run manually from the Actions tab
 
 permissions:

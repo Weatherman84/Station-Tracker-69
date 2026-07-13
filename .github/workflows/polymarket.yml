@@ -3,7 +3,7 @@ name: Update Polymarket
 on:
   schedule:
     # every 20 minutes — market prices move faster than weather models
-    - cron: '*/20 * * * *'
+    - cron: '3,23,43 * * * *'
   workflow_dispatch: {}
 
 permissions:
