@@ -24063,7 +24063,58 @@
     "cover": "FEW",
     "raw": "METAR EHAM 161455Z 05009KT 360V080 9999 FEW049 24/15 Q1018 NOSIG"
    }
-  ]
+  ],
+  "market": {
+   "fetchedAt": "2026-07-16T17:48:45.772983+00:00",
+   "eventSlug": "highest-temperature-in-amsterdam-on-july-16-2026",
+   "question": "Highest temperature in Amsterdam on July 16?",
+   "buckets": [
+    {
+     "label": "23°C or below",
+     "price": 0.0005
+    },
+    {
+     "label": "24°C",
+     "price": 0.9825
+    },
+    {
+     "label": "25°C",
+     "price": 0.004
+    },
+    {
+     "label": "26°C",
+     "price": 0.001
+    },
+    {
+     "label": "27°C",
+     "price": 0.0005
+    },
+    {
+     "label": "28°C",
+     "price": 0.0005
+    },
+    {
+     "label": "29°C",
+     "price": 0.0005
+    },
+    {
+     "label": "30°C",
+     "price": 0.0005
+    },
+    {
+     "label": "31°C",
+     "price": 0.0005
+    },
+    {
+     "label": "32°C",
+     "price": 0.0005
+    },
+    {
+     "label": "33°C or higher",
+     "price": 0.0005
+    }
+   ]
+  }
  },
  "ankara": {
   "forecasts": {
