@@ -25866,7 +25866,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-07-16T17:48:45.772983+00:00",
+   "fetchedAt": "2026-07-16T21:46:10.986904+00:00",
    "eventSlug": "highest-temperature-in-amsterdam-on-july-16-2026",
    "question": "Highest temperature in Amsterdam on July 16?",
    "buckets": [
@@ -25876,15 +25876,15 @@
     },
     {
      "label": "24°C",
-     "price": 0.9825
+     "price": 0.9995
     },
     {
      "label": "25°C",
-     "price": 0.004
+     "price": 0.0005
     },
     {
      "label": "26°C",
-     "price": 0.001
+     "price": 0.0005
     },
     {
      "label": "27°C",
