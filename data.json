@@ -39759,33 +39759,33 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-07-25T06:36:37.995136+00:00",
+   "fetchedAt": "2026-07-25T11:02:37.605170+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-july-25-2026",
    "question": "Highest temperature in Madrid on July 25?",
    "buckets": [
     {
      "label": "27°C or below",
-     "price": 0.0425
+     "price": 0.0155
     },
     {
      "label": "28°C",
-     "price": 0.075
+     "price": 0.165
     },
     {
      "label": "29°C",
-     "price": 0.175
+     "price": 0.735
     },
     {
      "label": "30°C",
-     "price": 0.685
+     "price": 0.095
     },
     {
      "label": "31°C",
-     "price": 0.035
+     "price": 0.015
     },
     {
      "label": "32°C",
-     "price": 0.0045
+     "price": 0.003
     },
     {
      "label": "33°C",
