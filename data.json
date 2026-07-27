@@ -21698,7 +21698,58 @@
     "cover": "CAVOK",
     "raw": "METAR EPWA 262330Z 18005KT CAVOK 20/15 Q1002 NOSIG"
    }
-  ]
+  ],
+  "market": {
+   "fetchedAt": "2026-07-27T12:40:30.496988+00:00",
+   "eventSlug": "highest-temperature-in-warsaw-on-july-27-2026",
+   "question": "Highest temperature in Warsaw on July 27?",
+   "buckets": [
+    {
+     "label": "18°C or below",
+     "price": 0.0005
+    },
+    {
+     "label": "19°C",
+     "price": 0.0005
+    },
+    {
+     "label": "20°C",
+     "price": 0.0005
+    },
+    {
+     "label": "21°C",
+     "price": 0.0005
+    },
+    {
+     "label": "22°C",
+     "price": 0.0005
+    },
+    {
+     "label": "23°C",
+     "price": 0.985
+    },
+    {
+     "label": "24°C",
+     "price": 0.015
+    },
+    {
+     "label": "25°C",
+     "price": 0.002
+    },
+    {
+     "label": "26°C",
+     "price": 0.003
+    },
+    {
+     "label": "27°C",
+     "price": 0.0005
+    },
+    {
+     "label": "28°C or higher",
+     "price": 0.0005
+    }
+   ]
+  }
  },
  "madrid": {
   "forecasts": {
