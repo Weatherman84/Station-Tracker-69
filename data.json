@@ -93432,6 +93432,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 142100Z 33004KT 280V010 9999 FEW090CB 26/12 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T21:30:00+00:00",
+    "temp": 26,
+    "dewp": 12,
+    "wdir": 70,
+    "wspd": 1,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 142130Z 07001KT 9999 FEW090TCU 26/12 Q1018 NOSIG"
    }
   ],
   "market": {
