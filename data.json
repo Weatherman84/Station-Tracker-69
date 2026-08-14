@@ -45937,6 +45937,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 141700Z 16005KT CAVOK 24/09 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T17:30:00+00:00",
+    "temp": 23,
+    "dewp": 9,
+    "wdir": 170,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 141730Z 17005KT CAVOK 23/09 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T18:00:00+00:00",
+    "temp": 22,
+    "dewp": 10,
+    "wdir": 160,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 141800Z 16004KT CAVOK 22/10 Q1021 NOSIG"
    }
   ],
   "market": {
@@ -93262,6 +93282,26 @@
     "wgst": 30,
     "cover": "SCT",
     "raw": "SPECI LEMD 141720Z 08015G30KT 9999 TS VCSH SCT090CB 31/11 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T17:30:00+00:00",
+    "temp": 30,
+    "dewp": 12,
+    "wdir": "VRB",
+    "wspd": 14,
+    "wgst": 30,
+    "cover": "SCT",
+    "raw": "METAR LEMD 141730Z VRB14G30KT 9999 TS VCSH SCT090CB 30/12 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T18:00:00+00:00",
+    "temp": 28,
+    "dewp": 14,
+    "wdir": 70,
+    "wspd": 10,
+    "wgst": 21,
+    "cover": "SCT",
+    "raw": "METAR LEMD 141800Z 07010G21KT 9999 VCTS VCSH SCT090CB 28/14 Q1016 RETS NOSIG"
    }
   ],
   "market": {
@@ -142206,6 +142246,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EHAM 141725Z 31009KT CAVOK 28/15 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T17:55:00+00:00",
+    "temp": 27,
+    "dewp": 14,
+    "wdir": 320,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EHAM 141755Z 32009KT CAVOK 27/14 Q1014 NOSIG"
    }
   ],
   "market": {
@@ -184475,6 +184525,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LTAC 141720Z 07014KT 9999 FEW040 SCT100 23/09 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T17:50:00+00:00",
+    "temp": 22,
+    "dewp": 10,
+    "wdir": 80,
+    "wspd": 14,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LTAC 141750Z 08014KT 9999 FEW040 SCT100 22/10 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T18:20:00+00:00",
+    "temp": 21,
+    "dewp": 10,
+    "wdir": 80,
+    "wspd": 15,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 141820Z 08015KT CAVOK 21/10 Q1016 NOSIG"
    }
   ]
  },
