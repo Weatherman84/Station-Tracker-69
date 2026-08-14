@@ -92114,9 +92114,9 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-07T20:23:30.092469+00:00",
-   "eventSlug": "highest-temperature-in-madrid-on-august-7-2026",
-   "question": "Highest temperature in Madrid on August 7?",
+   "fetchedAt": "2026-08-14T15:57:43.150709+00:00",
+   "eventSlug": "highest-temperature-in-madrid-on-august-14-2026",
+   "question": "Highest temperature in Madrid on August 14?",
    "buckets": [
     {
      "label": "35°C or below",
@@ -92136,15 +92136,15 @@
     },
     {
      "label": "39°C",
-     "price": 0.9995
+     "price": 0.98
     },
     {
      "label": "40°C",
-     "price": 0.0005
+     "price": 0.009
     },
     {
      "label": "41°C",
-     "price": 0.0005
+     "price": 0.002
     },
     {
      "label": "42°C",
@@ -140437,7 +140437,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-14T14:59:51.768238+00:00",
+   "fetchedAt": "2026-08-14T15:57:43.150841+00:00",
    "eventSlug": "highest-temperature-in-amsterdam-on-august-14-2026",
    "question": "Highest temperature in Amsterdam on August 14?",
    "buckets": [
@@ -140467,15 +140467,15 @@
     },
     {
      "label": "34°C",
-     "price": 0.9955
+     "price": 0.9975
     },
     {
      "label": "35°C",
-     "price": 0.0045
+     "price": 0.0005
     },
     {
      "label": "36°C",
-     "price": 0.0015
+     "price": 0.0005
     },
     {
      "label": "37°C",
