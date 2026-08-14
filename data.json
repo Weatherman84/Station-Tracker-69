@@ -140147,53 +140147,53 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-07-21T23:43:39.644148+00:00",
-   "eventSlug": "highest-temperature-in-amsterdam-on-july-21-2026",
-   "question": "Highest temperature in Amsterdam on July 21?",
+   "fetchedAt": "2026-08-14T11:25:14.409615+00:00",
+   "eventSlug": "highest-temperature-in-amsterdam-on-august-14-2026",
+   "question": "Highest temperature in Amsterdam on August 14?",
    "buckets": [
     {
-     "label": "16°C or below",
-     "price": 0.0
+     "label": "28°C or below",
+     "price": 0.0005
     },
     {
-     "label": "17°C",
-     "price": 0.0
+     "label": "29°C",
+     "price": 0.0005
     },
     {
-     "label": "18°C",
-     "price": 0.0
+     "label": "30°C",
+     "price": 0.0005
     },
     {
-     "label": "19°C",
-     "price": 0.0
+     "label": "31°C",
+     "price": 0.0005
     },
     {
-     "label": "20°C",
-     "price": 0.0
+     "label": "32°C",
+     "price": 0.0005
     },
     {
-     "label": "21°C",
-     "price": 0.0
+     "label": "33°C",
+     "price": 0.105
     },
     {
-     "label": "22°C",
-     "price": 0.9995
+     "label": "34°C",
+     "price": 0.565
     },
     {
-     "label": "23°C",
-     "price": 0.0
+     "label": "35°C",
+     "price": 0.305
     },
     {
-     "label": "24°C",
-     "price": 0.0
+     "label": "36°C",
+     "price": 0.0315
     },
     {
-     "label": "25°C",
-     "price": 0.0
+     "label": "37°C",
+     "price": 0.0005
     },
     {
-     "label": "26°C or higher",
-     "price": 0.0
+     "label": "38°C or higher",
+     "price": 0.0005
     }
    ]
   }
