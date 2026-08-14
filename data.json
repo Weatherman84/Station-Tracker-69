@@ -45977,6 +45977,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 141900Z 15004KT CAVOK 21/10 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T19:30:00+00:00",
+    "temp": 21,
+    "dewp": 10,
+    "wdir": 150,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 141930Z 15004KT CAVOK 21/10 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T20:00:00+00:00",
+    "temp": 20,
+    "dewp": 10,
+    "wdir": 140,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 142000Z 14004KT CAVOK 20/10 Q1021 NOSIG"
    }
   ],
   "market": {
@@ -93342,6 +93362,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LEMD 141900Z 10006KT 050V150 9999 SCT090CB 28/13 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T19:30:00+00:00",
+    "temp": 27,
+    "dewp": 12,
+    "wdir": 60,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 141930Z 06006KT 9999 SCT090CB 27/12 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T20:00:00+00:00",
+    "temp": 27,
+    "dewp": 12,
+    "wdir": 80,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 142000Z 08006KT 350V160 9999 SCT090CB 27/12 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -142326,6 +142366,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EHAM 141925Z 35005KT 320V030 CAVOK 24/15 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T19:55:00+00:00",
+    "temp": 22,
+    "dewp": 15,
+    "wdir": 340,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EHAM 141955Z 34004KT 310V020 CAVOK 22/15 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -184635,6 +184685,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 141920Z 06011KT CAVOK 19/10 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-14T19:50:00+00:00",
+    "temp": 19,
+    "dewp": 10,
+    "wdir": 70,
+    "wspd": 13,
+    "wgst": 23,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 141950Z 07013G23KT CAVOK 19/10 Q1017 NOSIG"
    }
   ]
  },
