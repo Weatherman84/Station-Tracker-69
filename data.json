@@ -187832,6 +187832,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 150720Z 10011KT 070V130 CAVOK 20/07 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T07:50:00+00:00",
+    "temp": 20,
+    "dewp": 6,
+    "wdir": 100,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 150750Z 10010KT 060V140 CAVOK 20/06 Q1016 NOSIG"
    }
   ]
  },
