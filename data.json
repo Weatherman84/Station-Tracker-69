@@ -94982,29 +94982,29 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-15T08:31:48.773860+00:00",
+   "fetchedAt": "2026-08-15T09:00:01.735741+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-august-15-2026",
    "question": "Highest temperature in Madrid on August 15?",
    "buckets": [
     {
      "label": "30°C or below",
-     "price": 0.057
+     "price": 0.082
     },
     {
      "label": "31°C",
-     "price": 0.175
+     "price": 0.265
     },
     {
      "label": "32°C",
-     "price": 0.325
+     "price": 0.37
     },
     {
      "label": "33°C",
-     "price": 0.33
+     "price": 0.22
     },
     {
      "label": "34°C",
-     "price": 0.115
+     "price": 0.075
     },
     {
      "label": "35°C",
@@ -95012,7 +95012,7 @@
     },
     {
      "label": "36°C",
-     "price": 0.005
+     "price": 0.0055
     },
     {
      "label": "37°C",
@@ -144810,52 +144810,52 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-14T15:57:43.150841+00:00",
-   "eventSlug": "highest-temperature-in-amsterdam-on-august-14-2026",
-   "question": "Highest temperature in Amsterdam on August 14?",
+   "fetchedAt": "2026-08-15T09:00:01.735882+00:00",
+   "eventSlug": "highest-temperature-in-amsterdam-on-august-15-2026",
+   "question": "Highest temperature in Amsterdam on August 15?",
    "buckets": [
     {
-     "label": "28°C or below",
+     "label": "20°C or below",
      "price": 0.0005
+    },
+    {
+     "label": "21°C",
+     "price": 0.0005
+    },
+    {
+     "label": "22°C",
+     "price": 0.029
+    },
+    {
+     "label": "23°C",
+     "price": 0.165
+    },
+    {
+     "label": "24°C",
+     "price": 0.455
+    },
+    {
+     "label": "25°C",
+     "price": 0.265
+    },
+    {
+     "label": "26°C",
+     "price": 0.11
+    },
+    {
+     "label": "27°C",
+     "price": 0.025
+    },
+    {
+     "label": "28°C",
+     "price": 0.001
     },
     {
      "label": "29°C",
      "price": 0.0005
     },
     {
-     "label": "30°C",
-     "price": 0.0005
-    },
-    {
-     "label": "31°C",
-     "price": 0.0005
-    },
-    {
-     "label": "32°C",
-     "price": 0.0005
-    },
-    {
-     "label": "33°C",
-     "price": 0.0005
-    },
-    {
-     "label": "34°C",
-     "price": 0.9975
-    },
-    {
-     "label": "35°C",
-     "price": 0.0005
-    },
-    {
-     "label": "36°C",
-     "price": 0.0005
-    },
-    {
-     "label": "37°C",
-     "price": 0.0005
-    },
-    {
-     "label": "38°C or higher",
+     "label": "30°C or higher",
      "price": 0.0005
     }
    ]
