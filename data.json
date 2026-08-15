@@ -95242,29 +95242,29 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-15T14:56:51.763674+00:00",
+   "fetchedAt": "2026-08-15T15:23:20.206632+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-august-15-2026",
    "question": "Highest temperature in Madrid on August 15?",
    "buckets": [
     {
      "label": "30°C or below",
-     "price": 0.906
+     "price": 0.956
     },
     {
      "label": "31°C",
-     "price": 0.085
+     "price": 0.04
     },
     {
      "label": "32°C",
-     "price": 0.015
+     "price": 0.01
     },
     {
      "label": "33°C",
-     "price": 0.006
+     "price": 0.005
     },
     {
      "label": "34°C",
-     "price": 0.0045
+     "price": 0.0005
     },
     {
      "label": "35°C",
@@ -145190,7 +145190,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-15T14:56:51.763815+00:00",
+   "fetchedAt": "2026-08-15T15:23:20.206768+00:00",
    "eventSlug": "highest-temperature-in-amsterdam-on-august-15-2026",
    "question": "Highest temperature in Amsterdam on August 15?",
    "buckets": [
@@ -145208,15 +145208,15 @@
     },
     {
      "label": "23°C",
-     "price": 0.985
+     "price": 0.965
     },
     {
      "label": "24°C",
-     "price": 0.015
+     "price": 0.025
     },
     {
      "label": "25°C",
-     "price": 0.008
+     "price": 0.0055
     },
     {
      "label": "26°C",
