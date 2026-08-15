@@ -46167,6 +46167,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 150430Z 15006KT CAVOK 14/10 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T05:00:00+00:00",
+    "temp": 15,
+    "dewp": 10,
+    "wdir": 150,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 150500Z 15005KT CAVOK 15/10 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T05:30:00+00:00",
+    "temp": 16,
+    "dewp": 10,
+    "wdir": 140,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 150530Z 14005KT CAVOK 16/10 Q1019 NOSIG"
    }
   ],
   "market": {
@@ -93722,28 +93742,38 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 150430Z 34003KT CAVOK 21/14 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T05:00:00+00:00",
+    "temp": 20,
+    "dewp": 14,
+    "wdir": 50,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 150500Z 05003KT 010V090 CAVOK 20/14 Q1016 NOSIG"
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-15T05:32:43.163082+00:00",
+   "fetchedAt": "2026-08-15T05:00:35.644990+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-august-15-2026",
    "question": "Highest temperature in Madrid on August 15?",
    "buckets": [
     {
      "label": "30°C or below",
-     "price": 0.0155
+     "price": 0.0225
     },
     {
      "label": "31°C",
-     "price": 0.105
+     "price": 0.07
     },
     {
      "label": "32°C",
-     "price": 0.135
+     "price": 0.13
     },
     {
      "label": "33°C",
-     "price": 0.285
+     "price": 0.305
     },
     {
      "label": "34°C",
@@ -93751,7 +93781,7 @@
     },
     {
      "label": "35°C",
-     "price": 0.175
+     "price": 0.185
     },
     {
      "label": "36°C",
@@ -142886,6 +142916,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 150425Z 02005KT 320V070 7000 TSRA FEW040 FEW090CB 20/17 Q1015 BECMG 9999 NSW"
+   },
+   {
+    "obsTime": "2026-08-15T04:55:00+00:00",
+    "temp": 20,
+    "dewp": 18,
+    "wdir": 40,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 150455Z 04009KT 010V080 9999 SHRA FEW015 SCT050CB 20/18 Q1014 BECMG NSW"
+   },
+   {
+    "obsTime": "2026-08-15T05:25:00+00:00",
+    "temp": 20,
+    "dewp": 17,
+    "wdir": 60,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 150525Z 06009KT 020V090 9999 FEW050CB 20/17 Q1014 RETSRA NOSIG"
    }
   ],
   "market": {
@@ -185375,6 +185425,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 150420Z 04011KT CAVOK 14/08 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T04:50:00+00:00",
+    "temp": 16,
+    "dewp": 8,
+    "wdir": 60,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 150450Z 06010KT CAVOK 16/08 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T05:20:00+00:00",
+    "temp": 16,
+    "dewp": 7,
+    "wdir": 50,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 150520Z 05009KT CAVOK 16/07 Q1017 NOSIG"
    }
   ]
  },
