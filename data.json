@@ -46814,6 +46814,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 151000Z 13011KT 100V170 CAVOK 27/09 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T10:30:00+00:00",
+    "temp": 28,
+    "dewp": 10,
+    "wdir": 130,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 151030Z 13008KT 090V170 CAVOK 28/10 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -95059,6 +95069,16 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "SPECI LEMD 151014Z 12005KT 060V170 9999 -SHRA SCT040CB 22/17 Q1017 RESHRA NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T10:30:00+00:00",
+    "temp": 24,
+    "dewp": 16,
+    "wdir": 160,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 151030Z 16006KT 060V220 9999 SCT044TCU 24/16 Q1017 RESHRA NOSIG"
    }
   ],
   "market": {
