@@ -95179,6 +95179,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 151230Z 02004KT 330V120 9999 FEW055TCU 27/15 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T13:00:00+00:00",
+    "temp": 26,
+    "dewp": 15,
+    "wdir": 70,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 151300Z 07004KT 020V120 9999 FEW055CB SCT060TCU 26/15 Q1018 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-15T13:30:00+00:00",
+    "temp": 26,
+    "dewp": 12,
+    "wdir": 130,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 151330Z 13008KT 110V170 9999 SCT050TCU 26/12 Q1018 NOSIG"
    }
   ],
   "market": {
