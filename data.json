@@ -96493,7 +96493,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-15T19:00:50.080867+00:00",
+   "fetchedAt": "2026-08-15T19:52:39.839071+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-august-15-2026",
    "question": "Highest temperature in Madrid on August 15?",
    "buckets": [
@@ -147111,7 +147111,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-15T19:00:50.081005+00:00",
+   "fetchedAt": "2026-08-15T19:52:39.839183+00:00",
    "eventSlug": "highest-temperature-in-amsterdam-on-august-15-2026",
    "question": "Highest temperature in Amsterdam on August 15?",
    "buckets": [
