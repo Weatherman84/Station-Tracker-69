@@ -48416,6 +48416,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 161330Z 31018KT CAVOK 28/14 Q1012 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T14:00:00+00:00",
+    "temp": 27,
+    "dewp": 15,
+    "wdir": 310,
+    "wspd": 18,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 161400Z 31018KT CAVOK 27/15 Q1013 NOSIG"
    }
   ],
   "market": {
@@ -98307,6 +98317,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 161330Z VRB02KT CAVOK 33/08 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T14:00:00+00:00",
+    "temp": 33,
+    "dewp": 8,
+    "wdir": 150,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 161400Z 15005KT CAVOK 33/08 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -149868,6 +149888,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 161325Z 31009KT 9999 FEW022 21/14 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T13:55:00+00:00",
+    "temp": 21,
+    "dewp": 15,
+    "wdir": 330,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 161355Z 33010KT 300V360 9999 FEW018 21/15 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T14:25:00+00:00",
+    "temp": 21,
+    "dewp": 14,
+    "wdir": 320,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 161425Z 32010KT 9999 FEW020 21/14 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -194606,6 +194646,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LTAC 161320Z 04010KT 360V070 9999 SCT040 SCT100 27/09 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T13:50:00+00:00",
+    "temp": 27,
+    "dewp": 9,
+    "wdir": "VRB",
+    "wspd": 6,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LTAC 161350Z VRB06KT 9999 SCT040 SCT100 27/09 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T14:20:00+00:00",
+    "temp": 26,
+    "dewp": 8,
+    "wdir": 40,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LTAC 161420Z 04009KT 360V090 9999 SCT040 SCT100 26/08 Q1013 NOSIG"
    }
   ]
  },
