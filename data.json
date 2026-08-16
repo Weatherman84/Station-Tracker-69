@@ -47689,6 +47689,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 160400Z 14005KT CAVOK 16/12 Q1011 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T04:30:00+00:00",
+    "temp": 17,
+    "dewp": 12,
+    "wdir": 140,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 160430Z 14003KT CAVOK 17/12 Q1011 NOSIG"
    }
   ],
   "market": {
@@ -96830,6 +96840,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 160400Z 02003KT 350V070 CAVOK 17/13 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T04:30:00+00:00",
+    "temp": 17,
+    "dewp": 13,
+    "wdir": 350,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 160430Z 35003KT CAVOK 17/13 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -147618,6 +147638,26 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR EHAM 160355Z 10004KT 9999 BKN032 17/14 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T04:25:00+00:00",
+    "temp": 17,
+    "dewp": 14,
+    "wdir": 80,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EHAM 160425Z 08003KT 050V110 9999 BKN032 17/14 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T04:55:00+00:00",
+    "temp": 17,
+    "dewp": 14,
+    "wdir": 100,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EHAM 160455Z 10005KT 9999 BKN035 17/14 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -191629,6 +191669,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 160350Z 02008KT CAVOK 13/08 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T04:20:00+00:00",
+    "temp": 15,
+    "dewp": 8,
+    "wdir": 20,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 160420Z 02008KT CAVOK 15/08 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T04:50:00+00:00",
+    "temp": 16,
+    "dewp": 8,
+    "wdir": 30,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 160450Z 03008KT CAVOK 16/08 Q1016 NOSIG"
    }
   ]
  },
