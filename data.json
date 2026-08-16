@@ -48356,6 +48356,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 161030Z 31009KT CAVOK 29/13 Q1011 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T11:00:00+00:00",
+    "temp": 30,
+    "dewp": 14,
+    "wdir": 320,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 161100Z 32006KT 270V350 CAVOK 30/14 Q1011 NOSIG"
    }
   ],
   "market": {
@@ -98187,6 +98197,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 161030Z 09002KT CAVOK 28/11 Q1018 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T11:00:00+00:00",
+    "temp": 29,
+    "dewp": 10,
+    "wdir": 10,
+    "wspd": 2,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 161100Z 01002KT CAVOK 29/10 Q1018 NOSIG"
    }
   ],
   "market": {
@@ -149688,6 +149708,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EHAM 161025Z VRB05KT 9999 FEW035 SCT048 22/13 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T10:55:00+00:00",
+    "temp": 22,
+    "dewp": 13,
+    "wdir": 280,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 161055Z 28005KT 230V340 9999 SCT035 22/13 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T11:25:00+00:00",
+    "temp": 23,
+    "dewp": 13,
+    "wdir": 330,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 161125Z 33005KT 240V020 9999 SCT038 23/13 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -194366,6 +194406,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LTAC 161020Z 04009KT 340V070 9999 FEW040 SCT100 24/09 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T10:50:00+00:00",
+    "temp": 25,
+    "dewp": 9,
+    "wdir": 40,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LTAC 161050Z 04008KT 330V090 9999 SCT040 SCT100 25/09 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-16T11:20:00+00:00",
+    "temp": 25,
+    "dewp": 9,
+    "wdir": 50,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LTAC 161120Z 05008KT 300V060 9999 SCT040 SCT100 25/09 Q1015 NOSIG"
    }
   ]
  },
