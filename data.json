@@ -98030,53 +98030,53 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-15T23:55:39.811444+00:00",
-   "eventSlug": "highest-temperature-in-madrid-on-august-15-2026",
-   "question": "Highest temperature in Madrid on August 15?",
+   "fetchedAt": "2026-08-16T07:33:09.735390+00:00",
+   "eventSlug": "highest-temperature-in-madrid-on-august-16-2026",
+   "question": "Highest temperature in Madrid on August 16?",
    "buckets": [
     {
-     "label": "30°C or below",
-     "price": 0.9995
+     "label": "27°C or below",
+     "price": 0.0005
+    },
+    {
+     "label": "28°C",
+     "price": 0.0005
+    },
+    {
+     "label": "29°C",
+     "price": 0.0005
+    },
+    {
+     "label": "30°C",
+     "price": 0.0005
     },
     {
      "label": "31°C",
-     "price": 0.0
+     "price": 0.006
     },
     {
      "label": "32°C",
-     "price": 0.0
+     "price": 0.0315
     },
     {
      "label": "33°C",
-     "price": 0.0
+     "price": 0.195
     },
     {
      "label": "34°C",
-     "price": 0.0
+     "price": 0.575
     },
     {
      "label": "35°C",
-     "price": 0.0
+     "price": 0.185
     },
     {
      "label": "36°C",
-     "price": 0.0
+     "price": 0.015
     },
     {
-     "label": "37°C",
-     "price": 0.0
-    },
-    {
-     "label": "38°C",
-     "price": 0.0
-    },
-    {
-     "label": "39°C",
-     "price": 0.0
-    },
-    {
-     "label": "40°C or higher",
-     "price": 0.0
+     "label": "37°C or higher",
+     "price": 0.0025
     }
    ]
   }
