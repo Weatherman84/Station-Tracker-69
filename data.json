@@ -154464,7 +154464,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-17T10:00:43.022694+00:00",
+   "fetchedAt": "2026-08-17T11:33:46.697188+00:00",
    "eventSlug": "highest-temperature-in-amsterdam-on-august-17-2026",
    "question": "Highest temperature in Amsterdam on August 17?",
    "buckets": [
@@ -154482,23 +154482,23 @@
     },
     {
      "label": "19°C",
-     "price": 0.016
+     "price": 0.0005
     },
     {
      "label": "20°C",
-     "price": 0.475
+     "price": 0.55
     },
     {
      "label": "21°C",
-     "price": 0.415
+     "price": 0.34
     },
     {
      "label": "22°C",
-     "price": 0.115
+     "price": 0.12
     },
     {
      "label": "23°C",
-     "price": 0.0215
+     "price": 0.01
     },
     {
      "label": "24°C",
