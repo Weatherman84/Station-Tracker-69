@@ -156650,6 +156650,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 172025Z 31001KT 9999 FEW020 17/13 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T20:55:00+00:00",
+    "temp": 17,
+    "dewp": 13,
+    "wdir": 0,
+    "wspd": 0,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 172055Z 00000KT 9999 FEW020 17/13 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -203095,6 +203105,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 172020Z 02005KT CAVOK 18/11 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T20:50:00+00:00",
+    "temp": 17,
+    "dewp": 11,
+    "wdir": 30,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 172050Z 03006KT CAVOK 17/11 Q1013 NOSIG"
    }
   ]
  },
