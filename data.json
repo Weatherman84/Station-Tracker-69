@@ -49948,6 +49948,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 171330Z 19004KT 150V230 CAVOK 24/12 Q1009 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T14:00:00+00:00",
+    "temp": 23,
+    "dewp": 12,
+    "wdir": 210,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 171400Z 21003KT 160V250 CAVOK 23/12 Q1009 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T14:30:00+00:00",
+    "temp": 23,
+    "dewp": 12,
+    "wdir": 180,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 171430Z 18003KT 150V210 CAVOK 23/12 Q1008 NOSIG"
    }
   ],
   "market": {
@@ -101415,6 +101435,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 171330Z 18003KT CAVOK 37/06 Q1018 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T14:00:00+00:00",
+    "temp": 37,
+    "dewp": 6,
+    "wdir": 230,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 171400Z 23006KT 160V280 CAVOK 37/06 Q1018 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T14:30:00+00:00",
+    "temp": 37,
+    "dewp": 6,
+    "wdir": 250,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 171430Z 25005KT 140V310 CAVOK 37/06 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -154611,6 +154651,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EHAM 171325Z 32009KT 9999 FEW024 SCT041 20/12 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T13:55:00+00:00",
+    "temp": 20,
+    "dewp": 13,
+    "wdir": 320,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 171355Z 32009KT 260V020 9999 FEW027 SCT046 20/13 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T14:25:00+00:00",
+    "temp": 20,
+    "dewp": 13,
+    "wdir": 330,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 171425Z 33009KT 290V030 9999 FEW027 SCT047 20/13 Q1016 NOSIG"
    }
   ],
   "market": {
@@ -200881,6 +200941,26 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR LTAC 171320Z VRB01KT 9999 FEW030CB SCT040 BKN100 26/10 Q1012 TEMPO 01020G30KT -TSRA"
+   },
+   {
+    "obsTime": "2026-08-17T13:50:00+00:00",
+    "temp": 26,
+    "dewp": 10,
+    "wdir": 10,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 171350Z 01006KT 310V050 9999 FEW030CB SCT040 BKN100 26/10 Q1012 TEMPO -TSRA"
+   },
+   {
+    "obsTime": "2026-08-17T14:20:00+00:00",
+    "temp": 26,
+    "dewp": 10,
+    "wdir": "VRB",
+    "wspd": 4,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 171420Z VRB04KT 9999 FEW030CB SCT040 BKN100 26/10 Q1012 TEMPO -TSRA"
    }
   ]
  },
