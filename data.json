@@ -156470,6 +156470,16 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR EHAM 171725Z 31008KT 280V340 9999 FEW025 BKN034 19/13 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T17:55:00+00:00",
+    "temp": 18,
+    "dewp": 12,
+    "wdir": 310,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 171755Z 31007KT 9999 FEW021 SCT047 18/12 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -202855,6 +202865,16 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LTAC 171720Z 04010KT 9999 SCT040 21/12 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T17:50:00+00:00",
+    "temp": 21,
+    "dewp": 12,
+    "wdir": 20,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LTAC 171750Z 02007KT 9999 FEW040 21/12 Q1013 NOSIG"
    }
   ]
  },
