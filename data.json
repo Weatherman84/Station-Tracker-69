@@ -50653,6 +50653,16 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR EPWA 172300Z 32014KT 6000 SHRA BKN006 BKN026CB 14/14 Q1005 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T23:30:00+00:00",
+    "temp": 15,
+    "dewp": 14,
+    "wdir": 340,
+    "wspd": 14,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 172330Z 34014KT 8000 SHRA BKN006 BKN044CB 15/14 Q1005 TEMPO 4000 SHRA"
    }
   ],
   "market": {
@@ -102846,6 +102856,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 172300Z 34004KT 280V070 CAVOK 29/11 Q1018 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T23:30:00+00:00",
+    "temp": 28,
+    "dewp": 12,
+    "wdir": 330,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 172330Z 33006KT CAVOK 28/12 Q1018 NOSIG"
    }
   ],
   "market": {
