@@ -50643,6 +50643,16 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR EPWA 172230Z 33014KT 7000 -RA BKN006 BKN015 14/14 Q1005 RESHRA NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T23:00:00+00:00",
+    "temp": 14,
+    "dewp": 14,
+    "wdir": 320,
+    "wspd": 14,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 172300Z 32014KT 6000 SHRA BKN006 BKN026CB 14/14 Q1005 NOSIG"
    }
   ],
   "market": {
@@ -102826,6 +102836,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 172230Z 33005KT 300V010 CAVOK 29/09 Q1018 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T23:00:00+00:00",
+    "temp": 29,
+    "dewp": 11,
+    "wdir": 340,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 172300Z 34004KT 280V070 CAVOK 29/11 Q1018 NOSIG"
    }
   ],
   "market": {
@@ -156770,6 +156790,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EHAM 172225Z 22004KT CAVOK 15/12 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T22:55:00+00:00",
+    "temp": 16,
+    "dewp": 13,
+    "wdir": 220,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EHAM 172255Z 22004KT CAVOK 16/13 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T23:25:00+00:00",
+    "temp": 17,
+    "dewp": 14,
+    "wdir": 210,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EHAM 172325Z 21005KT CAVOK 17/14 Q1014 NOSIG"
    }
   ],
   "market": {
@@ -203255,6 +203295,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 172220Z 06005KT CAVOK 17/11 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T22:50:00+00:00",
+    "temp": 16,
+    "dewp": 11,
+    "wdir": 40,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 172250Z 04006KT CAVOK 16/11 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-17T23:20:00+00:00",
+    "temp": 16,
+    "dewp": 11,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 172320Z VRB02KT CAVOK 16/11 Q1013 NOSIG"
    }
   ]
  },
