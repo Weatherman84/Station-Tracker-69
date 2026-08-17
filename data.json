@@ -200961,6 +200961,16 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR LTAC 171420Z VRB04KT 9999 FEW030CB SCT040 BKN100 26/10 Q1012 TEMPO -TSRA"
+   },
+   {
+    "obsTime": "2026-08-17T14:50:00+00:00",
+    "temp": 26,
+    "dewp": 11,
+    "wdir": 330,
+    "wspd": 7,
+    "wgst": 19,
+    "cover": "BKN",
+    "raw": "METAR LTAC 171450Z 33007G19KT 280V040 9999 FEW030CB SCT040 BKN100 26/11 Q1012 NOSIG"
    }
   ]
  },
