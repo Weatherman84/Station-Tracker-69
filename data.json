@@ -157190,6 +157190,16 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR EHAM 180525Z 15007KT 120V190 3500 DZRA FEW004 SCT006 BKN023 15/15 Q1009 BECMG BKN006"
+   },
+   {
+    "obsTime": "2026-08-18T05:55:00+00:00",
+    "temp": 15,
+    "dewp": 15,
+    "wdir": 150,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EHAM 180555Z 15008KT 2700 DZ FEW003 BKN005 BKN016 15/15 Q1009 REDZ NOSIG"
    }
   ],
   "market": {
@@ -203815,6 +203825,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 180520Z VRB02KT CAVOK 18/12 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T05:50:00+00:00",
+    "temp": 20,
+    "dewp": 12,
+    "wdir": 70,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LTAC 180550Z 07003KT 010V160 9999 FEW040 20/12 Q1013 NOSIG"
    }
   ]
  },
