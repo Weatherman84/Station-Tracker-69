@@ -52054,6 +52054,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EPWA 181930Z 24006KT 9999 FEW045 14/12 Q1007 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T20:00:00+00:00",
+    "temp": 14,
+    "dewp": 12,
+    "wdir": 230,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 182000Z 23004KT CAVOK 14/12 Q1007 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T20:30:00+00:00",
+    "temp": 14,
+    "dewp": 13,
+    "wdir": 230,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 182030Z 23004KT CAVOK 14/13 Q1007 NOSIG"
    }
   ],
   "market": {
@@ -105692,6 +105712,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 181930Z 20005KT 080V240 CAVOK 36/06 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T20:00:00+00:00",
+    "temp": 35,
+    "dewp": 7,
+    "wdir": 220,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 182000Z 22004KT CAVOK 35/07 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -161149,6 +161179,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 181925Z 31003KT 9999 FEW030 19/17 Q1008 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T19:55:00+00:00",
+    "temp": 19,
+    "dewp": 17,
+    "wdir": 270,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 181955Z 27005KT 9999 FEW035 SCT042 19/17 Q1008 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T20:25:00+00:00",
+    "temp": 19,
+    "dewp": 16,
+    "wdir": 270,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 182025Z 27007KT 9999 FEW022 SCT042 19/16 Q1008 NOSIG"
    }
   ],
   "market": {
@@ -208093,6 +208143,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 181920Z 06006KT CAVOK 22/07 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T19:50:00+00:00",
+    "temp": 20,
+    "dewp": 8,
+    "wdir": 30,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 181950Z 03008KT CAVOK 20/08 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T20:20:00+00:00",
+    "temp": 20,
+    "dewp": 9,
+    "wdir": 10,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 182020Z 01005KT CAVOK 20/09 Q1014 NOSIG"
    }
   ]
  },
