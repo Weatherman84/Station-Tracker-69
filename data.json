@@ -105802,6 +105802,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 182200Z VRB01KT CAVOK 30/08 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-18T22:30:00+00:00",
+    "temp": 30,
+    "dewp": 8,
+    "wdir": 10,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 182230Z 01004KT 330V060 CAVOK 30/08 Q1016 NOSIG"
    }
   ],
   "market": {
