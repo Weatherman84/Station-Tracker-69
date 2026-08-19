@@ -108570,6 +108570,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 191700Z 21017KT 190V250 CAVOK 35/02 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-19T17:30:00+00:00",
+    "temp": 35,
+    "dewp": 4,
+    "wdir": 220,
+    "wspd": 14,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 191730Z 22014KT 190V250 CAVOK 35/04 Q1013 NOSIG"
    }
   ],
   "market": {
