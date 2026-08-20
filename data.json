@@ -219289,6 +219289,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 202120Z 05010KT CAVOK 21/10 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-20T21:50:00+00:00",
+    "temp": 20,
+    "dewp": 10,
+    "wdir": 50,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 202150Z 05011KT CAVOK 20/10 Q1021 NOSIG"
    }
   ]
  },
