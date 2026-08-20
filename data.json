@@ -53716,6 +53716,26 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR EPWA 200530Z 22006KT 180V250 9999 BKN007 18/17 Q1004 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-20T06:00:00+00:00",
+    "temp": 19,
+    "dewp": 18,
+    "wdir": 240,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 200600Z 24006KT 210V270 9999 BKN007 19/18 Q1003 BECMG SCT010"
+   },
+   {
+    "obsTime": "2026-08-20T06:30:00+00:00",
+    "temp": 20,
+    "dewp": 18,
+    "wdir": 230,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EPWA 200630Z 23007KT 200V260 9999 SCT007 20/18 Q1004 NOSIG"
    }
   ],
   "market": {
@@ -109060,6 +109080,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 200530Z VRB01KT CAVOK 22/10 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-20T06:00:00+00:00",
+    "temp": 21,
+    "dewp": 11,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 200600Z VRB02KT CAVOK 21/11 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-20T06:30:00+00:00",
+    "temp": 23,
+    "dewp": 12,
+    "wdir": 170,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 200630Z 17004KT 130V210 CAVOK 23/12 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -166281,6 +166321,36 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EHAM 200525Z 21012KT 6000 FEW004 SCT005 17/16 Q1003 BECMG 8000"
+   },
+   {
+    "obsTime": "2026-08-20T05:55:00+00:00",
+    "temp": 17,
+    "dewp": 16,
+    "wdir": 210,
+    "wspd": 14,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 200555Z 21014KT 170V230 9000 FEW006 17/16 Q1003 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-20T06:25:00+00:00",
+    "temp": 18,
+    "dewp": 16,
+    "wdir": 210,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 200625Z 21012KT 9999 FEW006 FEW025TCU 18/16 Q1004 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-20T06:55:00+00:00",
+    "temp": 18,
+    "dewp": 16,
+    "wdir": 210,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 200655Z 21012KT 9999 FEW007 18/16 Q1004 NOSIG"
    }
   ],
   "market": {
@@ -214423,6 +214493,36 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 200520Z VRB03KT CAVOK 19/08 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-20T05:50:00+00:00",
+    "temp": 21,
+    "dewp": 8,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 200550Z VRB02KT CAVOK 21/08 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-20T06:20:00+00:00",
+    "temp": 23,
+    "dewp": 9,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 200620Z VRB02KT CAVOK 23/09 Q1021"
+   },
+   {
+    "obsTime": "2026-08-20T06:50:00+00:00",
+    "temp": 24,
+    "dewp": 9,
+    "wdir": "VRB",
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 200650Z VRB03KT CAVOK 24/09 Q1021 NOSIG"
    }
   ]
  },
