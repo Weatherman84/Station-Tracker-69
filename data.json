@@ -56396,6 +56396,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 211730Z 10005KT 070V130 CAVOK 25/18 Q1008 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T18:00:00+00:00",
+    "temp": 25,
+    "dewp": 18,
+    "wdir": 80,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 211800Z 08004KT CAVOK 25/18 Q1008 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T18:30:00+00:00",
+    "temp": 24,
+    "dewp": 18,
+    "wdir": 90,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 211830Z 09005KT CAVOK 24/18 Q1008 NOSIG"
    }
   ],
   "market": {
@@ -114508,6 +114528,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 211730Z 17006KT 130V220 CAVOK 31/07 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T18:00:00+00:00",
+    "temp": 30,
+    "dewp": 8,
+    "wdir": 170,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 211800Z 17006KT 120V200 CAVOK 30/08 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T18:30:00+00:00",
+    "temp": 30,
+    "dewp": 8,
+    "wdir": 200,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 211830Z 20007KT 160V240 CAVOK 30/08 Q1013 NOSIG"
    }
   ],
   "market": {
@@ -174622,6 +174662,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 211755Z 34008KT 310V010 9999 FEW030 19/11 Q1012 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T18:25:00+00:00",
+    "temp": 17,
+    "dewp": 11,
+    "wdir": 340,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 211825Z 34008KT 310V010 9999 FEW030 17/11 Q1012 NOSIG"
    }
   ],
   "market": {
@@ -224494,6 +224544,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 211750Z 07005KT 340V090 CAVOK 27/04 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T18:20:00+00:00",
+    "temp": 24,
+    "dewp": 5,
+    "wdir": 360,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 211820Z 36003KT 320V020 CAVOK 24/05 Q1016 NOSIG"
    }
   ]
  },
