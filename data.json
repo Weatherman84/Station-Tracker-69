@@ -113277,6 +113277,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 211100Z 18005KT 9999 FEW050 27/13 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T11:30:00+00:00",
+    "temp": 28,
+    "dewp": 13,
+    "wdir": 60,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 211130Z 06003KT 9999 SCT055 28/13 Q1016 NOSIG"
    }
   ],
   "market": {
@@ -222468,6 +222478,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LTAC 211120Z 09011KT 050V120 9999 FEW040 32/M00 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T11:50:00+00:00",
+    "temp": 32,
+    "dewp": 0,
+    "wdir": 100,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LTAC 211150Z 10010KT 040V140 9999 FEW040 32/M00 Q1016 NOSIG"
    }
   ]
  },
