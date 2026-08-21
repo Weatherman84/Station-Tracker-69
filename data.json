@@ -56496,6 +56496,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 212230Z 10008KT CAVOK 22/19 Q1004 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T23:00:00+00:00",
+    "temp": 22,
+    "dewp": 19,
+    "wdir": 100,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EPWA 212300Z 10010KT 9999 FEW050CB 22/19 Q1003 NOSIG"
    }
   ],
   "market": {
@@ -114708,6 +114718,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 212230Z 11003KT 080V140 CAVOK 24/08 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T23:00:00+00:00",
+    "temp": 23,
+    "dewp": 8,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 212300Z VRB02KT 9999 FEW080 23/08 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -174912,6 +174932,26 @@
     "wgst": null,
     "cover": "CLR",
     "raw": "METAR EHAM 212225Z 29006KT 9999 -RA NSC 14/12 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T22:55:00+00:00",
+    "temp": 15,
+    "dewp": 12,
+    "wdir": 300,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 212255Z 30003KT 9999 FEW025 15/12 Q1014 TEMPO -SHRA FEW020TCU"
+   },
+   {
+    "obsTime": "2026-08-21T23:25:00+00:00",
+    "temp": 15,
+    "dewp": 12,
+    "wdir": 300,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 212325Z 30003KT 9999 FEW030 15/12 Q1014 TEMPO -SHRA FEW020TCU"
    }
   ],
   "market": {
@@ -224874,6 +224914,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 212220Z 04007KT CAVOK 19/08 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T22:50:00+00:00",
+    "temp": 18,
+    "dewp": 8,
+    "wdir": 50,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 212250Z 05006KT CAVOK 18/08 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T23:20:00+00:00",
+    "temp": 18,
+    "dewp": 6,
+    "wdir": 170,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 212320Z 17003KT 100V230 CAVOK 18/06 Q1015 NOSIG"
    }
   ]
  },
