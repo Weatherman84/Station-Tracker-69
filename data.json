@@ -55836,6 +55836,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EPWA 211330Z 30008KT 9999 FEW030TCU 25/18 Q1009 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T14:00:00+00:00",
+    "temp": 25,
+    "dewp": 18,
+    "wdir": 290,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EPWA 211400Z 29006KT 9999 FEW033TCU 25/18 Q1009 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T14:30:00+00:00",
+    "temp": 26,
+    "dewp": 18,
+    "wdir": 300,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 211430Z 30005KT 240V330 CAVOK 26/18 Q1009 NOSIG"
    }
   ],
   "market": {
@@ -113367,6 +113387,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LEMD 211330Z 18005KT 120V260 9999 SCT070 30/11 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T14:00:00+00:00",
+    "temp": 30,
+    "dewp": 11,
+    "wdir": 190,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 211400Z 19008KT 160V220 9999 FEW070 30/11 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T14:30:00+00:00",
+    "temp": 31,
+    "dewp": 10,
+    "wdir": 240,
+    "wspd": 6,
+    "wgst": 17,
+    "cover": "FEW",
+    "raw": "METAR LEMD 211430Z 24006G17KT 9999 FEW070 31/10 Q1014 NOSIG"
    }
   ],
   "market": {
@@ -172856,6 +172896,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 211325Z 33008KT 300V360 9999 FEW028 19/11 Q1011 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T13:55:00+00:00",
+    "temp": 19,
+    "dewp": 10,
+    "wdir": 320,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 211355Z 32011KT 290V360 9999 FEW034 19/10 Q1011 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T14:25:00+00:00",
+    "temp": 20,
+    "dewp": 10,
+    "wdir": 330,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 211425Z 33009KT 270V010 9999 FEW038 20/10 Q1011 NOSIG"
    }
   ],
   "market": {
@@ -222638,6 +222698,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LTAC 211320Z 11010KT 080V150 9999 FEW040 32/04 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T13:50:00+00:00",
+    "temp": 32,
+    "dewp": 5,
+    "wdir": 100,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LTAC 211350Z 10010KT 070V130 9999 FEW040 32/05 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-21T14:20:00+00:00",
+    "temp": 32,
+    "dewp": 5,
+    "wdir": 110,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LTAC 211420Z 11010KT 070V150 9999 FEW040 32/05 Q1015 NOSIG"
    }
   ]
  },
