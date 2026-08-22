@@ -57846,6 +57846,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EPWA 221700Z 23007KT 9999 -SHRA FEW044CB 16/14 Q1012 TEMPO SHRA"
+   },
+   {
+    "obsTime": "2026-08-22T17:30:00+00:00",
+    "temp": 16,
+    "dewp": 14,
+    "wdir": 240,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 221730Z 24007KT CAVOK 16/14 Q1013 NOSIG"
    }
   ],
   "market": {
@@ -117452,6 +117462,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 221700Z 17011KT 130V200 9999 FEW080 33/08 Q1013 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T17:30:00+00:00",
+    "temp": 33,
+    "dewp": 9,
+    "wdir": 180,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 221730Z 18008KT 150V220 9999 FEW080 33/09 Q1013 NOSIG"
    }
   ],
   "market": {
