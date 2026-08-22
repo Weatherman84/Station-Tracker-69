@@ -57179,12 +57179,20 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-07-27T12:40:30.496988+00:00",
-   "eventSlug": "highest-temperature-in-warsaw-on-july-27-2026",
-   "question": "Highest temperature in Warsaw on July 27?",
+   "fetchedAt": "2026-08-22T07:59:01.145158+00:00",
+   "eventSlug": "highest-temperature-in-warsaw-on-august-22-2026",
+   "question": "Highest temperature in Warsaw on August 22?",
    "buckets": [
     {
-     "label": "18°C or below",
+     "label": "16°C or below",
+     "price": 0.0005
+    },
+    {
+     "label": "17°C",
+     "price": 0.0005
+    },
+    {
+     "label": "18°C",
      "price": 0.0005
     },
     {
@@ -57209,23 +57217,15 @@
     },
     {
      "label": "24°C",
-     "price": 0.015
+     "price": 0.0125
     },
     {
      "label": "25°C",
-     "price": 0.002
+     "price": 0.0055
     },
     {
-     "label": "26°C",
+     "label": "26°C or higher",
      "price": 0.003
-    },
-    {
-     "label": "27°C",
-     "price": 0.0005
-    },
-    {
-     "label": "28°C or higher",
-     "price": 0.0005
     }
    ]
   }
