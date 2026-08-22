@@ -57916,6 +57916,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 222030Z 26005KT CAVOK 14/13 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T21:00:00+00:00",
+    "temp": 14,
+    "dewp": 13,
+    "wdir": 250,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 222100Z 25008KT CAVOK 14/13 Q1014 NOSIG"
    }
   ],
   "market": {
@@ -117592,6 +117602,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 222030Z 25008KT CAVOK 29/10 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T21:00:00+00:00",
+    "temp": 29,
+    "dewp": 8,
+    "wdir": 250,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 222100Z 25008KT CAVOK 29/08 Q1014 NOSIG"
    }
   ],
   "market": {
@@ -179319,6 +179339,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 222025Z 32004KT 9999 FEW032 15/10 Q1023 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T20:55:00+00:00",
+    "temp": 15,
+    "dewp": 10,
+    "wdir": 310,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 222055Z 31004KT 9999 FEW035 15/10 Q1023 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T21:25:00+00:00",
+    "temp": 14,
+    "dewp": 9,
+    "wdir": 300,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 222125Z 30005KT 9999 FEW047 14/09 Q1023 NOSIG"
    }
   ],
   "market": {
@@ -230701,6 +230741,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 222020Z 03004KT 360V060 CAVOK 23/08 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T20:50:00+00:00",
+    "temp": 22,
+    "dewp": 8,
+    "wdir": 10,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 222050Z 01004KT 330V060 CAVOK 22/08 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T21:20:00+00:00",
+    "temp": 22,
+    "dewp": 7,
+    "wdir": 50,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 222120Z 05005KT CAVOK 22/07 Q1014 NOSIG"
    }
   ]
  },
