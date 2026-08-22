@@ -57306,6 +57306,16 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR EPWA 221400Z 25010KT 9999 BKN042 19/12 Q1011 TEMPO 3000 SHRA"
+   },
+   {
+    "obsTime": "2026-08-22T14:30:00+00:00",
+    "temp": 19,
+    "dewp": 13,
+    "wdir": 250,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 221430Z 25010KT 9999 BKN043 19/13 Q1011 TEMPO 3000 SHRA"
    }
   ],
   "market": {
@@ -116351,6 +116361,16 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LEMD 221400Z 17010KT 150V210 9999 SCT075 33/11 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T14:30:00+00:00",
+    "temp": 31,
+    "dewp": 11,
+    "wdir": 210,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 221430Z 21005KT 9999 SCT075 31/11 Q1014 NOSIG"
    }
   ],
   "market": {
