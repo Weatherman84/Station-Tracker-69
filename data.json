@@ -57239,7 +57239,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-22T10:57:01.119059+00:00",
+   "fetchedAt": "2026-08-22T11:22:36.398267+00:00",
    "eventSlug": "highest-temperature-in-warsaw-on-august-22-2026",
    "question": "Highest temperature in Warsaw on August 22?",
    "buckets": [
@@ -57277,7 +57277,7 @@
     },
     {
      "label": "24°C",
-     "price": 0.0105
+     "price": 0.0125
     },
     {
      "label": "25°C",
