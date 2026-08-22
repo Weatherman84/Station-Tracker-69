@@ -57926,6 +57926,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 222100Z 25008KT CAVOK 14/13 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T21:30:00+00:00",
+    "temp": 14,
+    "dewp": 13,
+    "wdir": 250,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 222130Z 25008KT CAVOK 14/13 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -117612,6 +117622,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 222100Z 25008KT CAVOK 29/08 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-22T21:30:00+00:00",
+    "temp": 29,
+    "dewp": 7,
+    "wdir": 220,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 222130Z 22007KT CAVOK 29/07 Q1014 NOSIG"
    }
   ],
   "market": {
