@@ -58766,6 +58766,16 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EPWA 231400Z 28013KT 9999 SCT036 18/11 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T14:30:00+00:00",
+    "temp": 18,
+    "dewp": 10,
+    "wdir": 270,
+    "wspd": 14,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EPWA 231430Z 27014KT 240V300 9999 SCT036 18/10 Q1019 NOSIG"
    }
   ],
   "market": {
@@ -119315,6 +119325,16 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LEMD 231400Z 16013KT 130V220 9999 SCT080 31/09 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T14:30:00+00:00",
+    "temp": 32,
+    "dewp": 9,
+    "wdir": 170,
+    "wspd": 14,
+    "wgst": 27,
+    "cover": "SCT",
+    "raw": "METAR LEMD 231430Z 17014G27KT 120V240 9999 SCT080 32/09 Q1014 NOSIG"
    }
   ],
   "market": {
