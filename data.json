@@ -58096,6 +58096,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EPWA 230530Z 26011KT 9999 FEW010 14/12 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T06:00:00+00:00",
+    "temp": 14,
+    "dewp": 12,
+    "wdir": 260,
+    "wspd": 13,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EPWA 230600Z 26013KT 210V280 9999 FEW015 14/12 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T06:30:00+00:00",
+    "temp": 15,
+    "dewp": 12,
+    "wdir": 260,
+    "wspd": 13,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EPWA 230630Z 26013KT 9999 SCT016 15/12 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -117952,6 +117972,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 230530Z VRB01KT 9999 FEW070 21/17 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T06:00:00+00:00",
+    "temp": 22,
+    "dewp": 17,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 230600Z VRB02KT 9999 SCT060 22/17 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T06:30:00+00:00",
+    "temp": 23,
+    "dewp": 17,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 230630Z VRB02KT 9999 SCT060 23/17 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -179859,6 +179899,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EHAM 230525Z VRB02KT 9999 FEW020 SCT035 14/11 Q1023 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T05:55:00+00:00",
+    "temp": 14,
+    "dewp": 12,
+    "wdir": 180,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 230555Z 18003KT 9999 FEW030 SCT048 14/12 Q1024 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T06:25:00+00:00",
+    "temp": 16,
+    "dewp": 11,
+    "wdir": 200,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 230625Z 20005KT 170V230 9999 FEW030 SCT048 16/11 Q1024 NOSIG"
    }
   ],
   "market": {
@@ -231421,6 +231481,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 230520Z VRB02KT CAVOK 23/08 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T05:50:00+00:00",
+    "temp": 24,
+    "dewp": 8,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 230550Z VRB02KT CAVOK 24/08 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T06:20:00+00:00",
+    "temp": 26,
+    "dewp": 8,
+    "wdir": "VRB",
+    "wspd": 2,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 230620Z VRB02KT CAVOK 26/08 Q1015 NOSIG"
    }
   ]
  },
