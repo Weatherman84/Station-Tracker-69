@@ -58696,6 +58696,16 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR EPWA 231030Z 27016KT 9999 BKN030 17/11 Q1018 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T11:00:00+00:00",
+    "temp": 18,
+    "dewp": 11,
+    "wdir": 260,
+    "wspd": 16,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 231100Z 26016KT 9999 SCT030 BKN043 18/11 Q1018 NOSIG"
    }
   ],
   "market": {
@@ -119175,6 +119185,16 @@
     "wgst": 24,
     "cover": "FEW",
     "raw": "METAR LEMD 231030Z 20005G24KT 150V280 9999 FEW073 29/13 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T11:00:00+00:00",
+    "temp": 28,
+    "dewp": 14,
+    "wdir": 190,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 231100Z 19005KT 9999 FEW058 SCT063 28/14 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -181729,6 +181749,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EHAM 231025Z 32012KT 300V010 9999 FEW035 SCT048 19/09 Q1024 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T10:55:00+00:00",
+    "temp": 18,
+    "dewp": 10,
+    "wdir": 300,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 231055Z 30012KT 9999 FEW030 SCT038 18/10 Q1024 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T11:25:00+00:00",
+    "temp": 20,
+    "dewp": 8,
+    "wdir": 340,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 231125Z 34009KT 300V020 9999 FEW035 SCT042 20/08 Q1024 NOSIG"
    }
   ],
   "market": {
@@ -233891,6 +233931,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 231020Z VRB05KT CAVOK 33/04 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T10:50:00+00:00",
+    "temp": 34,
+    "dewp": 5,
+    "wdir": 330,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 231050Z 33009KT CAVOK 34/05 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T11:20:00+00:00",
+    "temp": 35,
+    "dewp": 5,
+    "wdir": 290,
+    "wspd": 6,
+    "wgst": 16,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 231120Z 29006G16KT 230V030 CAVOK 35/05 Q1014 NOSIG"
    }
   ]
  },
