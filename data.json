@@ -233811,6 +233811,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 230920Z VRB03KT CAVOK 33/04 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T09:50:00+00:00",
+    "temp": 34,
+    "dewp": 5,
+    "wdir": "VRB",
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 230950Z VRB04KT CAVOK 34/05 Q1015 NOSIG"
    }
   ]
  },
