@@ -58756,6 +58756,16 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EPWA 231330Z 29014KT 9999 SCT036 18/11 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T14:00:00+00:00",
+    "temp": 18,
+    "dewp": 11,
+    "wdir": 280,
+    "wspd": 13,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EPWA 231400Z 28013KT 9999 SCT036 18/11 Q1019 NOSIG"
    }
   ],
   "market": {
@@ -119295,6 +119305,16 @@
     "wgst": 20,
     "cover": "SCT",
     "raw": "METAR LEMD 231330Z 18009G20KT 9999 SCT080 31/09 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T14:00:00+00:00",
+    "temp": 31,
+    "dewp": 9,
+    "wdir": 160,
+    "wspd": 13,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 231400Z 16013KT 130V220 9999 SCT080 31/09 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -181909,6 +181929,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EHAM 231325Z 36005KT 300V040 9999 FEW023 SCT046 18/10 Q1025 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T13:55:00+00:00",
+    "temp": 19,
+    "dewp": 9,
+    "wdir": 310,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 231355Z 31009KT 270V010 9999 FEW029 19/09 Q1025 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T14:25:00+00:00",
+    "temp": 19,
+    "dewp": 11,
+    "wdir": 310,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 231425Z 31010KT 270V340 9999 FEW029 19/11 Q1024 NOSIG"
    }
   ],
   "market": {
@@ -234131,6 +234171,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 231320Z 32008KT 270V360 CAVOK 35/04 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T13:50:00+00:00",
+    "temp": 35,
+    "dewp": 3,
+    "wdir": 310,
+    "wspd": 10,
+    "wgst": 21,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 231350Z 31010G21KT CAVOK 35/03 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T14:20:00+00:00",
+    "temp": 35,
+    "dewp": 3,
+    "wdir": 360,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 231420Z 36008KT 310V060 CAVOK 35/03 Q1014 NOSIG"
    }
   ]
  },
