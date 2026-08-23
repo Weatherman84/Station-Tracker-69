@@ -119165,6 +119165,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 231000Z 16004KT 9999 FEW070 28/14 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-23T10:30:00+00:00",
+    "temp": 29,
+    "dewp": 13,
+    "wdir": 200,
+    "wspd": 5,
+    "wgst": 24,
+    "cover": "FEW",
+    "raw": "METAR LEMD 231030Z 20005G24KT 150V280 9999 FEW073 29/13 Q1017 NOSIG"
    }
   ],
   "market": {
