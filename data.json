@@ -60206,6 +60206,16 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR EPWA 241300Z 24007KT 200V270 9999 SCT020CB 18/14 Q1020 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T13:30:00+00:00",
+    "temp": 17,
+    "dewp": 12,
+    "wdir": 280,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EPWA 241330Z 28009KT 230V310 9999 FEW020CB 17/12 Q1020 NOSIG"
    }
   ],
   "market": {
@@ -122239,6 +122249,16 @@
     "wgst": 28,
     "cover": "SCT",
     "raw": "METAR LEMD 241300Z 18017G28KT 150V210 9999 FEW060 SCT075 27/09 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T13:30:00+00:00",
+    "temp": 29,
+    "dewp": 8,
+    "wdir": 190,
+    "wspd": 19,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 241330Z 19019KT 9999 FEW070 29/08 Q1014 NOSIG"
    }
   ],
   "market": {
@@ -186405,6 +186425,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 241255Z 08011KT 050V120 9999 FEW038 21/10 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T13:25:00+00:00",
+    "temp": 21,
+    "dewp": 10,
+    "wdir": 80,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 241325Z 08012KT 040V110 9999 FEW040 21/10 Q1020 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T13:55:00+00:00",
+    "temp": 21,
+    "dewp": 10,
+    "wdir": 70,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 241355Z 07012KT 040V100 9999 FEW042 21/10 Q1020 NOSIG"
    }
   ],
   "market": {
@@ -239597,6 +239637,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LTAC 241250Z 07007KT 9999 FEW040 33/07 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T13:20:00+00:00",
+    "temp": 32,
+    "dewp": 7,
+    "wdir": 70,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LTAC 241320Z 07007KT 9999 FEW040 32/07 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T13:50:00+00:00",
+    "temp": 32,
+    "dewp": 7,
+    "wdir": 70,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LTAC 241350Z 07010KT 020V110 9999 FEW040 32/07 Q1017 NOSIG"
    }
   ]
  },
