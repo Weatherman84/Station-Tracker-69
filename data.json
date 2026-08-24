@@ -188431,6 +188431,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EHAM 242125Z 09008KT CAVOK 16/10 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T21:55:00+00:00",
+    "temp": 16,
+    "dewp": 10,
+    "wdir": 80,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EHAM 242155Z 08010KT CAVOK 16/10 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -242273,6 +242283,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 242120Z 05007KT 010V120 CAVOK 22/11 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T21:50:00+00:00",
+    "temp": 23,
+    "dewp": 12,
+    "wdir": 90,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 242150Z 09010KT CAVOK 23/12 Q1019 NOSIG"
    }
   ]
  },
