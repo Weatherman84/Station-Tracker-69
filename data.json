@@ -60856,6 +60856,26 @@
     "wgst": null,
     "cover": "CLR",
     "raw": "METAR EPWA 242130Z COR 00000KT 9999 MIFG NSC 13/12 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T22:00:00+00:00",
+    "temp": 12,
+    "dewp": 11,
+    "wdir": 0,
+    "wspd": 0,
+    "wgst": null,
+    "cover": "CLR",
+    "raw": "METAR EPWA 242200Z 00000KT 9999 MIFG NSC 12/11 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T22:30:00+00:00",
+    "temp": 11,
+    "dewp": 11,
+    "wdir": 310,
+    "wspd": 1,
+    "wgst": null,
+    "cover": "CLR",
+    "raw": "METAR EPWA 242230Z 31001KT 9999 2000W MIFG NSC 11/11 Q1021 NOSIG"
    }
   ],
   "market": {
@@ -123560,6 +123580,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 242130Z 25009KT 220V280 9999 FEW075 22/14 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T22:00:00+00:00",
+    "temp": 22,
+    "dewp": 13,
+    "wdir": 250,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 242200Z 25011KT 9999 FEW075 22/13 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T22:30:00+00:00",
+    "temp": 22,
+    "dewp": 14,
+    "wdir": 250,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 242230Z 25008KT 210V280 9999 FEW075 22/14 Q1016 NOSIG"
    }
   ],
   "market": {
@@ -188441,6 +188481,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EHAM 242155Z 08010KT CAVOK 16/10 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T22:25:00+00:00",
+    "temp": 16,
+    "dewp": 10,
+    "wdir": 70,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EHAM 242225Z 07009KT CAVOK 16/10 Q1016 NOSIG"
    }
   ],
   "market": {
@@ -242293,6 +242343,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 242150Z 09010KT CAVOK 23/12 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-24T22:20:00+00:00",
+    "temp": 21,
+    "dewp": 11,
+    "wdir": 50,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 242220Z 05005KT CAVOK 21/11 Q1019 NOSIG"
    }
   ]
  },
