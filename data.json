@@ -122262,7 +122262,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-08-24T13:56:47.122006+00:00",
+   "fetchedAt": "2026-08-24T14:44:49.548856+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-august-24-2026",
    "question": "Highest temperature in Madrid on August 24?",
    "buckets": [
@@ -122288,19 +122288,19 @@
     },
     {
      "label": "28°C",
-     "price": 0.0015
+     "price": 0.001
     },
     {
      "label": "29°C",
-     "price": 0.89
+     "price": 0.86
     },
     {
      "label": "30°C",
-     "price": 0.0925
+     "price": 0.102
     },
     {
      "label": "31°C",
-     "price": 0.0245
+     "price": 0.0255
     },
     {
      "label": "32°C",
