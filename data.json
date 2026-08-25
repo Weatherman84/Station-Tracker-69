@@ -245463,6 +245463,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LTAC 251120Z 09008KT 050V150 9999 FEW040 29/10 Q1018 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-25T11:50:00+00:00",
+    "temp": 29,
+    "dewp": 10,
+    "wdir": 70,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LTAC 251150Z 07010KT 020V100 9999 FEW040 29/10 Q1018 NOSIG"
    }
   ]
  },
