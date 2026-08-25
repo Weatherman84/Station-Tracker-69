@@ -61536,6 +61536,26 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 250630Z 09005KT 060V130 CAVOK 16/12 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-25T07:00:00+00:00",
+    "temp": 17,
+    "dewp": 11,
+    "wdir": 100,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 250700Z 10006KT CAVOK 17/11 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-25T07:30:00+00:00",
+    "temp": 18,
+    "dewp": 12,
+    "wdir": 90,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 250730Z 09005KT 050V170 CAVOK 18/12 Q1021 NOSIG"
    }
   ],
   "market": {
@@ -124943,6 +124963,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 250630Z 15008KT 130V200 9999 FEW020 18/15 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-25T07:00:00+00:00",
+    "temp": 18,
+    "dewp": 15,
+    "wdir": 170,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 250700Z 17007KT 120V220 9999 FEW020 18/15 Q1017 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-25T07:30:00+00:00",
+    "temp": 19,
+    "dewp": 15,
+    "wdir": 210,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 250730Z 21005KT 110V250 9999 FEW020 19/15 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -190551,6 +190591,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EHAM 250655Z 08010KT 050V120 CAVOK 16/11 Q1015 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-25T07:25:00+00:00",
+    "temp": 17,
+    "dewp": 10,
+    "wdir": 80,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EHAM 250725Z 08012KT 040V110 CAVOK 17/10 Q1015 NOSIG"
    }
   ],
   "market": {
@@ -245083,6 +245133,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LTAC 250650Z 09007KT 030V150 CAVOK 24/13 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-25T07:20:00+00:00",
+    "temp": 25,
+    "dewp": 12,
+    "wdir": 100,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LTAC 250720Z 10007KT 030V130 CAVOK 25/12 Q1019 NOSIG"
    }
   ]
  },
