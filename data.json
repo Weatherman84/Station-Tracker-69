@@ -63666,6 +63666,16 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 261600Z 06007KT 030V100 CAVOK 22/08 Q1022 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-26T16:30:00+00:00",
+    "temp": 22,
+    "dewp": 9,
+    "wdir": 60,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 261630Z 06008KT 360V080 CAVOK 22/09 Q1022 NOSIG"
    }
   ],
   "market": {
@@ -129258,6 +129268,26 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR LEMD 261530Z 25014KT 9999 FEW079 28/08 Q1011 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-26T16:00:00+00:00",
+    "temp": 28,
+    "dewp": 9,
+    "wdir": 220,
+    "wspd": 12,
+    "wgst": 22,
+    "cover": "FEW",
+    "raw": "METAR LEMD 261600Z 22012G22KT 190V280 9999 FEW077 28/09 Q1011 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-26T16:30:00+00:00",
+    "temp": 28,
+    "dewp": 9,
+    "wdir": 230,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 261630Z 23010KT 200V310 9999 FEW077 28/09 Q1011 NOSIG"
    }
   ],
   "market": {
@@ -197143,6 +197173,16 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 261555Z 14009KT 100V180 9999 FEW045 25/14 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-26T16:25:00+00:00",
+    "temp": 25,
+    "dewp": 14,
+    "wdir": 140,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 261625Z 14010KT 9999 FEW045 25/14 Q1014 NOSIG"
    }
   ],
   "market": {
@@ -253795,6 +253835,26 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LTAC 261550Z 24006KT 9999 FEW025CB SCT040 30/08 Q1014 NOSIG"
+   },
+   {
+    "obsTime": "2026-08-26T16:20:00+00:00",
+    "temp": 29,
+    "dewp": 7,
+    "wdir": 270,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 261620Z COR 27005KT 240V330 9999 FEW025CB BKN040 29/07 Q1014 TEMPO -TSRA"
+   },
+   {
+    "obsTime": "2026-08-26T16:31:00+00:00",
+    "temp": 29,
+    "dewp": 8,
+    "wdir": 360,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "SPECI LTAC 261631Z 36007KT 330V040 9999 -TSRA FEW020CB BKN030 29/08 Q1015 BECMG NSW"
    }
   ]
  },
