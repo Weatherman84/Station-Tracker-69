@@ -82199,7 +82199,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-09-10T17:11:11.641346+00:00",
+   "fetchedAt": "2026-09-10T19:48:14.778275+00:00",
    "eventSlug": "highest-temperature-in-warsaw-on-september-10-2026",
    "question": "Highest temperature in Warsaw on September 10?",
    "buckets": [
@@ -82225,7 +82225,7 @@
     },
     {
      "label": "20°C",
-     "price": 0.998
+     "price": 0.9995
     },
     {
      "label": "21°C",
