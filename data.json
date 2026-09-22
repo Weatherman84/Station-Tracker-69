@@ -388437,7 +388437,58 @@
     "cover": "SCT",
     "raw": "METAR LTAC 221420Z 23008KT 9999 SCT035 SCT100 25/10 Q1013 NOSIG"
    }
-  ]
+  ],
+  "market": {
+   "fetchedAt": "2026-09-22T16:33:01.983242+00:00",
+   "eventSlug": "highest-temperature-in-ankara-on-september-22-2026",
+   "question": "Highest temperature in Ankara on September 22?",
+   "buckets": [
+    {
+     "label": "20°C or below",
+     "price": 0.0005
+    },
+    {
+     "label": "21°C",
+     "price": 0.0005
+    },
+    {
+     "label": "22°C",
+     "price": 0.0005
+    },
+    {
+     "label": "23°C",
+     "price": 0.0005
+    },
+    {
+     "label": "24°C",
+     "price": 0.0005
+    },
+    {
+     "label": "25°C",
+     "price": 0.0005
+    },
+    {
+     "label": "26°C",
+     "price": 0.9995
+    },
+    {
+     "label": "27°C",
+     "price": 0.0005
+    },
+    {
+     "label": "28°C",
+     "price": 0.0005
+    },
+    {
+     "label": "29°C",
+     "price": 0.0005
+    },
+    {
+     "label": "30°C or higher",
+     "price": 0.0005
+    }
+   ]
+  }
  },
  "_modelNames": {
   "ecmwf_ifs025": "ECMWF IFS",
