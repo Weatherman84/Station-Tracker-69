@@ -213520,7 +213520,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-09-28T07:02:35.529693+00:00",
+   "fetchedAt": "2026-09-28T15:18:31.458193+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-september-28-2026",
    "question": "Highest temperature in Madrid on September 28?",
    "buckets": [
@@ -213538,19 +213538,19 @@
     },
     {
      "label": "25°C",
-     "price": 0.001
+     "price": 0.0005
     },
     {
      "label": "26°C",
-     "price": 0.97
+     "price": 0.9955
     },
     {
      "label": "27°C",
-     "price": 0.025
+     "price": 0.0005
     },
     {
      "label": "28°C",
-     "price": 0.0015
+     "price": 0.0005
     },
     {
      "label": "29°C",
