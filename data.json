@@ -107316,6 +107316,66 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 301230Z 14011KT CAVOK 21/08 Q1032 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T15:30:00+00:00",
+    "temp": 19,
+    "dewp": 8,
+    "wdir": 120,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 301530Z 12009KT 090V150 CAVOK 19/08 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T16:00:00+00:00",
+    "temp": 19,
+    "dewp": 8,
+    "wdir": 110,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 301600Z 11009KT CAVOK 19/08 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T16:30:00+00:00",
+    "temp": 17,
+    "dewp": 8,
+    "wdir": 100,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 301630Z 10007KT CAVOK 17/08 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T17:00:00+00:00",
+    "temp": 16,
+    "dewp": 7,
+    "wdir": 120,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 301700Z 12008KT CAVOK 16/07 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T17:30:00+00:00",
+    "temp": 17,
+    "dewp": 8,
+    "wdir": 100,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 301730Z 10008KT CAVOK 17/08 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T18:00:00+00:00",
+    "temp": 16,
+    "dewp": 8,
+    "wdir": 100,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 301800Z 10009KT CAVOK 16/08 Q1031 NOSIG"
    }
   ],
   "market": {
@@ -218575,6 +218635,66 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 301230Z 18005KT 120V260 CAVOK 27/14 Q1020 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T15:30:00+00:00",
+    "temp": 28,
+    "dewp": 11,
+    "wdir": 200,
+    "wspd": 8,
+    "wgst": 20,
+    "cover": "FEW",
+    "raw": "METAR LEMD 301530Z 20008G20KT 9999 FEW060 28/11 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T16:00:00+00:00",
+    "temp": 28,
+    "dewp": 11,
+    "wdir": 220,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 301600Z 22009KT 190V260 9999 FEW070 28/11 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T16:30:00+00:00",
+    "temp": 27,
+    "dewp": 11,
+    "wdir": 240,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 301630Z 24007KT 210V270 9999 FEW070 27/11 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T17:00:00+00:00",
+    "temp": 27,
+    "dewp": 11,
+    "wdir": 230,
+    "wspd": 7,
+    "wgst": 17,
+    "cover": "FEW",
+    "raw": "METAR LEMD 301700Z 23007G17KT 170V310 9999 FEW070 27/11 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T17:30:00+00:00",
+    "temp": 27,
+    "dewp": 11,
+    "wdir": 250,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 301730Z 25007KT 9999 FEW075 27/11 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T18:00:00+00:00",
+    "temp": 26,
+    "dewp": 11,
+    "wdir": 270,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LEMD 301800Z 27006KT 9999 SCT070 26/11 Q1019 NOSIG"
    }
   ],
   "market": {
@@ -333570,6 +333690,66 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EHAM 301225Z 17008KT CAVOK 23/16 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T15:25:00+00:00",
+    "temp": 23,
+    "dewp": 17,
+    "wdir": 170,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 301525Z 17007KT 9999 FEW049 23/17 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T15:55:00+00:00",
+    "temp": 23,
+    "dewp": 17,
+    "wdir": 170,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 301555Z 17005KT 9999 -RA SCT049 23/17 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T16:25:00+00:00",
+    "temp": 22,
+    "dewp": 17,
+    "wdir": 200,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 301625Z 20005KT 9999 -RADZ SCT049 22/17 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T16:55:00+00:00",
+    "temp": 21,
+    "dewp": 17,
+    "wdir": 200,
+    "wspd": 6,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 301655Z 20006KT 9999 -RADZ FEW032 SCT035 21/17 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T17:25:00+00:00",
+    "temp": 21,
+    "dewp": 17,
+    "wdir": 180,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 301725Z 18004KT 9999 -RADZ FEW015 SCT030 21/17 Q1016 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T17:55:00+00:00",
+    "temp": 21,
+    "dewp": 18,
+    "wdir": 180,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 301755Z 18004KT 9999 -RADZ FEW030 21/18 Q1017 NOSIG"
    }
   ],
   "market": {
@@ -429256,6 +429436,56 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR LTAC 301250Z 04012KT 9999 SCT030 BKN100 15/10 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T15:50:00+00:00",
+    "temp": 13,
+    "dewp": 10,
+    "wdir": 60,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 301550Z 06011KT 9999 SCT023 BKN100 13/10 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T16:20:00+00:00",
+    "temp": 13,
+    "dewp": 9,
+    "wdir": 60,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 301620Z 06012KT 9999 SCT023 BKN100 13/09 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T16:50:00+00:00",
+    "temp": 12,
+    "dewp": 9,
+    "wdir": 60,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 301650Z 06011KT 9999 SCT023 BKN100 12/09 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T17:20:00+00:00",
+    "temp": 12,
+    "dewp": 9,
+    "wdir": 60,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 301720Z 06012KT 9999 SCT023 BKN100 12/09 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-09-30T17:50:00+00:00",
+    "temp": 12,
+    "dewp": 9,
+    "wdir": 60,
+    "wspd": 13,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 301750Z 06013KT 9999 SCT023 BKN100 12/09 Q1022 NOSIG"
    }
   ],
   "market": {
