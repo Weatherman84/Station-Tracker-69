@@ -108526,6 +108526,66 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR EPWA 010730Z 12008KT 090V160 CAVOK 14/08 Q1032 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T12:30:00+00:00",
+    "temp": 21,
+    "dewp": 3,
+    "wdir": 120,
+    "wspd": 14,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 011230Z 12014KT CAVOK 21/03 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T13:00:00+00:00",
+    "temp": 21,
+    "dewp": 3,
+    "wdir": 110,
+    "wspd": 17,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 011300Z 11017KT CAVOK 21/03 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T13:30:00+00:00",
+    "temp": 19,
+    "dewp": 2,
+    "wdir": 130,
+    "wspd": 14,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 011330Z 13014KT CAVOK 19/02 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T14:00:00+00:00",
+    "temp": 19,
+    "dewp": 4,
+    "wdir": 120,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 011400Z 12012KT CAVOK 19/04 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T14:30:00+00:00",
+    "temp": 19,
+    "dewp": 4,
+    "wdir": 120,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 011430Z 12009KT 090V160 CAVOK 19/04 Q1031 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T15:00:00+00:00",
+    "temp": 19,
+    "dewp": 5,
+    "wdir": 120,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR EPWA 011500Z 12009KT CAVOK 19/05 Q1031 NOSIG"
    }
   ],
   "market": {
@@ -221039,6 +221099,66 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 010730Z 34006KT 310V010 CAVOK 17/11 Q1023 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T12:30:00+00:00",
+    "temp": 26,
+    "dewp": 11,
+    "wdir": 20,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 011230Z 02003KT CAVOK 26/11 Q1022 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T13:00:00+00:00",
+    "temp": 27,
+    "dewp": 11,
+    "wdir": "VRB",
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 011300Z VRB04KT CAVOK 27/11 Q1022 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T13:30:00+00:00",
+    "temp": 27,
+    "dewp": 11,
+    "wdir": 280,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 011330Z 28004KT CAVOK 27/11 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T14:00:00+00:00",
+    "temp": 28,
+    "dewp": 11,
+    "wdir": 230,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 011400Z 23004KT CAVOK 28/11 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T14:30:00+00:00",
+    "temp": 29,
+    "dewp": 12,
+    "wdir": 260,
+    "wspd": 2,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 011430Z 26002KT CAVOK 29/12 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T15:00:00+00:00",
+    "temp": 28,
+    "dewp": 11,
+    "wdir": 330,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR LEMD 011500Z 33005KT 250V010 9999 FEW080 28/11 Q1021 NOSIG"
    }
   ],
   "market": {
@@ -337366,6 +337486,66 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 010725Z 25006KT 210V280 9999 FEW040 18/16 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T12:25:00+00:00",
+    "temp": 20,
+    "dewp": 15,
+    "wdir": 280,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EHAM 011225Z 28012KT 9999 SCT020 20/15 Q1022 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T12:55:00+00:00",
+    "temp": 21,
+    "dewp": 15,
+    "wdir": 270,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 011255Z 27012KT 220V310 9999 FEW021 21/15 Q1022 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T13:25:00+00:00",
+    "temp": 20,
+    "dewp": 14,
+    "wdir": 260,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 011325Z 26012KT 230V300 9999 FEW022 20/14 Q1023 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T13:55:00+00:00",
+    "temp": 20,
+    "dewp": 14,
+    "wdir": 260,
+    "wspd": 13,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 011355Z 26013KT 9999 FEW023 20/14 Q1023 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T14:25:00+00:00",
+    "temp": 20,
+    "dewp": 14,
+    "wdir": 270,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 011425Z 27012KT 9999 FEW023 20/14 Q1023 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T14:55:00+00:00",
+    "temp": 19,
+    "dewp": 14,
+    "wdir": 270,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 011455Z 27011KT 240V300 9999 FEW022 19/14 Q1024 NOSIG"
    }
   ],
   "market": {
@@ -434261,6 +434441,56 @@
     "wgst": null,
     "cover": "SCT",
     "raw": "METAR LTAC 010720Z 05008KT 020V100 9999 SCT033 13/07 Q1021 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T12:50:00+00:00",
+    "temp": 17,
+    "dewp": 3,
+    "wdir": 60,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR LTAC 011250Z 06011KT 040V110 9999 SCT040 17/03 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T13:20:00+00:00",
+    "temp": 17,
+    "dewp": 3,
+    "wdir": 70,
+    "wspd": 11,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 011320Z 07011KT 040V100 9999 BKN040 17/03 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T13:50:00+00:00",
+    "temp": 16,
+    "dewp": 3,
+    "wdir": 60,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 011350Z 06010KT 9999 BKN040 16/03 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T14:20:00+00:00",
+    "temp": 16,
+    "dewp": 4,
+    "wdir": 30,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 011420Z 03012KT 9999 BKN040 16/04 Q1019 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-01T14:50:00+00:00",
+    "temp": 15,
+    "dewp": 4,
+    "wdir": 20,
+    "wspd": 12,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 011450Z 02012KT 9999 SCT040 BKN080 15/04 Q1019 NOSIG"
    }
   ],
   "market": {
