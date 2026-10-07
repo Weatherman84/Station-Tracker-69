@@ -237717,41 +237717,41 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-10-07T17:57:19.115372+00:00",
+   "fetchedAt": "2026-10-07T22:52:45.825225+00:00",
    "eventSlug": "highest-temperature-in-madrid-on-october-7-2026",
    "question": "Highest temperature in Madrid on October 7?",
    "buckets": [
     {
      "label": "15°C or below",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "16°C",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "17°C",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "18°C",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "19°C",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "20°C",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "21°C",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "22°C",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "23°C",
@@ -237759,11 +237759,11 @@
     },
     {
      "label": "24°C",
-     "price": 0.0005
+     "price": 0.0
     },
     {
      "label": "25°C or higher",
-     "price": 0.0005
+     "price": 0.0
     }
    ]
   }
