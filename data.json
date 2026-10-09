@@ -119119,7 +119119,7 @@
    }
   ],
   "market": {
-   "fetchedAt": "2026-10-09T15:33:00.560041+00:00",
+   "fetchedAt": "2026-10-09T20:19:03.019691+00:00",
    "eventSlug": "highest-temperature-in-warsaw-on-october-9-2026",
    "question": "Highest temperature in Warsaw on October 9?",
    "buckets": [
@@ -119141,11 +119141,11 @@
     },
     {
      "label": "17°C",
-     "price": 0.9965
+     "price": 0.9995
     },
     {
      "label": "18°C",
-     "price": 0.003
+     "price": 0.0025
     },
     {
      "label": "19°C",
