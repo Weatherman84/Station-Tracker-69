@@ -124256,6 +124256,56 @@
     "wgst": null,
     "cover": "OVC",
     "raw": "METAR EPWA 141130Z 27008KT 9999 OVC007 10/09 Q1022 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T14:30:00+00:00",
+    "temp": 13,
+    "dewp": 10,
+    "wdir": 250,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "SCT",
+    "raw": "METAR EPWA 141430Z 25008KT 9999 FEW022CB SCT025 13/10 Q1021 TEMPO 4000 TSRA"
+   },
+   {
+    "obsTime": "2026-10-14T15:00:00+00:00",
+    "temp": 11,
+    "dewp": 8,
+    "wdir": 350,
+    "wspd": 18,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 141500Z 35018KT 9999 -SHRA VCTS BKN023CB 11/08 Q1022 BECMG 29010KT"
+   },
+   {
+    "obsTime": "2026-10-14T15:30:00+00:00",
+    "temp": 10,
+    "dewp": 8,
+    "wdir": 340,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 141530Z 34008KT 9999 -SHRA SCT023CB BKN043 10/08 Q1023 BECMG 28010KT"
+   },
+   {
+    "obsTime": "2026-10-14T16:00:00+00:00",
+    "temp": 9,
+    "dewp": 8,
+    "wdir": 270,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 141600Z 27005KT 9999 BKN037 09/08 Q1023 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T16:30:00+00:00",
+    "temp": 9,
+    "dewp": 8,
+    "wdir": 230,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR EPWA 141630Z 23003KT 9999 FEW032CB BKN040 09/08 Q1023 NOSIG"
    }
   ],
   "market": {
@@ -253170,6 +253220,56 @@
     "wgst": null,
     "cover": "CAVOK",
     "raw": "METAR LEMD 141130Z 12002KT CAVOK 24/13 Q1029 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T14:30:00+00:00",
+    "temp": 27,
+    "dewp": 14,
+    "wdir": "VRB",
+    "wspd": 3,
+    "wgst": 13,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 141430Z VRB03G13KT CAVOK 27/14 Q1026 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T15:00:00+00:00",
+    "temp": 27,
+    "dewp": 13,
+    "wdir": 150,
+    "wspd": 4,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 141500Z 15004KT 100V200 CAVOK 27/13 Q1026 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T15:30:00+00:00",
+    "temp": 28,
+    "dewp": 13,
+    "wdir": 230,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 141530Z 23003KT CAVOK 28/13 Q1026 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T16:00:00+00:00",
+    "temp": 28,
+    "dewp": 13,
+    "wdir": 190,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 141600Z 19003KT 130V240 CAVOK 28/13 Q1026 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T16:30:00+00:00",
+    "temp": 27,
+    "dewp": 13,
+    "wdir": 190,
+    "wspd": 3,
+    "wgst": null,
+    "cover": "CAVOK",
+    "raw": "METAR LEMD 141630Z 19003KT CAVOK 27/13 Q1026 NOSIG"
    }
   ],
   "market": {
@@ -386028,6 +386128,66 @@
     "wgst": null,
     "cover": "FEW",
     "raw": "METAR EHAM 141125Z 21009KT 170V240 9999 FEW035 17/10 Q1029 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T14:25:00+00:00",
+    "temp": 17,
+    "dewp": 10,
+    "wdir": 220,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 141425Z 22010KT 180V240 9999 FEW032 17/10 Q1028 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T14:55:00+00:00",
+    "temp": 17,
+    "dewp": 10,
+    "wdir": 210,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 141455Z 21010KT 9999 FEW030 17/10 Q1027 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T15:25:00+00:00",
+    "temp": 17,
+    "dewp": 10,
+    "wdir": 220,
+    "wspd": 10,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 141525Z 22010KT 190V260 9999 FEW031 17/10 Q1027 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T15:55:00+00:00",
+    "temp": 16,
+    "dewp": 10,
+    "wdir": 230,
+    "wspd": 9,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 141555Z 23009KT 9999 FEW030 16/10 Q1027 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T16:25:00+00:00",
+    "temp": 15,
+    "dewp": 10,
+    "wdir": 230,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 141625Z 23007KT 9999 FEW028 15/10 Q1027 NOSIG"
+   },
+   {
+    "obsTime": "2026-10-14T16:55:00+00:00",
+    "temp": 14,
+    "dewp": 10,
+    "wdir": 220,
+    "wspd": 5,
+    "wgst": null,
+    "cover": "FEW",
+    "raw": "METAR EHAM 141655Z 22005KT 9999 FEW028 14/10 Q1027 NOSIG"
    }
   ],
   "market": {
@@ -497688,6 +497848,66 @@
     "wgst": null,
     "cover": "BKN",
     "raw": "METAR LTAC 141120Z 05014KT 9999 BKN040 BKN080 14/12 Q1015 RESHRA NOSIG RMK RWY21C 05014KT RWY03L 05013KT RWY21R 03013KT RWY03R 03014KT RWY21L 04013KT"
+   },
+   {
+    "obsTime": "2026-10-14T14:20:00+00:00",
+    "temp": 14,
+    "dewp": 12,
+    "wdir": 60,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 141420Z 06008KT 9999 -SHRA BKN035 BKN080 14/12 Q1015 NOSIG RMK RWY21C 04007KT RWY03L 05008KT RWY21R 03007KT RWY03R 06008KT RWY21L 05007KT"
+   },
+   {
+    "obsTime": "2026-10-14T14:50:00+00:00",
+    "temp": 13,
+    "dewp": 12,
+    "wdir": 50,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 141450Z 05008KT 9999 -SHRA BKN035 BKN080 13/12 Q1015 NOSIG RMK RWY21C 05009KT RWY03L 05008KT RWY21R 02009KT RWY03R 05008KT RWY21L 04006KT 360V060"
+   },
+   {
+    "obsTime": "2026-10-14T15:20:00+00:00",
+    "temp": 13,
+    "dewp": 12,
+    "wdir": 60,
+    "wspd": 7,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 141520Z 06007KT 9999 -SHRA BKN035 BKN080 13/12 Q1015 NOSIG RMK RWY21C 07009KT RWY03L 05006KT RWY21R 05010KT RWY03R 04007KT RWY21L 05007KT"
+   },
+   {
+    "obsTime": "2026-10-14T15:50:00+00:00",
+    "temp": 13,
+    "dewp": 11,
+    "wdir": 70,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 141550Z 07008KT 9999 BKN040 BKN080 13/11 Q1014 RESHRA NOSIG RMK RWY21C 06009KT RWY03L 05007KT RWY21R 03009KT RWY03R 05009KT RWY21L 06006KT"
+   },
+   {
+    "obsTime": "2026-10-14T16:20:00+00:00",
+    "temp": 13,
+    "dewp": 11,
+    "wdir": 60,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 141620Z 06008KT 020V110 9999 BKN040 BKN080 13/11 Q1014 NOSIG RMK RWY21C 06009KT RWY03L 06006KT RWY21R 04010KT RWY03R 04007KT RWY21L 05005KT"
+   },
+   {
+    "obsTime": "2026-10-14T16:50:00+00:00",
+    "temp": 13,
+    "dewp": 11,
+    "wdir": 50,
+    "wspd": 8,
+    "wgst": null,
+    "cover": "BKN",
+    "raw": "METAR LTAC 141650Z 05008KT 9999 BKN040 BKN080 13/11 Q1014 NOSIG RMK RWY21C 06008KT RWY03L 06007KT RWY21R 04009KT RWY03R 06008KT RWY21L 05005KT 360V080"
    }
   ],
   "market": {
